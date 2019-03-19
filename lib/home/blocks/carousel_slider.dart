@@ -153,7 +153,7 @@ class CarouselSlider extends StatefulWidget {
   }
 }
 
-/// 与旋转木马滑块组件关联的��态子类。
+/// 与旋转木马滑块组件关联的状态子类。
 class _CarouselSliderState extends State<CarouselSlider>
     with TickerProviderStateMixin {
   // 整型变量，当前页面。

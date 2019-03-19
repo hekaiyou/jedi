@@ -57,6 +57,11 @@ class ActivityBar extends StatelessWidget {
           child: DecoratedBox(
             // 装饰（`decoration`）属性，具体怎么画装饰。
             decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/app_bar_plate_3.png'),
+                fit: BoxFit.fill,
+              ),
+              /* 使用代码绘制渐变效果的代码，因为无法实现效果图不使用。
                 // 线性梯度（`gradient`）组件，2D线性渐变。
                 gradient: LinearGradient(
               // 开始（`begin`）属性，放置渐变的0.0的偏移量。
@@ -64,12 +69,9 @@ class ActivityBar extends StatelessWidget {
               // 颜色（`colors`）属性，梯度应在每个停靠点处获得的颜色。
               colors: <Color>[
                 const Color(0xffFF355B),
-                const Color(0xffFF214B),
-                const Color(0xffFF2B43),
-                const Color(0xffFF212E),
                 const Color(0xffFF181C),
-              ],
-            )),
+              ],) */
+            ),
             child: Container(
               height: 145.0,
             ),
@@ -79,7 +81,7 @@ class ActivityBar extends StatelessWidget {
           // 对准属性，如何调整子组件。
           alignment: Alignment.center,
           child: Container(
-            padding: EdgeInsets.fromLTRB(12.0, 6.0, 12.0, 12.0),
+            padding: EdgeInsets.fromLTRB(14.0, 6.0, 14.0, 12.0),
             child: CarouselWithIndicator(),
           ),
         ),

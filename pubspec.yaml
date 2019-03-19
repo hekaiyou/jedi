@@ -57,6 +57,21 @@ flutter:
     - assets/app_bar_more.png
     - assets/app_bar_service.png
     - assets/app_bar_scan.png
+    - assets/app_bar_service_angle.png
+    - assets/featured_99_shipping.png
+    - assets/geatured_taobao_grab.png
+    - assets/featured_newcomers_yes.png
+    - assets/featured_poly_offer.png
+    - assets/featured_today_recommended.png
+    - assets/featured_tmall_supermarket.png
+    - assets/featured_tmall_international.png
+    - assets/featured_today_explosion.png
+    - assets/featured_peanuts_selection.png
+    - assets/featured_large_amount.png
+    - assets/app_bar_plate_1.png
+    - assets/app_bar_plate_2.png
+    - assets/app_bar_plate_3.png
+    - assets/featured_headlines_title.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

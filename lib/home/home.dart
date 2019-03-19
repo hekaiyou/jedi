@@ -211,7 +211,7 @@ class _HomePageState extends State<HomePage>
             },
           ),
           // 首选大小（`preferredSize`）属性，如果它不受限制，这个组件会更喜欢它的大小。
-          preferredSize: Size.fromHeight(21.0),
+          preferredSize: Size.fromHeight(26.0),
         ),
       ),
       // 标签栏视图（`TabBarView`)组件，显示与当前所选选项卡对应的窗口组件的页面视图。

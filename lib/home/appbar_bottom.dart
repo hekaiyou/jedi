@@ -29,6 +29,11 @@ class _AppBarBottomState extends State<AppBarBottom> {
     return DecoratedBox(
       // 装饰（`decoration`）属性，具体怎么画装饰。
       decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/app_bar_plate_2.png'),
+          fit: BoxFit.fill,
+        ),
+        /* 使用代码绘制渐变效果的代码，因为无法实现效果图不使用。
           // 线性梯度（`gradient`）组件，2D线性渐变。
           gradient: LinearGradient(
         // 开始（`begin`）属性，放置渐变的0.0的偏移量。
@@ -36,12 +41,9 @@ class _AppBarBottomState extends State<AppBarBottom> {
         // 颜色（`colors`）属性，梯度应在每个停靠点处获得的颜色。
         colors: <Color>[
           const Color(0xffFF3F70),
-          const Color(0xffFF3A66),
-          const Color(0xffFF3963),
-          const Color(0xffFF375F),
           const Color(0xffFF355B),
-        ],
-      )),
+        ],) */
+      ),
       child: Row(
         children: <Widget>[
           // 扩展（`Expanded`）组件，用于展开行（`Row`）、列（`Column`）或柔性（`Flex`）的子项。
@@ -57,7 +59,7 @@ class _AppBarBottomState extends State<AppBarBottom> {
               // 标签（`tabs`）属性，通常是两个或多个标签组件的列表。
               tabs: widget.tabs
                   .map((String text) => Container(
-                        height: 27.0,
+                        height: 30.0,
                         child: Center(
                           child: Text(
                             text,
@@ -82,8 +84,9 @@ class _AppBarBottomState extends State<AppBarBottom> {
                 fontSize: 15.0,
               ),
               // 标签填充（`labelPadding`）属性，填充添加到每个选项卡标签。
-              labelPadding: EdgeInsets.symmetric(
-                horizontal: 11.0,
+              labelPadding: EdgeInsets.only(
+                left: 13.0,
+                right: 9.0,
               ),
             ),
           ),

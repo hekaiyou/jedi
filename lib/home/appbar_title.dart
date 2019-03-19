@@ -8,6 +8,11 @@ class AppBarTitle extends StatelessWidget {
     return DecoratedBox(
       // 装饰（`decoration`）属性，具体怎么画装饰。
       decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/app_bar_plate_1.png'),
+          fit: BoxFit.fill,
+        ),
+        /* 使用代码绘制渐变效果的代码，因为无法实现效果图不使用。
         // 线性梯度（`gradient`）组件，2D线性渐变。
         gradient: LinearGradient(
           // 开始（`begin`）属性，放置渐变的0.0的偏移量。
@@ -15,12 +20,9 @@ class AppBarTitle extends StatelessWidget {
           // 颜色（`colors`）属性，梯度应在每个停靠点处获得的颜色。
           colors: <Color>[
             const Color(0xffFF447C),
-            const Color(0xffFF447B),
-            const Color(0xffFF447B),
-            const Color(0xffFF4072),
             const Color(0xffFF3F70),
           ],
-        ),
+        ), */
       ),
       child: Row(
         // 主轴对齐（`mainAxisAlignment`）属性，如何将子组件放在主轴上。
@@ -30,8 +32,9 @@ class AppBarTitle extends StatelessWidget {
           GestureDetector(
             child: Container(
               // 填充（`padding`）属性，在装饰里面的空白空间，如果有的话，将子组件放在这个衬垫内。
-              padding: EdgeInsets.symmetric(
-                horizontal: 12.0,
+              padding: EdgeInsets.only(
+                left: 14.0,
+                right: 12.0,
               ),
               child: Image.asset(
                 'assets/app_bar_scan.png',
@@ -56,10 +59,10 @@ class AppBarTitle extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Image.asset(
-                      'assets/navigation_classify.png',
-                      height: 12,
-                      width: 12,
+                    Icon(
+                      Icons.search,
+                      size: 16.0,
+                      color: Color(0xff999999),
                     ),
                     Text(
                       ' 粘贴宝贝标题，先领券再购物',
@@ -76,17 +79,30 @@ class AppBarTitle extends StatelessWidget {
           ),
           GestureDetector(
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 12.0,
+              padding: EdgeInsets.only(
+                right: 14.0,
+                left: 12.0,
               ),
-              child: Image.asset(
-                'assets/app_bar_service.png',
-                height: 23,
-                width: 23,
+              child: Stack(
+                // 对准属性，如何将堆叠中未定位和部分定位的子项对齐。
+                alignment: Alignment.topRight,
+                children: <Widget>[
+                  Image.asset(
+                    'assets/app_bar_service.png',
+                    height: 23,
+                    width: 23,
+                  ),
+                  Image.asset(
+                    'assets/app_bar_service_angle.png',
+                    height: 8,
+                    width: 14,
+                  ),
+                ],
               ),
             ),
             onTap: () {},
           ),
+          SizedBox(height: 50.0,),
         ],
       ),
     );
