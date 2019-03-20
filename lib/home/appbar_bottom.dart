@@ -75,18 +75,23 @@ class _AppBarBottomState extends State<AppBarBottom> {
               indicatorSize: TabBarIndicatorSize.label,
               // 标签样式（`labelStyle`）属性，所选标签的文本样式。
               labelStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0,
+                fontFamily: 'PingFangMedium',
+                fontSize: 17.0,
               ),
               // 未选定标签样式（`labelStyle`）属性，未选中标签的文字样式。
               unselectedLabelStyle: TextStyle(
-                fontWeight: FontWeight.normal,
+                fontFamily: 'PingFangRegular',
                 fontSize: 15.0,
               ),
               // 标签填充（`labelPadding`）属性，填充添加到每个选项卡标签。
               labelPadding: EdgeInsets.only(
                 left: 13.0,
-                right: 9.0,
+                right: 7.0,
+              ),
+              // 指示填充（`indicatorPadding`）属性，显示在选项卡下方线条的水平填充。
+              indicatorPadding: EdgeInsets.only(
+                left: 3.0,
+                right: -3.0,
               ),
             ),
           ),

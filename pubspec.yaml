@@ -72,6 +72,11 @@ flutter:
     - assets/app_bar_plate_2.png
     - assets/app_bar_plate_3.png
     - assets/featured_headlines_title.png
+    - assets/home_porcelain_backplane_1.png
+    - assets/home_porcelain_backplane_2.png
+    - assets/home_porcelain_backplane_3.png
+    - assets/home_porcelain_backplane_4.png
+    - assets/home_porcelain_backplane_5.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
@@ -98,3 +103,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
+  fonts:
+    - family: PingFangRegular
+      fonts:
+        - asset: fonts/PingFang-SC-Regular.ttf
+    - family: PingFangMedium
+      fonts:
+        - asset: fonts/PingFang-SC-Medium.ttf

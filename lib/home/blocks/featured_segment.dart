@@ -90,6 +90,7 @@ class FeaturedSegment extends StatelessWidget {
                 segment[i].title,
                 style: TextStyle(
                   color: Color(0xff666666),
+                  fontFamily: 'PingFangRegular',
                   fontSize: 13.0,
                 ),
               ),

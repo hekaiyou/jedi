@@ -9,16 +9,16 @@ class JediApp extends StatefulWidget {
 class _JediAppState extends State<JediApp> {
   @override
   Widget build(BuildContext context) {
-    /// Material应用组件，它包含了许多Material设计的应用程序通常需要的组件。
+    // Material应用组件，它包含了许多Material设计的应用程序通常需要的组件。
     return MaterialApp(
-      /// 标题属性，用于设备识别应用程序的单行描述。
-      /// 在Android上，标题显示在任务管理器的应用程序快照上方，但是在iOS上无法使用此值。
+      // 标题属性，用于设备识别应用程序的单行描述。
+      // 在Android上，标题显示在任务管理器的应用程序快照上方，但是在iOS上无法使用此值。
       title: 'JEDI',
-      /// home属性，应用程序默认路径（即`Navigator.defaultRouteName`或`/`）的组件。
-      /// 除非指定了initialRoute属性，否则这是在应用程序正常启动时首先显示的路由。
-      /// 如果无法显示initialRoute属性的路径，它也是显示的路径。
+      // home属性，应用程序默认路径（即`Navigator.defaultRouteName`或`/`）的组件。
+      // 除非指定了initialRoute属性，否则这是在应用程序正常启动时首先显示的路由。
+      // 如果无法显示initialRoute属性的路径，它也是显示的路径。
       home: NavigationPage(),
-      /// 在生成路由上属性，应用程序导航到命名路由时使用的路由生成器回调。
+      // 在生成路由上属性，应用程序导航到命名路由时使用的路由生成器回调。
       onGenerateRoute: _getRoute,
     );
   }
@@ -49,6 +49,5 @@ class _JediAppState extends State<JediApp> {
     // } else {
     //   return null;
     // }
-    
   }
 }

@@ -68,6 +68,7 @@ class AppBarTitle extends StatelessWidget {
                       ' 粘贴宝贝标题，先领券再购物',
                       style: TextStyle(
                         color: Color(0xff999999),
+                        fontFamily: 'PingFangRegular',
                         fontSize: 13.0,
                       ),
                     ),

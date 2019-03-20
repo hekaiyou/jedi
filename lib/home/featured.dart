@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jedi/home/blocks/activity_bar.dart';
 import 'package:jedi/home/blocks/featured_segment.dart';
 import 'package:jedi/home/blocks/featured_headlines.dart';
+import 'package:jedi/home/blocks/large_poster.dart';
 
 /// 自定义的精选页面组件。
 class FeaturedPage extends StatefulWidget {
@@ -22,6 +23,11 @@ class _FeaturedPageState extends State<FeaturedPage> {
           color: Color(0xffE2E2E2),
         ),
         FeaturedHeadlines(),
+        Container(
+          height: 10.0,
+          color: Color(0xffE2E2E2),
+        ),
+        LargePoster(),
         Container(
           height: 10.0,
           color: Color(0xffE2E2E2),
