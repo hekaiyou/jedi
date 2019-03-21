@@ -77,6 +77,8 @@ flutter:
     - assets/home_porcelain_backplane_3.png
     - assets/home_porcelain_backplane_4.png
     - assets/home_porcelain_backplane_5.png
+    - assets/hot_list_sign.png
+    - assets/home_roll_backplane.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
