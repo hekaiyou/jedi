@@ -98,7 +98,7 @@ class HotList extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Color(0xff333333),
-                  fontFamily: 'PingFangMedium',
+                  fontFamily: 'PingFangBold',
                   fontSize: 14.0,
                 ),
               ),
@@ -129,7 +129,7 @@ class HotList extends StatelessWidget {
                       ],
                       style: TextStyle(
                         color: Color(0xffFF4964),
-                        fontFamily: 'PingFangMedium',
+                        fontFamily: 'PingFangBold',
                         fontSize: 14.0,
                         letterSpacing: 4.0,
                       ),
@@ -192,7 +192,7 @@ class HotList extends StatelessWidget {
                 '热销榜单',
                 style: TextStyle(
                   color: Color(0xff333333),
-                  fontFamily: 'PingFangMedium',
+                  fontFamily: 'PingFangBold',
                   fontSize: 16.0,
                 ),
               ),

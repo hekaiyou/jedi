@@ -24,6 +24,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
+  # 下拉刷新、上拉加载更多
+  # https://pub.dartlang.org/packages/pulltorefresh_flutter
+  pulltorefresh_flutter: "^0.1.9"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -79,6 +83,9 @@ flutter:
     - assets/home_porcelain_backplane_5.png
     - assets/hot_list_sign.png
     - assets/home_roll_backplane.png
+    - assets/recommend_you_title.png
+    - assets/recommended_volume.png
+    - assets/refresh.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
@@ -108,7 +115,10 @@ flutter:
   fonts:
     - family: PingFangRegular
       fonts:
-        - asset: fonts/PingFang-SC-Regular.ttf
+        - asset: fonts/苹方黑体-准-简.ttf
     - family: PingFangMedium
       fonts:
-        - asset: fonts/PingFang-SC-Medium.ttf
+        - asset: fonts/苹方黑体-中黑-简.ttf
+    - family: PingFangBold
+      fonts:
+        - asset: fonts/苹方黑体-中粗-简.ttf

@@ -198,7 +198,7 @@ class LargePoster extends StatelessWidget {
                                     ),
                                     height: 50.0,
                                     child: Image.network(
-                                      'http://images.huasheng100.com/public/1548233739017146.jpg?x-oss-process=image/resize,m_fixed,h_300,w_300',
+                                      'http://logo.taobaocdn.com/shop-logo/ee/a1/TB1AxwhOXXXXXcPapXXwu0bFXXX.png',
                                       fit: BoxFit.contain,
                                     ),
                                   ),
@@ -245,7 +245,7 @@ class LargePoster extends StatelessWidget {
                                     ),
                                     height: 50.0,
                                     child: Image.network(
-                                      'http://images.huasheng100.com/public/1548233739017146.jpg?x-oss-process=image/resize,m_fixed,h_300,w_300',
+                                      'http://logo.taobaocdn.com/shop-logo/ee/a1/TB1AxwhOXXXXXcPapXXwu0bFXXX.png',
                                       fit: BoxFit.contain,
                                     ),
                                   ),
