@@ -25,6 +25,9 @@ class _NavigationPageState extends State<NavigationPage> {
   /// 当前选择的索引。
   int _selectedIndex = 0;
 
+  /// 页面控制器（`PageController`）组件，页面视图（`PageView`）的控制器。
+  PageController _controller = PageController();
+
   /// 范型为自定义的导航项目类的列表，用于统一管理导航项目。
   List<NavigationItem> navigationItem = [
     NavigationItem(
@@ -67,15 +70,30 @@ class _NavigationPageState extends State<NavigationPage> {
     // 创建底部导航栏的组件需要跟踪当前索引并调用`setState`以使用新提供的索引重建它。
     setState(() {
       _selectedIndex = index;
+      // 跳到页面（`jumpToPage`）方法，更改显示在的页面视图（`PageView`）组件中页面。
+      _controller.jumpToPage(index);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /* 因为下面的代码无法避免页面被动重新绘制，所以不使用。
       body: Center(
         // 元素在（`elementAt`）方法，返回列表元素。
         child: _widgetOptions.elementAt(_selectedIndex),
+      ), */
+      // 页面视图（`PageView`）组件，可逐页工作的可滚动列表，每个子项都被强制与视窗大小相同。
+      body: PageView.builder(
+        // 物理（`physics`）属性，页面视图应如何响应用户输入。
+        // 从不可滚动滚动物理（`NeverScrollableScrollPhysics`）类，不允许用户滚动。
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          return _widgetOptions.elementAt(index);
+        },
+        itemCount: _widgetOptions.length,
+        // 控制器（`controller`）属性，用于控制滚动此页面视图位置的对象。
+        controller: _controller,
       ),
       // 底部导航栏（`bottomNavigationBar`）属性，显示在脚手架（`Scaffold`）组件的底部。
       // 底部导航栏（`BottomNavigationBar`）组件，显示在应用程序底部的组件，

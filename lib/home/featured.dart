@@ -14,8 +14,11 @@ class FeaturedPage extends StatefulWidget {
 }
 
 /// 与自定义的精选页面组件关联的状态子类。
+/// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类，
+/// 为自动保持活动（`AutomaticKeepAlive`）的客户提供方便的方法，与State子类一起使用。
+/// 可以避免作为父组件的标签栏视图（`TabBarView`）组件切换时被重新绘制。
 class _FeaturedPageState extends State<FeaturedPage>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   /// 列表视图（`ListView`）中要显示的数据。
   List<Widget> widgetList = [];
 
@@ -27,6 +30,11 @@ class _FeaturedPageState extends State<FeaturedPage>
 
   /// 通过按钮等其他方式，通过方法调用触发下拉刷新。
   TriggerPullController triggerPullController = TriggerPullController();
+
+  /// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类的想要保持活动（`wantKeepAlive`）属性，
+  /// 用于设置当前实例是否应保持活动状态（不因父组件的切换而重新绘制）。
+  @protected
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {

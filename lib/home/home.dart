@@ -11,8 +11,11 @@ class HomePage extends StatefulWidget {
 }
 
 /// 与自定义的主页面组件关联的状态子类。
+/// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类，
+/// 为自动保持活动（`AutomaticKeepAlive`）的客户提供方便的方法，与State子类一起使用。
+/// 可以避免作为父组件的页面视图（`PageView`）组件切换时被重新绘制。
 class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   /// 集中管理标签栏（`TabBar`）、标签栏视图（`TabBarView`）和自定义的图片菜单组件的配置项。
   final Map<String, List<Widget>> tabViewKey = {
     '精选': [
@@ -88,6 +91,11 @@ class _HomePageState extends State<HomePage>
 
   /// 自定义的图片菜单（`ImageMenu`）组件的配置项。
   List<Widget> images = [];
+
+  /// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类的想要保持活动（`wantKeepAlive`）属性，
+  /// 用于设置当前实例是否应保持活动状态（不因父组件的切换而重新绘制）。
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {

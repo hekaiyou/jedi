@@ -4,13 +4,18 @@ import 'package:flutter/material.dart';
 class ImageMenu extends StatefulWidget {
   /// 提醒文本。
   final double hight;
+
+  /// 每个可选择标签对应的文本内容列表。
   final List<String> tabs;
+
+  /// 每个可选择标签对应的图片组件列表。
   final List<Widget> images;
+
+  /// 接收到当前选择的标签下标。
   final int select;
 
   ImageMenu({
-    @required
-    this.hight,
+    @required this.hight,
     this.tabs,
     this.images,
     this.select,
@@ -22,7 +27,10 @@ class ImageMenu extends StatefulWidget {
 
 /// 与自定义的顶部提醒组件关联的状态子类。
 class _ImageMenuState extends State<ImageMenu> {
+  /// 每行可选择标签对应的组件列表。
   List<Widget> _imageColumn;
+
+  /// 当前选择的标签下标。
   int _select;
 
   @override
@@ -33,38 +41,54 @@ class _ImageMenuState extends State<ImageMenu> {
 
   @override
   Widget build(BuildContext context) {
+    // 当前行中已经有多少个组件。
     int connx = 0;
+    // 每次构建之前清理一次每行组件列表，避免重复内容。
     _imageColumn = [];
+    // 临时存储当前行的所有子组件列表。
     List<Widget> _imageRow = [];
-    for(int i = 0; i < widget.images.length; i++) {
-      _imageRow.add(Expanded(
-        child: Container(
-          margin: const EdgeInsets.only(left: 13.0, right: 13.0, bottom: 13.0,),
-          child: GestureDetector(
-            child: Column(
-              children: <Widget>[
-                widget.images[i],
-                SizedBox(height: 6.0,),
-                Text(
-                  widget.tabs[i],
-                  style: TextStyle(
-                    color: _select == i ? Colors.red : Colors.grey[900],
-                    fontSize: _select == i ? 14.0 : 13.0,
-                  ),
-                ),
-              ],
+    // 遍历每个可选择标签对应的图片组件。
+    for (int i = 0; i < widget.images.length; i++) {
+      _imageRow.add(
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.only(
+              left: 13.0,
+              right: 13.0,
+              bottom: 13.0,
             ),
-            onTap: (){
-              setState(() {
-                _select = i;
-              });
-              Navigator.of(context).pop(_select);
-            },
+            child: GestureDetector(
+              child: Column(
+                children: <Widget>[
+                  widget.images[i],
+                  SizedBox(
+                    height: 6.0,
+                  ),
+                  Text(
+                    widget.tabs[i],
+                    style: TextStyle(
+                      // 如果是当前用户选择的标签，显示不同颜色。
+                      color: _select == i ? Colors.red : Colors.grey[900],
+                      // 如果是当前用户选择的标签，显示不同字体大小。
+                      fontSize: _select == i ? 14.0 : 13.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                setState(() {
+                  _select = i;
+                });
+                Navigator.of(context).pop(_select);
+              },
+            ),
           ),
         ),
-      ),);
-      connx ++;
-      if(connx == 4) {
+      );
+      // 当前行中的组件数量执行自加操作。
+      connx++;
+      // 如果当前行列表中已经有4个组件，归档并清理列表数据。
+      if (connx == 4) {
         connx = 0;
         _imageColumn.add(Row(
           children: _imageRow,
@@ -98,7 +122,9 @@ class _ImageMenuState extends State<ImageMenu> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 10.0,),
+                SizedBox(
+                  height: 10.0,
+                ),
                 Text(
                   '更多频道',
                   textAlign: TextAlign.start,
@@ -107,7 +133,9 @@ class _ImageMenuState extends State<ImageMenu> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 16.0,),
+                SizedBox(
+                  height: 16.0,
+                ),
                 Column(
                   children: _imageColumn,
                 ),
