@@ -92,7 +92,7 @@ class _FeaturedPageState extends State<FeaturedPage>
           ),
           HotItem(
             objUrl:
-                'http://images.huasheng100.com/public/1547102978196265.jpg?x-oss-process=image/resize,m_fixed,h_300,w_300',
+                'http://images.huasheng100.com/public/1553568711182897.png',
             title: '【Miss face】妆前乳美白防晒隔离霜',
             rebatePrice: 74.9,
             costPrice: 89.9,

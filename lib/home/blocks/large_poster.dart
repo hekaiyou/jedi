@@ -73,7 +73,7 @@ class LargePoster extends StatelessWidget {
                     ),
                     height: 103.0,
                     child: Image.network(
-                      'http://images.huasheng100.com/public/1547102978196265.jpg?x-oss-process=image/resize,m_fixed,h_300,w_300',
+                      'http://images.huasheng100.com/public/1553568711182897.png',
                       fit: BoxFit.contain,
                     ),
                   ),

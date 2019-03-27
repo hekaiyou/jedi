@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/home/home.dart';
+import 'package:jedi/category/category.dart';
 
 /// 自定义的导航项目类，包含底部导航栏项目（`BottomNavigationBarItem`）组件需要的数据。
 class NavigationItem {
@@ -32,7 +33,7 @@ class _NavigationPageState extends State<NavigationPage> {
   List<NavigationItem> navigationItem = [
     NavigationItem(
       icon: 'assets/navigation_home.png',
-      activeIcon: 'assets/navigation_home.png',
+      activeIcon: 'assets/navigation_home_selected.png',
       title: '首页',
     ),
     NavigationItem(
@@ -60,7 +61,7 @@ class _NavigationPageState extends State<NavigationPage> {
   /// 底部导航栏的组件选项。
   final _widgetOptions = [
     HomePage(),
-    Text('Index 1: 分类'),
+    CategoryPage(),
     Text('Index 2: 社区'),
     Text('Index 3: 收益'),
     Text('Index 4: 我的'),

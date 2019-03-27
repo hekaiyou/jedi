@@ -50,6 +50,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - assets/navigation_home.png
+    - assets/navigation_home_selected.png
     - assets/navigation_classify.png
     - assets/navigation_classify_selected.png
     - assets/navigation_society.png
@@ -85,6 +86,8 @@ flutter:
     - assets/home_roll_backplane.png
     - assets/recommend_you_title.png
     - assets/recommended_volume.png
+    - assets/app_bar_scan_gray.png
+    - assets/app_bar_service_gray.png
     - assets/refresh.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
