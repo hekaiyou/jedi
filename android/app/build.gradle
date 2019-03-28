@@ -32,9 +32,9 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // TODO: 指定您自己的唯一应用程序ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.jedi"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

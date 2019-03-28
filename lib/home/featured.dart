@@ -129,14 +129,14 @@ class _FeaturedPageState extends State<FeaturedPage>
 
   Future _loadData(bool isPullDown) async {
     if (isPullDown) {
-      Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(Duration(milliseconds: 50), () {
         setState(() {
           widgetList = _buildResidentData();
           widgetList.addAll(recommendYou());
         });
       });
     } else {
-      Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(Duration(milliseconds: 50), () {
         setState(() {
           widgetList.addAll(recommendYou());
         });

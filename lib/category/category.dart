@@ -191,7 +191,7 @@ class _CategoryPageState extends State<CategoryPage>
 }
 
 Future<List<Map>> fetchCategory() async {
-  final response = await Future.delayed(Duration(seconds: 3), () {
+  final response = await Future.delayed(Duration(milliseconds: 50), () {
     return [
       {
         "name": "母婴",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jedi/home/blocks/tabs.dart';
 
 /// 自定义的应用栏底部组件。
 class AppBarBottom extends StatefulWidget {
@@ -49,7 +50,7 @@ class _AppBarBottomState extends State<AppBarBottom> {
           // 扩展（`Expanded`）组件，用于展开行（`Row`）、列（`Column`）或柔性（`Flex`）的子项。
           Expanded(
             // 标签栏（`TabBar`）组件，显示一排水平的标签。
-            child: TabBar(
+            child: H_TabBar(
               // 标签颜色（`labelColor`）属性，所选标签标签的颜色。
               labelColor: Color(0xffFFFFFF),
               // 未选定标签颜色（`unselectedLabelColor`）属性，未选定标签的颜色。
@@ -71,8 +72,10 @@ class _AppBarBottomState extends State<AppBarBottom> {
               isScrollable: true,
               // 指示灯颜色（`indicatorColor`）属性，显示在所选选项卡下方的线条颜色。
               indicatorColor: Color(0xffFFFFFF),
+              /* 使用了修改过的TabBar组件，不能使用这个属性了。
               // 指标大小（`indicatorSize`）属性，定义如何计算选定选项卡指示符的大小。
               indicatorSize: TabBarIndicatorSize.label,
+              */
               // 标签样式（`labelStyle`）属性，所选标签的文本样式。
               labelStyle: TextStyle(
                 fontFamily: 'PingFangMedium',
@@ -90,8 +93,8 @@ class _AppBarBottomState extends State<AppBarBottom> {
               ),
               // 指示填充（`indicatorPadding`）属性，显示在选项卡下方线条的水平填充。
               indicatorPadding: EdgeInsets.only(
-                left: 3.0,
-                right: -3.0,
+                left: 12.0,
+                right: 6.0,
               ),
             ),
           ),

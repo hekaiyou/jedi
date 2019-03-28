@@ -8,6 +8,8 @@ public class MainActivity extends FlutterActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    // 设置状态栏颜色透明（API>21才有效）。
+    getWindow().setStatusBarColor(0);
     GeneratedPluginRegistrant.registerWith(this);
   }
 }
