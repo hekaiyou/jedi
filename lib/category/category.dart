@@ -13,7 +13,10 @@ class CategoryPage extends StatefulWidget {
 /// 可以避免作为父组件的页面视图（`PageView`）组件切换时被重新绘制。
 class _CategoryPageState extends State<CategoryPage>
     with AutomaticKeepAliveClientMixin {
+  /// 用户当前选择的视图下标。
   int _currentSelection = 0;
+
+  /// 页面控制器（`PageController`）组件，允许你操纵在页面视图（`PageView`）组件中可见的页面。
   PageController _controller = PageController();
 
   /// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类的想要保持活动（`wantKeepAlive`）属性，
@@ -62,10 +65,12 @@ class _CategoryPageState extends State<CategoryPage>
                         onTap: () {
                           setState(() {
                             _currentSelection = position;
+                            // 更改哪个页面显示在受控的页面视图（`PageView`）组件中。
                             _controller.jumpToPage(position);
                           });
                         },
                         child: Container(
+                          // 如果是用户当前选择的视图下标，显示特殊样式。
                           color: _currentSelection == position
                               ? Color(0xffF8F8F8)
                               : Color(0xffFFFFFF),
@@ -80,6 +85,7 @@ class _CategoryPageState extends State<CategoryPage>
                                   style: TextStyle(
                                     fontSize: 16.0,
                                     fontFamily: 'PingFangRegular',
+                                    // 如果是用户当前选择的视图下标，显示特殊样式。
                                     color: _currentSelection == position
                                         ? Color(0xffFE7C30)
                                         : Color(0xff333333),
@@ -94,6 +100,7 @@ class _CategoryPageState extends State<CategoryPage>
                                   ),
                                   width: 30.0,
                                   height: 2.0,
+                                  // 如果是用户当前选择的视图下标，显示特殊样式。
                                   color: _currentSelection == position
                                       ? Color(0xffFE7C30)
                                       : Color(0xffFFFFFF),
@@ -140,8 +147,7 @@ class _CategoryPageState extends State<CategoryPage>
                               return GestureDetector(
                                 onTap: () {},
                                 child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     // 剪辑椭圆形（`ClipOval`）组件，使用椭圆剪辑其子项的组件。
                                     ClipOval(

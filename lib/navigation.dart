@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/home/home.dart';
 import 'package:jedi/category/category.dart';
+import 'package:jedi/community/community.dart';
+import 'package:jedi/earnings/earnings.dart';
 
 /// 自定义的导航项目类，包含底部导航栏项目（`BottomNavigationBarItem`）组件需要的数据。
 class NavigationItem {
@@ -62,8 +64,8 @@ class _NavigationPageState extends State<NavigationPage> {
   final _widgetOptions = [
     HomePage(),
     CategoryPage(),
-    Text('Index 2: 社区'),
-    Text('Index 3: 收益'),
+    CommunityPage(),
+    EarningsPage(),
     Text('Index 4: 我的'),
   ];
 

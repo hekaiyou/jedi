@@ -74,13 +74,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.0"
-  pulltorefresh_flutter:
-    dependency: "direct main"
-    description:
-      name: pulltorefresh_flutter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.9"
   quiver:
     dependency: transitive
     description:

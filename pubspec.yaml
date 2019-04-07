@@ -26,7 +26,7 @@ dependencies:
 
   # 下拉刷新、上拉加载更多
   # https://pub.dartlang.org/packages/pulltorefresh_flutter
-  pulltorefresh_flutter: "^0.1.9"
+  # pulltorefresh_flutter: "^0.1.9"
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +88,10 @@ flutter:
     - assets/recommended_volume.png
     - assets/app_bar_scan_gray.png
     - assets/app_bar_service_gray.png
+    - assets/community_title.png
+    - assets/community_sharing.png
+    - assets/community_label.png
+    - assets/income_bottom_plate.png
     - assets/refresh.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
