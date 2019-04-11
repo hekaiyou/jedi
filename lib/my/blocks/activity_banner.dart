@@ -21,14 +21,14 @@ List<T> worker<T>(List list, Function handler) {
   return result;
 }
 
-/// 自定义的带指示器旋转木马滑块组件。
-class CarouselWithIndicator extends StatefulWidget {
+/// 自定义的活动横幅组件。
+class ActivityBanner extends StatefulWidget {
   @override
-  _CarouselWithIndicatorState createState() => _CarouselWithIndicatorState();
+  _ActivityBannerState createState() => _ActivityBannerState();
 }
 
-/// 与自定义的带指示器旋转木马滑块组件关联的状态子类。
-class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
+/// 与自定义的活动横幅组件关联的状态子类。
+class _ActivityBannerState extends State<ActivityBanner> {
   /// 当前页面的索引。
   int _current = 0;
 
@@ -46,6 +46,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
             // 容器组件，结合了常见的绘图、定位和大小调整的容器。
             return GestureDetector(
               child: Container(
+                margin: EdgeInsets.all(16.0),
                 // 装饰（`decoration`）属性，子组件背后的装饰。
                 // 框装饰（`BoxDecoration`）类，关于如何绘制框的不可变描述。
                 decoration: BoxDecoration(
@@ -66,8 +67,21 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                   borderRadius: BorderRadius.all(
                     // 半径（`Radius`）类，圆形或椭圆形的半径。
                     // 半径.圆（`Radius.circular`）构造函数，构造一个圆形半径，x和y将具有相同的半径值。
-                    Radius.circular(13.0),
+                    Radius.circular(5.0),
                   ),
+                  // 阴影
+                  boxShadow: [
+                    BoxShadow(
+                      //阴影位置
+                      offset: Offset(0.0, 5.0),
+                      // 阴影颜色。
+                      color: Color.fromRGBO(0, 0, 0, 0.19),
+                      // 阴影模糊程度，大就更透明更扩散
+                      blurRadius: 11.0,
+                      // 阴影模糊大小，负的：缩小、 正的：增大。
+                      spreadRadius: 0.0,
+                    ),
+                  ],
                 ),
               ),
               onTap: () {},
@@ -77,7 +91,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
           autoPlayDuration: Duration(seconds: 1),
           interval: Duration(seconds: 5),
           viewportFraction: 1.0,
-          aspectRatio: 23 / 9,
+          aspectRatio: 7 / 2,
           distortion: false,
           updateCallback: (index) {
             setState(() {
@@ -97,7 +111,11 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                   children: imgList.map((value) {
                     return Container(
                       // 边缘（`margin`）属性，空白的空间环绕装饰和子组件。
-                      margin: EdgeInsets.all(4.0),
+                      margin: EdgeInsets.only(
+                        right: 4.0,
+                        left: 4.0,
+                        bottom: 20.0,
+                      ),
                       // 剪辑椭圆形（`ClipOval`）组件，使用椭圆剪辑其子项的组件。
                       child: ClipOval(
                         child: Container(

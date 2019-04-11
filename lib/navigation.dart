@@ -3,6 +3,7 @@ import 'package:jedi/home/home.dart';
 import 'package:jedi/category/category.dart';
 import 'package:jedi/community/community.dart';
 import 'package:jedi/earnings/earnings.dart';
+import 'package:jedi/my/my.dart';
 
 /// 自定义的导航项目类，包含底部导航栏项目（`BottomNavigationBarItem`）组件需要的数据。
 class NavigationItem {
@@ -66,7 +67,7 @@ class _NavigationPageState extends State<NavigationPage> {
     CategoryPage(),
     CommunityPage(),
     EarningsPage(),
-    Text('Index 4: 我的'),
+    MyPage(),
   ];
 
   void _onItemTapped(int index) {

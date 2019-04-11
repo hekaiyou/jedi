@@ -92,6 +92,19 @@ flutter:
     - assets/community_sharing.png
     - assets/community_label.png
     - assets/income_bottom_plate.png
+    - assets/my_backboard.png
+    - assets/my_message.png
+    - assets/my_income.png
+    - assets/my_order.png
+    - assets/my_fans.png
+    - assets/my_invitation.png
+    - assets/my_common_corner.png
+    - assets/my_newbie_guide.png
+    - assets/my_yue_collection.png
+    - assets/my_official_announcement.png
+    - assets/my_feedback.png
+    - assets/my_about_us.png
+    - assets/my_settings.png
     - assets/refresh.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
