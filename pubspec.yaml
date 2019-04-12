@@ -28,6 +28,10 @@ dependencies:
   # https://pub.dartlang.org/packages/pulltorefresh_flutter
   # pulltorefresh_flutter: "^0.1.9"
 
+  # 极光推送官方支持的插件
+  # https://pub.dartlang.org/packages/jpush_flutter
+  jpush_flutter: 0.0.11
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

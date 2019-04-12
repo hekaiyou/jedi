@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/navigation.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
 
 class JediApp extends StatefulWidget {
   @override
@@ -7,6 +8,33 @@ class JediApp extends StatefulWidget {
 }
 
 class _JediAppState extends State<JediApp> {
+  final JPush jpush = JPush();
+
+  @override
+  void initState() {
+    jpush.setup(
+      appKey: "0d900709d234bc9825276054",
+      channel: "theChannel",
+      production: false,
+      debug: false, // 设置是否打印 debug 日志
+    );
+    jpush.addEventHandler(
+      // 接收通知回调方法。
+      onReceiveNotification: (Map<String, dynamic> message) async {
+        print("flutter onReceiveNotification: $message");
+      },
+      // 点击通知回调方法。
+      onOpenNotification: (Map<String, dynamic> message) async {
+        print("flutter onOpenNotification: $message");
+      },
+      // 接收自定义消息回调方法。
+      onReceiveMessage: (Map<String, dynamic> message) async {
+        print("flutter onReceiveMessage: $message");
+      },
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     // Material应用组件，它包含了许多Material设计的应用程序通常需要的组件。
