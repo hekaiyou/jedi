@@ -25,6 +25,12 @@ class _CategoryPageState extends State<CategoryPage>
   bool get wantKeepAlive => true;
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

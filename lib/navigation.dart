@@ -80,6 +80,12 @@ class _NavigationPageState extends State<NavigationPage> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       /* 因为下面的代码无法避免页面被动重新绘制，所以不使用。

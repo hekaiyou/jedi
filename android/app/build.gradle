@@ -48,8 +48,9 @@ android {
 
         // 极光推送的配置。
         ndk {
-            //选择要添加的对应 cpu 类型的 .so 库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'x86', 'x86_64', 'mips', 'mips64', 'arm64-v8a'
+            // 选择要添加的对应 cpu 类型的 .so 库。
+            // abiFilters 'armeabi', 'armeabi-v7a', 'x86', 'x86_64', 'mips', 'mips64', 'arm64-v8a'
+            abiFilters "armeabi-v7a", "x86"
         }
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
@@ -71,9 +72,18 @@ android {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            //signingConfig signingConfigs.debug
+            // signingConfig signingConfigs.debug
             signingConfig signingConfigs.release
+
+            // minifyEnabled true
+            // useProguard true
+
+            // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    packagingOptions {
+        exclude"lib/arm64-v8a/librealm-jni.so"
     }
 }
 

@@ -15,10 +15,19 @@ class MyPage extends StatefulWidget {
 /// 为自动保持活动（`AutomaticKeepAlive`）的客户提供方便的方法，与State子类一起使用。
 /// 可以避免作为父组件的页面视图（`PageView`）组件切换时被重新绘制。
 class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
+  /// 滚动控制器（`ScrollController`）类，控制可滚动的组件。
+  ScrollController controller = ScrollController();
+
   /// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类的想要保持活动（`wantKeepAlive`）属性，
   /// 用于设置当前实例是否应保持活动状态（不因父组件的切换而重新绘制）。
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +67,8 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
         ),
         Expanded(
           child: ListView(
+            key: PageStorageKey(6),
+            controller: controller,
             // 设置列表视图周围的填充，避免影响布局效果。
             padding: EdgeInsets.all(0.0),
             children: <Widget>[

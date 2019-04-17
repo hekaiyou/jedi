@@ -32,6 +32,14 @@ dependencies:
   # https://pub.dartlang.org/packages/jpush_flutter
   jpush_flutter: 0.0.11
 
+  # 允许Flutter与本机WebView通信的插件
+  # https://pub.dartlang.org/packages/flutter_webview_plugin
+  # flutter_webview_plugin: ^0.3.3
+
+  # 阿里百川电商SDK在Flutter上的实现
+  # https://pub.dartlang.org/packages/nautilus#-readme-tab-
+  nautilus: ^0.0.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
