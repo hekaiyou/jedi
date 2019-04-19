@@ -67,7 +67,6 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
         ),
         Expanded(
           child: ListView(
-            key: PageStorageKey(6),
             controller: controller,
             // 设置列表视图周围的填充，避免影响布局效果。
             padding: EdgeInsets.all(0.0),

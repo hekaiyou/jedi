@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/navigation.dart';
-import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:jedi/my/setting.dart';
-import 'package:nautilus/nautilus.dart' as nautilus;
+// import 'package:jpush_flutter/jpush_flutter.dart';
+// import 'package:nautilus/nautilus.dart' as nautilus;
 
 class JediApp extends StatefulWidget {
   @override
@@ -10,43 +10,43 @@ class JediApp extends StatefulWidget {
 }
 
 class _JediAppState extends State<JediApp> {
-  final JPush jpush = JPush();
+  // final JPush jpush = JPush();
 
   @override
   void initState() {
-    jpush.setup(
-      appKey: "0d900709d234bc9825276054",
-      channel: "theChannel",
-      production: false,
-      // 设置是否打印debug日志。
-      debug: false,
-    );
-    jpush.applyPushAuthority(NotificationSettingsIOS(
-      sound: true,
-      alert: true,
-      badge: true,
-    ));
-    jpush.addEventHandler(
-      // 接收通知回调方法。
-      onReceiveNotification: (Map<String, dynamic> message) async {
-        print("接收通知: $message");
-      },
-      // 点击通知回调方法。
-      onOpenNotification: (Map<String, dynamic> message) async {
-        print("点击通知: $message");
-      },
-      // 接收自定义消息回调方法。
-      onReceiveMessage: (Map<String, dynamic> message) async {
-        print("在接收消息: $message");
-      },
-    );
-    initNautilus();
+    // jpush.setup(
+    //   appKey: "0d900709d234bc9825276054",
+    //   channel: "theChannel",
+    //   production: false,
+    //   // 设置是否打印debug日志。
+    //   debug: false,
+    // );
+    // jpush.applyPushAuthority(NotificationSettingsIOS(
+    //   sound: true,
+    //   alert: true,
+    //   badge: true,
+    // ));
+    // jpush.addEventHandler(
+    //   // 接收通知回调方法。
+    //   onReceiveNotification: (Map<String, dynamic> message) async {
+    //     print("接收通知: $message");
+    //   },
+    //   // 点击通知回调方法。
+    //   onOpenNotification: (Map<String, dynamic> message) async {
+    //     print("点击通知: $message");
+    //   },
+    //   // 接收自定义消息回调方法。
+    //   onReceiveMessage: (Map<String, dynamic> message) async {
+    //     print("在接收消息: $message");
+    //   },
+    // );
+    // initNautilus();
     super.initState();
   }
 
-  initNautilus() async {
-    await nautilus.initTradeAsync();
-  }
+  // initNautilus() async {
+  //   await nautilus.initTradeAsync();
+  // }
 
   @override
   Widget build(BuildContext context) {
