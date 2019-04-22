@@ -47,6 +47,7 @@ class _EarningsPageState extends State<EarningsPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: Column(
         children: <Widget>[

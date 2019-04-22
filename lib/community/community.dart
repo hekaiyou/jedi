@@ -58,6 +58,7 @@ class _CommunityPageState extends State<CommunityPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         // 背景色（`backgroundColor`）属性，用于应用栏材质的颜色。

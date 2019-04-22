@@ -31,6 +31,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: <Widget>[
         SizedBox(

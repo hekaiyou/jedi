@@ -46,6 +46,7 @@ class _OnlineIncomeState extends State<OnlineIncome>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ListView(
       // 设置列表视图周围的填充，避免影响布局效果。
       padding: EdgeInsets.all(0.0),

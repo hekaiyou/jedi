@@ -146,6 +146,7 @@ class _FeaturedPageState extends State<FeaturedPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return PullAndPush(
       // 简单的配置头部和底部的样式。
       defaultRefreshBoxTipText: '松开将为你刷新数据……',

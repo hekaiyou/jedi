@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/navigation.dart';
 import 'package:jedi/my/setting.dart';
+import 'package:jedi/my/change_username.dart';
+import 'package:jedi/my/modify_phone.dart';
+import 'package:jedi/my/change_password.dart';
+import 'package:jedi/my/notification_settings.dart';
 // import 'package:jpush_flutter/jpush_flutter.dart';
 // import 'package:nautilus/nautilus.dart' as nautilus;
 
@@ -12,8 +16,8 @@ class JediApp extends StatefulWidget {
 class _JediAppState extends State<JediApp> {
   // final JPush jpush = JPush();
 
-  @override
-  void initState() {
+  // @override
+  // void initState() {
     // jpush.setup(
     //   appKey: "0d900709d234bc9825276054",
     //   channel: "theChannel",
@@ -41,8 +45,8 @@ class _JediAppState extends State<JediApp> {
     //   },
     // );
     // initNautilus();
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
   // initNautilus() async {
   //   await nautilus.initTradeAsync();
@@ -76,6 +80,7 @@ class _JediAppState extends State<JediApp> {
         settings: settings,
         builder: (BuildContext context) => NavigationPage(),
       );
+    // 设置页面路由。
     } else if (name == '/setting') {
       // Material页面路由（`MaterialPageRoute`）类，通过平台自适应转换替换整个屏幕的模态路由。
       // 对于Android，页面的入口转换会向上滑动页面并淡入其中。退出转换是相同的，但方向相反。
@@ -85,6 +90,30 @@ class _JediAppState extends State<JediApp> {
         settings: settings,
         // 构建者属性，构建路由的主要内容。
         builder: (BuildContext context) => SettingPage(),
+      );
+    // 设置-修改昵称页面路由。
+    }  else if (name == '/setting/change_username') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => ChangeUsernamePage(),
+      );
+    // 设置-修改手机页面路由。
+    }  else if (name == '/setting/modify_phone') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => ModifyPhonePage(),
+      );
+    // 设置-修改密码页面路由。
+    }  else if (name == '/setting/change_password') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => ChangePasswordPage(),
+      );
+    // 设置-通知设置页面路由。
+    }  else if (name == '/setting/notification_settings') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => NotificationSettingsPage(),
       );
     } else {
       return null;

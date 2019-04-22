@@ -186,6 +186,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     /// 全局键值（`GlobalKey`）抽象类，整个应用程序中唯一的密钥。
     /// 当前全局键值（`GlobalKey`）对象用于应用栏（`AppBar`）组件。
     GlobalKey _appBarKey = GlobalKey();

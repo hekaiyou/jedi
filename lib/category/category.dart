@@ -32,6 +32,7 @@ class _CategoryPageState extends State<CategoryPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         // 背景色（`backgroundColor`）属性，用于应用栏材质的颜色。
@@ -128,7 +129,7 @@ class _CategoryPageState extends State<CategoryPage>
                         // 边界边（`BorderSide`）类，盒子边框的一面。
                         left: BorderSide(
                           color: Color(0xffE2E2E2),
-                          width: 2.0,
+                          width: 1.0,
                         ),
                       ),
                     ),
