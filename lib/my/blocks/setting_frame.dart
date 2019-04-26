@@ -16,7 +16,7 @@ class SettingFrame extends StatelessWidget {
   final String title;
 
   /// 当前设置页面的主要内容。
-  final List<Widget> children;
+  final Widget children;
 
   SettingFrame({
     this.title,
@@ -46,10 +46,8 @@ class SettingFrame extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView(
-        // 设置列表视图周围的填充，避免影响布局效果。
-        padding: EdgeInsets.all(0.0),
-        children: children,
+      body: SafeArea(
+        child: children,
       ),
     );
   }

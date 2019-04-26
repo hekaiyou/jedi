@@ -10,6 +10,7 @@ class SettingOptions extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
+            color: Color(0xffFFFFFF),
             alignment: Alignment.center,
             height: 49.0,
             // 双精度（`double`）类的无穷（`infinity`）常量，最大宽度。
@@ -55,7 +56,7 @@ class SettingOptions extends StatelessWidget {
           title: '昵称',
           callback: () {
             // 使用命名路由导航到第二个屏幕。
-            Navigator.pushNamed(context, '/setting/change_username');
+            Navigator.pushNamed(context, '/my/setting/change_username');
           },
         ),
         _buildOperationRow(
@@ -80,21 +81,21 @@ class SettingOptions extends StatelessWidget {
           title: '修改手机号',
           callback: () {
             // 使用命名路由导航到第二个屏幕。
-            Navigator.pushNamed(context, '/setting/modify_phone');
+            Navigator.pushNamed(context, '/my/setting/modify_phone');
           },
         ),
         _buildOperationRow(
           title: '修改密码',
           callback: () {
             // 使用命名路由导航到第二个屏幕。
-            Navigator.pushNamed(context, '/setting/change_password');
+            Navigator.pushNamed(context, '/my/setting/change_password');
           },
         ),
         _buildOperationRow(
           title: '消息通知',
           callback: () {
             // 使用命名路由导航到第二个屏幕。
-            Navigator.pushNamed(context, '/setting/notification_settings');
+            Navigator.pushNamed(context, '/my/setting/notification_settings');
           },
         ),
         _buildOperationRow(

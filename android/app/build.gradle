@@ -47,16 +47,15 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         // 极光推送的配置。
-        // ndk {
-            // 选择要添加的对应 cpu 类型的 .so 库。
-            // abiFilters 'armeabi', 'armeabi-v7a', 'x86', 'x86_64', 'mips', 'mips64', 'arm64-v8a'
-            // abiFilters "armeabi-v7a", "x86"
-        // }
-        // manifestPlaceholders = [
-        //         JPUSH_PKGNAME : applicationId,
-        //         JPUSH_APPKEY : "0d900709d234bc9825276054", // NOTE: JPush 上注册的包名对应的 Appkey.
-        //         JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
-        // ]
+        ndk{
+            // // 设置支持的SO库架构。
+            abiFilters "armeabi-v7a"
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "0d900709d234bc9825276054", // NOTE: JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
 
     signingConfigs {
@@ -75,11 +74,22 @@ android {
             // signingConfig signingConfigs.debug
             signingConfig signingConfigs.release
 
+            ndk{
+                // 这里其实我觉可以直接是用"armeabi-v7a"，但国内几个大哥之前使用的都是"armeabi"。
+                abiFilters "armeabi-v7a"
+            }
+
             // 配置混淆代码
             // minifyEnabled true
             // useProguard true
 
             // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            ndk {
+                // 这里要加上，否则debug包会出问题，后面三个为可选，x86建议加上不然部分模拟器回报错
+                abiFilters "armeabi-v7a", 'x86'
+            }
         }
     }
 

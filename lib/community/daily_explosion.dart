@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/shared/pulltore_fresh.dart';
+import 'package:jedi/blocks/pulltore_fresh.dart';
 import 'package:jedi/community/blocks/explosion_item.dart';
 
 /// 自定义的每日爆款页面组件。

@@ -5,7 +5,7 @@ import 'package:jedi/home/blocks/featured_headlines.dart';
 import 'package:jedi/home/blocks/large_poster.dart';
 import 'package:jedi/home/blocks/hot_list.dart';
 import 'package:jedi/home/blocks/recommend_you.dart';
-import 'package:jedi/shared/pulltore_fresh.dart';
+import 'package:jedi/blocks/pulltore_fresh.dart';
 
 /// 自定义的精选页面组件。
 class FeaturedPage extends StatefulWidget {

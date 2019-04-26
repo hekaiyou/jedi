@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 class CommonOperation extends StatelessWidget {
   /// 构建具体的常用操作列组件。
   Widget _buildOperationColumn(
-      {String image, String title, String fresh = '0'}) {
+      {String image, String title, String fresh = '0', Function callback}) {
     return GestureDetector(
       // 具体操作的细节，更新或跳转路由。
-      onTap: () {
-        print(title);
-      },
-      child: SizedBox(
-        width: 33.0,
-        height: 45.0,
+      onTap: callback,
+      child: Container(
+        width: 45.0,
+        height: 50.0,
+        color: Color(0xffFFFFFF),
+        alignment: Alignment.center,
         child: Stack(
           children: <Widget>[
             // 常用操作列组件的本体。
@@ -106,11 +106,33 @@ class CommonOperation extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildOperationColumn(image: 'assets/my_income.png', title: '收益'),
           _buildOperationColumn(
-              image: 'assets/my_order.png', title: '订单', fresh: '1'),
-          _buildOperationColumn(image: 'assets/my_fans.png', title: '粉丝'),
-          _buildOperationColumn(image: 'assets/my_invitation.png', title: '邀请'),
+            image: 'assets/my_income.png',
+            title: '收益',
+            callback: () {},
+          ),
+          _buildOperationColumn(
+            image: 'assets/my_order.png',
+            title: '订单',
+            fresh: '1',
+            callback: () {
+              // 使用命名路由导航到第二个屏幕。
+              Navigator.pushNamed(context, '/my/order');
+            },
+          ),
+          _buildOperationColumn(
+            image: 'assets/my_fans.png',
+            title: '粉丝',
+            callback: () {
+              // 使用命名路由导航到第二个屏幕。
+              Navigator.pushNamed(context, '/my/fans');
+            },
+          ),
+          _buildOperationColumn(
+            image: 'assets/my_invitation.png',
+            title: '邀请',
+            callback: () {},
+          ),
         ],
       ),
     );

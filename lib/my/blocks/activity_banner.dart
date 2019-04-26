@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/shared/carousel_slider.dart';
+import 'package:jedi/blocks/carousel_slider.dart';
 
 /// 最终、字符串列表变量，图片列表，运营位图片列表。
 final List<String> imgList = [

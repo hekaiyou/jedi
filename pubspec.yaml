@@ -30,7 +30,7 @@ dependencies:
 
   # 极光推送官方支持的插件
   # https://pub.dartlang.org/packages/jpush_flutter
-  # jpush_flutter: 0.0.11
+  jpush_flutter: 0.0.11
 
   # 允许Flutter与本机WebView通信的插件
   # https://pub.dartlang.org/packages/flutter_webview_plugin
@@ -117,6 +117,11 @@ flutter:
     - assets/my_feedback.png
     - assets/my_about_us.png
     - assets/my_settings.png
+    - assets/super_member_logo.png
+    - assets/choose_my_order.png
+    - assets/choose_subordinate_order.png
+    - assets/my_order_rectangle.png
+    - assets/white_placeholder.png
     - assets/refresh.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

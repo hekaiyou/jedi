@@ -113,7 +113,7 @@ class MyInformation extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       // 使用命名路由导航到第二个屏幕。
-                      Navigator.pushNamed(context, '/setting');
+                      Navigator.pushNamed(context, '/my/setting');
                     },
                     child: Padding(
                       padding: EdgeInsets.only(

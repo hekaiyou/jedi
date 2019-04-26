@@ -76,7 +76,7 @@ class _AppBarBottomState extends State<AppBarBottom> {
               // 标签样式（`labelStyle`）属性，所选标签的文本样式。
               labelStyle: TextStyle(
                 fontFamily: 'PingFangMedium',
-                fontSize: 17.0,
+                fontSize: 15.0,
               ),
               // 未选定标签样式（`labelStyle`）属性，未选中标签的文字样式。
               unselectedLabelStyle: TextStyle(
