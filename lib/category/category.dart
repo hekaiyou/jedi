@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/category/appbar_title.dart';
+import 'package:jedi/category/blocks/appbar_title.dart';
 
 /// 自定义的类别页面组件。
 class CategoryPage extends StatefulWidget {

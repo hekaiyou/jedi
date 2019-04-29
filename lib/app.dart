@@ -7,6 +7,7 @@ import 'package:jedi/my/change_password.dart';
 import 'package:jedi/my/notification_settings.dart';
 import 'package:jedi/my/fans/fans.dart';
 import 'package:jedi/my/order/order.dart';
+import 'package:jedi/category/details/details.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 // import 'package:nautilus/nautilus.dart' as nautilus;
 
@@ -128,6 +129,12 @@ class _JediAppState extends State<JediApp> {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => OrderPage(),
+      );
+    // 分类-详情页面路由。
+    }  else if (name == '/category/details') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => DetailsPage(),
       );
     } else {
       return null;

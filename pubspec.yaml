@@ -121,6 +121,15 @@ flutter:
     - assets/choose_my_order.png
     - assets/choose_subordinate_order.png
     - assets/my_order_rectangle.png
+    - assets/details_share_gradient.png
+    - assets/details_coupon_gradient.png
+    - assets/details_discount_gradient.png
+    - assets/details_white_back.png
+    - assets/details_white_collection.png
+    - assets/details_white_more.png
+    - assets/details_black_back.png
+    - assets/details_black_collection.png
+    - assets/details_black_more.png
     - assets/white_placeholder.png
     - assets/refresh.png
 
