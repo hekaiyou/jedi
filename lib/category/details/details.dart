@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/category/details/blocks/product_exhibition_area.dart';
 import 'package:jedi/category/details/blocks/sharing_and_collar.dart';
+import 'package:jedi/category/details/blocks/product_details.dart';
+import 'package:jedi/category/details/blocks/recommend_you_title.dart';
+import 'package:jedi/category/details/blocks/recommend_you.dart';
+import 'package:jedi/category/details/blocks/product_description.dart';
 
 /// 自定义的商品详情页面组件。
 class DetailsPage extends StatefulWidget {
@@ -8,7 +12,7 @@ class DetailsPage extends StatefulWidget {
   _DetailsPageState createState() => _DetailsPageState();
 }
 
-/// 与自定义的商品详情页面组件关联的状态子类。。
+/// 与自定义的商品详情页面组件关联的状态子类。
 class _DetailsPageState extends State<DetailsPage> {
   /// 滚动控制器（`ScrollController`）对象，控制可滚动的组件。
   ScrollController _controller = ScrollController();
@@ -142,36 +146,10 @@ class _DetailsPageState extends State<DetailsPage> {
               ],
             ),
           ),
-          // SliverFixedExtentList(
-          //   itemExtent: 10.0,
-          //   delegate: SliverChildBuilderDelegate(
-          //     (BuildContext context, int index) {
-          //       return Container(
-          //         alignment: Alignment.center,
-          //         color: Colors.lightBlue[100 * (index % 9)],
-          //         child: Text('列表项目 $index'),
-          //       );
-          //     },
-          //   ),
-          // ),
-          // SliverGrid(
-          //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          //     maxCrossAxisExtent: 200.0,
-          //     mainAxisSpacing: 10.0,
-          //     crossAxisSpacing: 10.0,
-          //     childAspectRatio: 4.0,
-          //   ),
-          //   delegate: SliverChildBuilderDelegate(
-          //     (BuildContext context, int index) {
-          //       return Container(
-          //         alignment: Alignment.center,
-          //         color: Colors.teal[100 * (index % 9)],
-          //         child: Text('grid item $index'),
-          //       );
-          //     },
-          //     childCount: 20,
-          //   ),
-          // ),
+          ProductDescription(),
+          ProductDetails(),
+          RecommendYouTitle(),
+          RecommendYou(),
         ],
       ),
       // 底部导航栏（`bottomNavigationBar`）属性，显示在脚手架底部的组件。

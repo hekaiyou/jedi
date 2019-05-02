@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/home/blocks/recommend_you_item.dart';
+import 'package:jedi/category/details/blocks/recommend_you_item.dart';
 
 /// 自定义的为你推荐组件。
 List<Container> recommendYou() {
