@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/home/blocks/buying_date.dart';
+import 'package:jedi/home/featured/blocks/buying_date.dart';
 
 /// 自定义的大海报组件。
 class LargePoster extends StatelessWidget {
@@ -93,60 +93,66 @@ class LargePoster extends StatelessWidget {
                   // 第二块瓷砖的内容，限时抢购。
                   Flexible(
                     flex: 1,
-                    child: Container(
-                      // 双精度（`double`）类的无穷（`infinity`）常量，最大宽度。
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                            'assets/home_porcelain_backplane_2.png',
+                    child: GestureDetector(
+                      onTap: () {
+                        // 使用命名路由导航到第二个屏幕。
+                        Navigator.pushNamed(context, '/category/limited');
+                      },
+                      child: Container(
+                        // 双精度（`double`）类的无穷（`infinity`）常量，最大宽度。
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              'assets/home_porcelain_backplane_2.png',
+                            ),
+                            fit: BoxFit.fill,
                           ),
-                          fit: BoxFit.fill,
                         ),
-                      ),
-                      margin: EdgeInsets.only(
-                        bottom: 4.0,
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                padding: EdgeInsets.only(
-                                  top: 10.0,
-                                  left: 14.0,
-                                ),
-                                child: Text(
-                                  '限时抢购',
-                                  style: TextStyle(
-                                    color: Color(0xff2B2F33),
-                                    fontFamily: 'PingFangMedium',
-                                    fontSize: 18.0,
+                        margin: EdgeInsets.only(
+                          bottom: 4.0,
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.only(
+                                    top: 10.0,
+                                    left: 14.0,
+                                  ),
+                                  child: Text(
+                                    '限时抢购',
+                                    style: TextStyle(
+                                      color: Color(0xff2B2F33),
+                                      fontFamily: 'PingFangMedium',
+                                      fontSize: 18.0,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              BuyingDate(
-                                hour: 3,
-                                minute: 6,
-                                second: 12,
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            // 放置“限时抢购”的网络图片的容器（`Container`）组件。
-                            child: Container(
-                              padding: EdgeInsets.all(
-                                7.0,
-                              ),
-                              height: 80.0,
-                              child: Image.network(
-                                'https://img.alicdn.com/i2/2615650292/O1CN011E1m5zcGXrNqYCH_!!2615650292.png_300x300.jpg',
-                                fit: BoxFit.contain,
+                                BuyingDate(
+                                  hour: 3,
+                                  minute: 6,
+                                  second: 12,
+                                ),
+                              ],
+                            ),
+                            Expanded(
+                              // 放置“限时抢购”的网络图片的容器（`Container`）组件。
+                              child: Container(
+                                padding: EdgeInsets.all(
+                                  7.0,
+                                ),
+                                height: 80.0,
+                                child: Image.network(
+                                  'https://img.alicdn.com/i2/2615650292/O1CN011E1m5zcGXrNqYCH_!!2615650292.png_300x300.jpg',
+                                  fit: BoxFit.contain,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

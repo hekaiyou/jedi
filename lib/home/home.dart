@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jedi/home/image_menu.dart';
 import 'package:jedi/home/appbar_title.dart';
 import 'package:jedi/home/appbar_bottom.dart';
-import 'package:jedi/home/featured.dart';
+import 'package:jedi/home/featured/featured.dart';
 
 /// 自定义的主页面组件。
 class HomePage extends StatefulWidget {
@@ -187,6 +187,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     /// 全局键值（`GlobalKey`）抽象类，整个应用程序中唯一的密钥。
     /// 当前全局键值（`GlobalKey`）对象用于应用栏（`AppBar`）组件。
     GlobalKey _appBarKey = GlobalKey();
@@ -220,7 +221,7 @@ class _HomePageState extends State<HomePage>
             },
           ),
           // 首选大小（`preferredSize`）属性，如果它不受限制，这个组件会更喜欢它的大小。
-          preferredSize: Size.fromHeight(26.0),
+          preferredSize: Size.fromHeight(30.0),
         ),
       ),
       // 标签栏视图（`TabBarView`)组件，显示与当前所选选项卡对应的窗口组件的页面视图。

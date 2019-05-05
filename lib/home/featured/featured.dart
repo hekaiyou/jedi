@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jedi/home/blocks/activity_bar.dart';
 import 'package:jedi/home/blocks/featured_segment.dart';
 import 'package:jedi/home/blocks/featured_headlines.dart';
-import 'package:jedi/home/blocks/large_poster.dart';
+import 'package:jedi/home/featured/blocks/large_poster.dart';
 import 'package:jedi/home/blocks/hot_list.dart';
 import 'package:jedi/home/blocks/recommend_you.dart';
 import 'package:jedi/blocks/pulltore_fresh.dart';

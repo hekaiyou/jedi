@@ -130,6 +130,9 @@ flutter:
     - assets/details_black_back.png
     - assets/details_black_collection.png
     - assets/details_black_more.png
+    - assets/limited_bar_plate_1.png
+    - assets/limited_bar_plate_2.png
+    - assets/limited_bar_title.png
     - assets/white_placeholder.png
     - assets/refresh.png
 

@@ -8,6 +8,7 @@ import 'package:jedi/my/notification_settings.dart';
 import 'package:jedi/my/fans/fans.dart';
 import 'package:jedi/my/order/order.dart';
 import 'package:jedi/category/details/details.dart';
+import 'package:jedi/category/limited/limited.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 // import 'package:nautilus/nautilus.dart' as nautilus;
 
@@ -83,7 +84,7 @@ class _JediAppState extends State<JediApp> {
         settings: settings,
         builder: (BuildContext context) => NavigationPage(),
       );
-    // 设置页面路由。
+      // 设置页面路由。
     } else if (name == '/my/setting') {
       // Material页面路由（`MaterialPageRoute`）类，通过平台自适应转换替换整个屏幕的模态路由。
       // 对于Android，页面的入口转换会向上滑动页面并淡入其中。退出转换是相同的，但方向相反。
@@ -94,47 +95,53 @@ class _JediAppState extends State<JediApp> {
         // 构建者属性，构建路由的主要内容。
         builder: (BuildContext context) => SettingPage(),
       );
-    // 设置-修改昵称页面路由。
-    }  else if (name == '/my/setting/change_username') {
+      // 设置-修改昵称页面路由。
+    } else if (name == '/my/setting/change_username') {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => ChangeUsernamePage(),
       );
-    // 设置-修改手机页面路由。
-    }  else if (name == '/my/setting/modify_phone') {
+      // 设置-修改手机页面路由。
+    } else if (name == '/my/setting/modify_phone') {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => ModifyPhonePage(),
       );
-    // 设置-修改密码页面路由。
-    }  else if (name == '/my/setting/change_password') {
+      // 设置-修改密码页面路由。
+    } else if (name == '/my/setting/change_password') {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => ChangePasswordPage(),
       );
-    // 设置-通知设置页面路由。
-    }  else if (name == '/my/setting/notification_settings') {
+      // 设置-通知设置页面路由。
+    } else if (name == '/my/setting/notification_settings') {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => NotificationSettingsPage(),
       );
-    // 我的-粉丝页面路由。
-    }  else if (name == '/my/fans') {
+      // 我的-粉丝页面路由。
+    } else if (name == '/my/fans') {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => FansPage(),
       );
-    // 我的-订单页面路由。
-    }  else if (name == '/my/order') {
+      // 我的-订单页面路由。
+    } else if (name == '/my/order') {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => OrderPage(),
       );
-    // 分类-详情页面路由。
-    }  else if (name == '/category/details') {
+      // 分类-详情页面路由。
+    } else if (name == '/category/details') {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => DetailsPage(),
+      );
+      // 分类-限时抢购页面路由。
+    } else if (name == '/category/limited') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => LimitedPage(),
       );
     } else {
       return null;

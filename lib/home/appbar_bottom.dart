@@ -59,7 +59,7 @@ class _AppBarBottomState extends State<AppBarBottom> {
               // 标签（`tabs`）属性，通常是两个或多个标签组件的列表。
               tabs: widget.tabs
                   .map((String text) => Container(
-                        height: 30.0,
+                        height: 34.0,
                         child: Center(
                           child: Text(
                             text,
