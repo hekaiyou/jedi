@@ -98,6 +98,8 @@ flutter:
     - assets/home_roll_backplane.png
     - assets/recommend_you_title.png
     - assets/recommended_volume.png
+    - assets/recommended_volume_2.png
+    - assets/recommended_volume_3.png
     - assets/app_bar_scan_gray.png
     - assets/app_bar_service_gray.png
     - assets/community_title.png
@@ -133,6 +135,7 @@ flutter:
     - assets/limited_bar_plate_1.png
     - assets/limited_bar_plate_2.png
     - assets/limited_bar_title.png
+    - assets/limited_estimated_price.png
     - assets/white_placeholder.png
     - assets/refresh.png
 

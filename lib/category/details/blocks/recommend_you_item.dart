@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jedi/category/limited/blocks/discount_rate.dart';
 
 /// 自定义的推荐项目类，包含自定义的为你推荐组件需要的数据。
 class RecommendItem {
@@ -136,46 +137,7 @@ class RecommendYouItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(
-                      left: 21.0,
-                      right: 4.0,
-                      top: 3.0,
-                    ),
-                    height: 17.0,
-                    width: 48.0,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/recommended_volume.png',
-                        ),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    // 用来显示优惠券折扣的文本（`Text`）组件。
-                    child: Text.rich(
-                      TextSpan(
-                        text: '¥',
-                        children: [
-                          TextSpan(
-                            // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
-                            text: recommendItem.couponPrice.toStringAsFixed(0),
-                            style: TextStyle(
-                              // 字母间距（`letterSpacing`）属性，每个字母之间添加的空间量。
-                              // 以逻辑像素为单位，可以使用负值来使字母更接近。
-                              letterSpacing: 0.0,
-                            ),
-                          ),
-                        ],
-                        style: TextStyle(
-                          color: Color(0xffFFFFFF),
-                          fontFamily: 'PingFangMedium',
-                          fontSize: 11.0,
-                          letterSpacing: 4.0,
-                        ),
-                      ),
-                    ),
-                  ),
+                  DiscountRate(couponPrice: recommendItem.couponPrice),
                   Container(
                     padding: EdgeInsets.only(
                       left: 7.0,

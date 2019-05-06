@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/category/limited/blocks/appbar_title.dart';
 import 'package:jedi/category/limited/blocks/appbar_bottom.dart';
+import 'package:jedi/category/limited/blocks/limited_list.dart';
 
 /// 自定义的限时抢购页面组件。
 class LimitedPage extends StatefulWidget {
@@ -13,14 +14,14 @@ class _LimitedPageState extends State<LimitedPage>
     with SingleTickerProviderStateMixin {
   /// 集中管理标签栏（`TabBar`）、标签栏视图（`TabBarView`）的配置项。
   final Map<String, Widget> tabViewKey = {
-    '00:00/2': Text('00:00'),
-    '10:00/2': Text('10:00'),
-    '15:00/2': Text('15:00'),
-    '21:00/1': Text('21:00'),
-    '00:00/3': Text('00:00'),
-    '10:00/3': Text('10:00'),
-    '15:00/3': Text('15:00'),
-    '21:00/3': Text('21:00'),
+    '00:00/2': LimitedList(),
+    '10:00/2': LimitedList(),
+    '15:00/2': LimitedList(),
+    '21:00/1': LimitedList(),
+    '00:00/3': LimitedList(),
+    '10:00/3': LimitedList(),
+    '15:00/3': LimitedList(),
+    '21:00/3': LimitedList(),
   };
 
   /// 标签控制器（`TabController`）组件，在标签栏（`TabBar`）和标签栏视图（`TabBarView`）组件之间协调选项卡选择。
