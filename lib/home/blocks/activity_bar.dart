@@ -46,6 +46,13 @@ class _ArcClipper extends CustomClipper<Path> {
 
 /// 自定义的活动栏组件。
 class ActivityBar extends StatelessWidget {
+  /// 最终、字符串列表变量，图片列表，运营位图片列表。
+  final List<List<String>> imgList;
+
+  ActivityBar({
+    this.imgList,
+  });
+
   @override
   Widget build(BuildContext context) {
     // 剪辑路径（`ClipPath`）组件，使用路径剪辑其子项。
@@ -82,7 +89,7 @@ class ActivityBar extends StatelessWidget {
           alignment: Alignment.center,
           child: Container(
             padding: EdgeInsets.fromLTRB(14.0, 6.0, 14.0, 12.0),
-            child: CarouselWithIndicator(),
+            child: CarouselWithIndicator(imgList: imgList),
           ),
         ),
       ],

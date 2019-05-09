@@ -9,6 +9,8 @@ import 'package:jedi/my/fans/fans.dart';
 import 'package:jedi/my/order/order.dart';
 import 'package:jedi/category/details/details.dart';
 import 'package:jedi/category/limited/limited.dart';
+import 'package:jedi/category/flash/flash.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 // import 'package:nautilus/nautilus.dart' as nautilus;
 
@@ -84,6 +86,18 @@ class _JediAppState extends State<JediApp> {
         settings: settings,
         builder: (BuildContext context) => NavigationPage(),
       );
+      // 活动页面路由。
+    } else if (name == '/web/activity') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => WebviewScaffold(
+              url: "https://www.baidu.com",
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text("Widget webview"),
+              ),
+            ),
+      );
       // 设置页面路由。
     } else if (name == '/my/setting') {
       // Material页面路由（`MaterialPageRoute`）类，通过平台自适应转换替换整个屏幕的模态路由。
@@ -142,6 +156,12 @@ class _JediAppState extends State<JediApp> {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => LimitedPage(),
+      );
+      // 分类-品牌闪购页面路由。
+    } else if (name == '/category/flash') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => FlashPage(),
       );
     } else {
       return null;

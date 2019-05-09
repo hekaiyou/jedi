@@ -3,6 +3,13 @@ import 'package:jedi/home/blocks/scrolling_link.dart';
 
 /// 自定义的精选头条新闻组件。
 class FeaturedHeadlines extends StatelessWidget {
+  /// 放到滚动区域的新闻及其操作列表，格式为[[String, String],...]。
+  final List<List<String>> headlines;
+
+  FeaturedHeadlines({
+    this.headlines,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,12 +32,7 @@ class FeaturedHeadlines extends StatelessWidget {
           Expanded(
             child: ScrollingLink(
               seconds: 5,
-              headlines: [
-                ['山泉灌溉，不打农药的丑橘没吃就OUT啦~', ''],
-                ['专为呵护婴儿设计的绵柔巾，第三件0元！', ''],
-                ['潮爆办公室的网红下午茶，7.9元起', ''],
-                ['源自新疆大草原的牛奶片，宝宝都喜欢吃哦~', ''],
-              ],
+              headlines: headlines,
             ),
           ),
         ],

@@ -28,13 +28,21 @@ dependencies:
   # https://pub.dartlang.org/packages/pulltorefresh_flutter
   # pulltorefresh_flutter: "^0.1.9"
 
+  # 对图片使用sqflite进行缓存管理
+  # https://pub.dev/packages/cached_network_image#-readme-tab-
+  cached_network_image: ^0.8.0
+
   # 极光推送官方支持的插件
   # https://pub.dartlang.org/packages/jpush_flutter
   jpush_flutter: 0.0.11
 
+  # Http请求库，支持拦截器、请求取消、Cookie管理、文件上传/下载、超时、自定义适配器等
+  # https://pub.dev/packages/dio#-readme-tab-
+  dio: ^2.1.3
+
   # 允许Flutter与本机WebView通信的插件
   # https://pub.dartlang.org/packages/flutter_webview_plugin
-  # flutter_webview_plugin: ^0.3.3
+  flutter_webview_plugin: ^0.3.3
 
   # 阿里百川电商SDK在Flutter上的实现
   # https://pub.dartlang.org/packages/nautilus#-readme-tab-
@@ -75,16 +83,6 @@ flutter:
     - assets/app_bar_service.png
     - assets/app_bar_scan.png
     - assets/app_bar_service_angle.png
-    - assets/featured_99_shipping.png
-    - assets/geatured_taobao_grab.png
-    - assets/featured_newcomers_yes.png
-    - assets/featured_poly_offer.png
-    - assets/featured_today_recommended.png
-    - assets/featured_tmall_supermarket.png
-    - assets/featured_tmall_international.png
-    - assets/featured_today_explosion.png
-    - assets/featured_peanuts_selection.png
-    - assets/featured_large_amount.png
     - assets/app_bar_plate_1.png
     - assets/app_bar_plate_2.png
     - assets/app_bar_plate_3.png
@@ -93,7 +91,6 @@ flutter:
     - assets/home_porcelain_backplane_2.png
     - assets/home_porcelain_backplane_3.png
     - assets/home_porcelain_backplane_4.png
-    - assets/home_porcelain_backplane_5.png
     - assets/hot_list_sign.png
     - assets/home_roll_backplane.png
     - assets/recommend_you_title.png

@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 
 /// 自定义的设置选项组件。
-class SettingOptions extends StatelessWidget {
+class SettingOptions extends StatefulWidget {
+  @override
+  _SettingOptionsState createState() => _SettingOptionsState();
+}
+
+/// 与自定义的设置选项组件关联的状态子类。
+class _SettingOptionsState extends State<SettingOptions> {
+  /// 图片缓存的大小，以`MB`为单位。
+  double currentSize = imageCache.currentSizeBytes / 1024 / 1024;
+
   /// 构建具体的操作行组件。
   Widget _buildOperationRow({String title, Widget child, Function callback}) {
     return GestureDetector(
@@ -103,8 +114,8 @@ class SettingOptions extends StatelessWidget {
           // 显示清除按钮的容器（`Container`）组件。
           child: Container(
             alignment: Alignment.center,
-            width: 58.0,
             height: 27.0,
+            padding: EdgeInsets.symmetric(horizontal: 3.0),
             decoration: BoxDecoration(
               // 框装饰（`BoxDecoration`）类的边界（`border`）属性，在背景颜色、渐变或图像上方绘制的边框。
               // 边界（`Border`）类，框的边框，由四个边组成：顶部、右侧、底部、左侧。
@@ -124,7 +135,8 @@ class SettingOptions extends StatelessWidget {
               ),
             ),
             child: Text(
-              '清除',
+              // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
+              '清除' + currentSize.toStringAsFixed(1) + 'M',
               style: TextStyle(
                 fontSize: 15.0,
                 color: Color(0xffFE823A),
@@ -133,7 +145,34 @@ class SettingOptions extends StatelessWidget {
             ),
           ),
           callback: () {
-            print('清除缓存');
+            // 清理图片缓存。
+            imageCache.clear();
+            showDialog<Null>(
+              context: context,
+              barrierDismissible: true,
+              builder: (BuildContext context) {
+                return CupertinoAlertDialog(
+                  content: Text(
+                    '清除成功',
+                    style: TextStyle(
+                      fontFamily: 'PingFangRegular',
+                      fontSize: 15.0,
+                    ),
+                  ),
+                  actions: [
+                    CupertinoDialogAction(
+                      child: Text('确定'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+            setState(() {
+              currentSize = imageCache.currentSizeBytes / 1024 / 1024;
+            });
           },
         ),
       ],

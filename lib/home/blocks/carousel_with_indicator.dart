@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/blocks/carousel_slider.dart';
 
-/// 最终、字符串列表变量，图片列表，运营位图片列表。
-final List<String> imgList = [
-  'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552850106279&di=66945cb570b8b229ef2cd44439f29191&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20170916%2Fa941249e25e8495e81ff845b53a0a631.gif',
-  'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552849040492&di=466f5b51f52223e7855a60c522f9caed&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Fback_pic%2F05%2F51%2F77%2F175ae675f513899.jpg',
-  'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552848913675&di=27dcd7c44c7f26207b62f77cb1bd3c0d&imgtype=0&src=http%3A%2F%2Fpic.90sjimg.com%2Fdesign%2F00%2F66%2F06%2F05%2Fe348ca963a431520d0b6898dffd47fe4.jpg',
-];
-
 // 函数（`Function`）抽象类，所有函数类型的基类。
 /// 用给定的处理函数（`handler`）处理给定的列表数据（`list`），返回处理结果列表（`result`）。
 List<T> worker<T>(List list, Function handler) {
@@ -23,6 +16,13 @@ List<T> worker<T>(List list, Function handler) {
 
 /// 自定义的带指示器旋转木马滑块组件。
 class CarouselWithIndicator extends StatefulWidget {
+  /// 最终、字符串列表变量，图片列表，运营位图片列表。
+  final List<List<String>> imgList;
+
+  CarouselWithIndicator({
+    this.imgList,
+  });
+
   @override
   _CarouselWithIndicatorState createState() => _CarouselWithIndicatorState();
 }
@@ -42,7 +42,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
         // 自定义的旋转木马滑块（`CarouselSlider`）组件。
         CarouselSlider(
           // 使用自定义的工人`agent`方法生成一个容器组件列表。
-          items: worker<Widget>(imgList, (index, i) {
+          items: worker<Widget>(widget.imgList, (index, i) {
             // 容器组件，结合了常见的绘图、定位和大小调整的容器。
             return GestureDetector(
               child: Container(
@@ -55,7 +55,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                     // 装饰图片（`DecorationImage`）类的图片（`image`）属性，将图像绘制成装饰。
                     // 通常通过资产图片（`AssetImage`）使用随应用程序一起提供的图像，
                     // 或通过网络图像（`NetworkImage`）使用从网络获取的图像。
-                    image: NetworkImage(i),
+                    image: NetworkImage(i[0]),
                     // 适应属性，如何在框里展示图像。
                     // https://docs.flutter.io/flutter/painting/BoxFit-class.html
                     fit: BoxFit.cover,
@@ -70,10 +70,14 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                   ),
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                print(i[1]);
+                // 使用命名路由导航到第二个屏幕。
+                Navigator.pushNamed(context, '/web/activity');
+              },
             );
           }),
-          autoPlay: imgList.length > 1,
+          autoPlay: widget.imgList.length > 1,
           autoPlayDuration: Duration(seconds: 1),
           interval: Duration(seconds: 5),
           viewportFraction: 1.0,
@@ -89,19 +93,19 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
           // 对准属性，如何调整子组件。
           alignment: Alignment.bottomCenter,
           // 如果运营位图片列表只有一个图片，就不显示指示条。
-          child: imgList.length > 1
+          child: widget.imgList.length > 1
               // 行组件，用于在水平布局中显示其子组件。
               ? Row(
                   // 主轴对齐（`mainAxisAlignment`）组件，如何将孩子放在主轴上。
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: imgList.map((value) {
+                  children: widget.imgList.map((value) {
                     return Container(
                       // 边缘（`margin`）属性，空白的空间环绕装饰和子组件。
                       margin: EdgeInsets.all(4.0),
                       // 剪辑椭圆形（`ClipOval`）组件，使用椭圆剪辑其子项的组件。
                       child: ClipOval(
                         child: Container(
-                          color: value == imgList[_current]
+                          color: value[0] == widget.imgList[_current][0]
                               ? Color(0xffFE7C30)
                               : Color(0xffFFFFFF),
                           height: 4.0,

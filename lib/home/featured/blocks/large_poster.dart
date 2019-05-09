@@ -3,6 +3,13 @@ import 'package:jedi/home/featured/blocks/buying_date.dart';
 
 /// 自定义的大海报组件。
 class LargePoster extends StatelessWidget {
+  /// 海报图片的地址列表，需要按顺序来。
+  final List<String> posterPicture;
+
+  LargePoster({
+    this.posterPicture,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,70 +21,51 @@ class LargePoster extends StatelessWidget {
           // 第一块瓷砖的内容，品牌闪购。
           Flexible(
             flex: 1,
-            child: Container(
-              // 双精度（`double`）类的无穷（`infinity`）常量，最大宽度。
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    'assets/home_porcelain_backplane_1.png',
+            child: GestureDetector(
+              onTap: () {
+                // 使用命名路由导航到第二个屏幕。
+                Navigator.pushNamed(context, '/category/flash');
+              },
+              child: Container(
+                // 双精度（`double`）类的无穷（`infinity`）常量，最大宽度。
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      'assets/home_porcelain_backplane_1.png',
+                    ),
+                    fit: BoxFit.fill,
                   ),
-                  fit: BoxFit.fill,
                 ),
-              ),
-              margin: EdgeInsets.only(
-                right: 4.0,
-              ),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 14.0,
-                      bottom: 8.0,
-                    ),
-                    child: Text(
-                      '品牌闪购',
-                      style: TextStyle(
-                        color: Color(0xff2B2F33),
-                        fontFamily: 'PingFangMedium',
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 21.0,
-                    width: 96.0,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/home_porcelain_backplane_5.png',
-                        ),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    child: Center(
+                margin: EdgeInsets.only(
+                  right: 4.0,
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(top: 14.0),
                       child: Text(
-                        '洁婷第二件0元',
+                        '品牌闪购',
                         style: TextStyle(
-                          color: Color(0xffFFFFFF),
-                          fontFamily: 'PingFangRegular',
-                          fontSize: 12.0,
+                          color: Color(0xff2B2F33),
+                          fontFamily: 'PingFangMedium',
+                          fontSize: 18.0,
                         ),
                       ),
                     ),
-                  ),
-                  // 放置“品牌闪购”的网络图片的容器（`Container`）组件。
-                  Container(
-                    padding: EdgeInsets.all(
-                      13.0,
+                    // 放置“品牌闪购”的网络图片的容器（`Container`）组件。
+                    Container(
+                      padding: EdgeInsets.all(
+                        13.0,
+                      ),
+                      height: 132.0,
+                      child: Image.network(
+                        posterPicture[0],
+                        fit: BoxFit.contain,
+                      ),
                     ),
-                    height: 103.0,
-                    child: Image.network(
-                      'http://images.huasheng100.com/public/1553568711182897.png',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -146,7 +134,7 @@ class LargePoster extends StatelessWidget {
                                 ),
                                 height: 80.0,
                                 child: Image.network(
-                                  'https://img.alicdn.com/i2/2615650292/O1CN011E1m5zcGXrNqYCH_!!2615650292.png_300x300.jpg',
+                                  posterPicture[1],
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -204,7 +192,7 @@ class LargePoster extends StatelessWidget {
                                     ),
                                     height: 50.0,
                                     child: Image.network(
-                                      'http://logo.taobaocdn.com/shop-logo/ee/a1/TB1AxwhOXXXXXcPapXXwu0bFXXX.png',
+                                      posterPicture[2],
                                       fit: BoxFit.contain,
                                     ),
                                   ),
@@ -251,7 +239,7 @@ class LargePoster extends StatelessWidget {
                                     ),
                                     height: 50.0,
                                     child: Image.network(
-                                      'http://logo.taobaocdn.com/shop-logo/ee/a1/TB1AxwhOXXXXXcPapXXwu0bFXXX.png',
+                                      posterPicture[3],
                                       fit: BoxFit.contain,
                                     ),
                                   ),

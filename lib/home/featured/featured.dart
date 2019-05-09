@@ -3,9 +3,10 @@ import 'package:jedi/home/blocks/activity_bar.dart';
 import 'package:jedi/home/blocks/featured_segment.dart';
 import 'package:jedi/home/blocks/featured_headlines.dart';
 import 'package:jedi/home/featured/blocks/large_poster.dart';
-import 'package:jedi/home/blocks/hot_list.dart';
+import 'package:jedi/home/featured/blocks/hot_list.dart';
 import 'package:jedi/home/blocks/recommend_you.dart';
 import 'package:jedi/blocks/pulltore_fresh.dart';
+import 'package:jedi/internet/api_navigation.dart';
 
 /// 自定义的精选页面组件。
 class FeaturedPage extends StatefulWidget {
@@ -52,20 +53,25 @@ class _FeaturedPageState extends State<FeaturedPage>
   }
 
   /// 构建列表视图（`ListView`）中要显示的初始化或常驻内容。
-  List<Widget> _buildResidentData() {
+  List<Widget> _buildResidentData({
+    List<List<String>> imgList,
+    List<SegmentItem> segment,
+    List<List<String>> headlines,
+    List<String> posterPicture,
+  }) {
     return <Widget>[
-      ActivityBar(),
-      FeaturedSegment(),
+      ActivityBar(imgList: imgList),
+      FeaturedSegment(segment: segment),
       Divider(
         height: 1.0,
         color: Color(0xffE2E2E2),
       ),
-      FeaturedHeadlines(),
+      FeaturedHeadlines(headlines: headlines),
       Container(
         height: 10.0,
         color: Color(0xffF6F6F6),
       ),
-      LargePoster(),
+      LargePoster(posterPicture: posterPicture),
       Container(
         height: 10.0,
         color: Color(0xffF6F6F6),
@@ -91,8 +97,7 @@ class _FeaturedPageState extends State<FeaturedPage>
             purchaseNum: 33548,
           ),
           HotItem(
-            objUrl:
-                'http://images.huasheng100.com/public/1553568711182897.png',
+            objUrl: 'http://images.huasheng100.com/public/1553568711182897.png',
             title: '【Miss face】妆前乳美白防晒隔离霜',
             rebatePrice: 74.9,
             costPrice: 89.9,
@@ -129,9 +134,36 @@ class _FeaturedPageState extends State<FeaturedPage>
 
   Future _loadData(bool isPullDown) async {
     if (isPullDown) {
-      Future.delayed(Duration(milliseconds: 50), () {
+      apiGetGetPagelayout(categoryid: 1).then((_map) {
+        List<List<String>> imgList = [];
+        List<SegmentItem> segment = [];
+        List<List<String>> headlines = [];
+        List<String> posterPicture = [];
+        for (Map amap in _map) {
+          if (amap['type'] == '1') {
+            imgList.add(
+              [imageurlHeadPagelayout + amap['layoutimage'], amap['clickurl']],
+            );
+          } else if (amap['type'] == '2') {
+            segment.add(
+              SegmentItem(
+                image: imageurlHeadPagelayout + amap['layoutimage'],
+                title: amap['text'],
+              ),
+            );
+          } else if (amap['type'] == '3') {
+            headlines.add([amap['text']]);
+          } else if (amap['type'] == '4') {
+            posterPicture.add(imageurlHeadPagelayout + amap['layoutimage']);
+          }
+        }
         setState(() {
-          widgetList = _buildResidentData();
+          widgetList = _buildResidentData(
+            imgList: imgList,
+            segment: segment,
+            headlines: headlines,
+            posterPicture: posterPicture,
+          );
           widgetList.addAll(recommendYou());
         });
       });

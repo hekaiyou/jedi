@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/category/limited/blocks/discount_rate.dart';
+import 'package:jedi/blocks/discount_rate.dart';
 import 'package:jedi/category/limited/blocks/panning_progress.dart';
 
 /// 自定义的限时抢购列表瓷砖组件。

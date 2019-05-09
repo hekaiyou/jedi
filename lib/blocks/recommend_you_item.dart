@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/category/limited/blocks/discount_rate.dart';
+import 'package:jedi/blocks/discount_rate.dart';
 
 /// 自定义的推荐项目类，包含自定义的为你推荐组件需要的数据。
 class RecommendItem {

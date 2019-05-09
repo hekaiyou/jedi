@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 /// 自定义的细分项目类，包含自定义的精选细分组件需要的数据。
 class SegmentItem {
@@ -13,56 +14,19 @@ class SegmentItem {
 
 /// 自定义的精选细分组件。
 class FeaturedSegment extends StatelessWidget {
+  /// 存储用于构建当前组件的细分项目列表。
+  final List<SegmentItem> segment;
+
+  FeaturedSegment({
+    this.segment,
+  });
+
   @override
   Widget build(BuildContext context) {
     // 存储用于列（`Column`）组件的行（`Row`）组件列表。
     List<Row> _columnRow = [];
     // 存储用于行（`Row`）组件的容器（`Container`）组件列表。
     List<Container> _rows = [];
-    // 存储用于构建当前组件的细分项目列表。
-    List<SegmentItem> segment = [
-      SegmentItem(
-        image: 'assets/featured_99_shipping.png',
-        title: '9.9包邮',
-      ),
-      SegmentItem(
-        image: 'assets/geatured_taobao_grab.png',
-        title: '淘抢购',
-      ),
-      SegmentItem(
-        image: 'assets/featured_newcomers_yes.png',
-        title: '新人专享',
-      ),
-      SegmentItem(
-        image: 'assets/featured_poly_offer.png',
-        title: '聚划算',
-      ),
-      SegmentItem(
-        image: 'assets/featured_today_recommended.png',
-        title: '今日推荐',
-      ),
-      SegmentItem(
-        image: 'assets/featured_tmall_supermarket.png',
-        title: '天猫超市',
-      ),
-      SegmentItem(
-        image: 'assets/featured_tmall_international.png',
-        title: '天猫国际',
-      ),
-      SegmentItem(
-        image: 'assets/featured_today_explosion.png',
-        title: '每日爆款',
-      ),
-      SegmentItem(
-        image: 'assets/featured_peanuts_selection.png',
-        title: '花生严选',
-      ),
-      SegmentItem(
-        image: 'assets/featured_large_amount.png',
-        title: '大额券',
-      ),
-    ];
-
     // 遍历细分项目列表。
     for (int i = 0; i < segment.length; i++) {
       // 控制每行只有5个细分项目。
@@ -81,10 +45,11 @@ class FeaturedSegment extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image.asset(
-                segment[i].image,
+              CachedNetworkImage(
+                imageUrl: segment[i].image,
                 height: 45.0,
                 width: 45.0,
+                fit: BoxFit.contain,
               ),
               Text(
                 segment[i].title,
