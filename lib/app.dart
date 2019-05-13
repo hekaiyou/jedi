@@ -149,7 +149,7 @@ class _JediAppState extends State<JediApp> {
     } else if (name == '/category/details') {
       return MaterialPageRoute(
         settings: settings,
-        builder: (BuildContext context) => DetailsPage(),
+        builder: (BuildContext context) => DetailsPage(id: settings.arguments),
       );
       // 分类-限时抢购页面路由。
     } else if (name == '/category/limited') {

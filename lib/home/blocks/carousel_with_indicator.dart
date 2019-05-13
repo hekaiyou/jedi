@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/blocks/carousel_slider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 // 函数（`Function`）抽象类，所有函数类型的基类。
 /// 用给定的处理函数（`handler`）处理给定的列表数据（`list`），返回处理结果列表（`result`）。
@@ -45,28 +46,15 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
           items: worker<Widget>(widget.imgList, (index, i) {
             // 容器组件，结合了常见的绘图、定位和大小调整的容器。
             return GestureDetector(
-              child: Container(
-                // 装饰（`decoration`）属性，子组件背后的装饰。
-                // 框装饰（`BoxDecoration`）类，关于如何绘制框的不可变描述。
-                decoration: BoxDecoration(
-                  // 框装饰（`BoxDecoration`）类的图片（`image`）属性，要在背景颜色或渐变上方绘制的图像。
-                  // 装饰图片（`DecorationImage`）类，框装饰的图像。
-                  image: DecorationImage(
-                    // 装饰图片（`DecorationImage`）类的图片（`image`）属性，将图像绘制成装饰。
-                    // 通常通过资产图片（`AssetImage`）使用随应用程序一起提供的图像，
-                    // 或通过网络图像（`NetworkImage`）使用从网络获取的图像。
-                    image: NetworkImage(i[0]),
-                    // 适应属性，如何在框里展示图像。
-                    // https://docs.flutter.io/flutter/painting/BoxFit-class.html
+              // 圆角矩形剪裁（`ClipRRect`）组件，使用圆角矩形剪辑其子项的组件。
+              child: ClipRRect(
+                // 边界半径（`borderRadius`）属性，圆角的边界半径。
+                borderRadius: BorderRadius.all(Radius.circular(13.0)),
+                child: Container(
+                  width: double.infinity,
+                  child: CachedNetworkImage(
+                    imageUrl: i[0],
                     fit: BoxFit.cover,
-                  ),
-                  // 边界半径（`borderRadius`）属性，如果为非空值，则此属性将对此框的角进行舍入。
-                  // 边界半径（`BorderRadius`）类，矩形每个角的一组不可变半径。
-                  // 边界半径.所有（`BorderRadius.all`）构造函数，创建一个边界半径，设置所有的半径。
-                  borderRadius: BorderRadius.all(
-                    // 半径（`Radius`）类，圆形或椭圆形的半径。
-                    // 半径.圆（`Radius.circular`）构造函数，构造一个圆形半径，x和y将具有相同的半径值。
-                    Radius.circular(13.0),
                   ),
                 ),
               ),

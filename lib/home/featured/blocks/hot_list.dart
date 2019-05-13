@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 /// 自定义的热销项目类，包含自定义的热销榜单组件需要的数据。
 class HotItem {
+  /// 商品ID。
+  final int id;
+
   /// 商品图片地址。
-  final String objUrl;
+  final String picturl;
 
   /// 销售商品名称。
   final String title;
 
   /// 折扣后价格。
-  final double rebatePrice;
+  final double zkfinalprice;
 
   /// 折扣前价格。
-  final double costPrice;
-
-  /// 优惠券折扣。
-  final double couponPrice;
+  final double reserveprice;
 
   /// 领劵总人数。
-  final int purchaseNum;
+  final int volume;
 
   HotItem({
-    this.objUrl,
+    this.id,
+    this.picturl,
     this.title,
-    this.rebatePrice,
-    this.costPrice,
-    this.couponPrice,
-    this.purchaseNum,
+    this.zkfinalprice,
+    this.reserveprice,
+    this.volume,
   });
 }
 
@@ -56,7 +57,7 @@ class HotList extends StatelessWidget {
                 bottom: 1.0,
               ),
               height: 70.0,
-              child: Image.network(hotItem.objUrl),
+              child: CachedNetworkImage(imageUrl: hotItem.picturl),
             ),
             // 用来显示优惠劵简介的容器（`Container`）组件。
             Container(
@@ -73,9 +74,10 @@ class HotList extends StatelessWidget {
               child: Center(
                 child: Text(
                   // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
-                  (hotItem.purchaseNum / 10000).toStringAsFixed(1) +
+                  (hotItem.volume / 10000).toStringAsFixed(1) +
                       'w人已领 | ' +
-                      hotItem.couponPrice.toStringAsFixed(0) +
+                      (hotItem.reserveprice - hotItem.zkfinalprice)
+                          .toStringAsFixed(0) +
                       '元劵',
                   style: TextStyle(
                     color: Color(0xffFFFFFF),
@@ -85,8 +87,9 @@ class HotList extends StatelessWidget {
                 ),
               ),
             ),
-            // 用来显示销售商品名称的填充（`Padding`）组件。
-            Padding(
+            // 用来显示销售商品名称的容器（`Container`）组件。
+            Container(
+              alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(
                 right: 4.0,
                 left: 4.0,
@@ -119,7 +122,7 @@ class HotList extends StatelessWidget {
                       text: '¥',
                       children: [
                         TextSpan(
-                          text: hotItem.rebatePrice.toString(),
+                          text: hotItem.zkfinalprice.toString(),
                           style: TextStyle(
                             // 字母间距（`letterSpacing`）属性，每个字母之间添加的空间量。
                             // 以逻辑像素为单位，可以使用负值来使字母更接近。
@@ -141,7 +144,7 @@ class HotList extends StatelessWidget {
                       text: '¥',
                       children: [
                         TextSpan(
-                          text: hotItem.costPrice.toString(),
+                          text: hotItem.reserveprice.toString(),
                           style: TextStyle(
                             // 字母间距（`letterSpacing`）属性，每个字母之间添加的空间量。
                             // 以逻辑像素为单位，可以使用负值来使字母更接近。
@@ -211,11 +214,20 @@ class HotList extends StatelessWidget {
           ),
           child: Row(
             children: hotData.map((HotItem hotItem) {
-              return _buildCard(hotItem);
+              return GestureDetector(
+                  onTap: () {
+                    // 使用命名路由导航到第二个屏幕。
+                    Navigator.pushNamed(
+                      context,
+                      '/category/details',
+                      arguments: hotItem.id,
+                    );
+                  },
+                  child: _buildCard(hotItem));
             }).toList(),
           ),
         ),
-        // 用大小框（`SizedBox`）组件来占一块空间。
+        // 用大小框���`SizedBox`）组件来占一块空间。
         SizedBox(
           height: 11.0,
         ),

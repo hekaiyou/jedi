@@ -2,6 +2,33 @@ import 'package:flutter/material.dart';
 
 /// 自定义的商品描述组件。
 class ProductDescription extends StatelessWidget {
+  /// 最终、双精度变量，商品原价。
+  final double reserveprice;
+
+  /// 最终、字符串变量，商品名称。
+  final String title;
+
+  /// 最终、整型变量，购买平台，1=淘宝、2=天猫。
+  final int taobaousertype;
+
+  /// 最终、双精度变量，目前商品已售数量。
+  final int volume;
+
+  /// 最终、双精度变量，商品预估收益。
+  final double estimatedprice;
+
+  /// 最终、字符串变量，店铺名称。
+  final String nick;
+
+  ProductDescription({
+    this.reserveprice,
+    this.title,
+    this.taobaousertype,
+    this.volume,
+    this.estimatedprice = 0.0,
+    this.nick,
+  });
+
   @override
   Widget build(BuildContext context) {
     // 裂片列表（`SliverList`）组件，沿着主轴将多个盒子放置在线性阵列中的滚动条。
@@ -17,6 +44,7 @@ class ProductDescription extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15.0),
             color: Color(0xffFFFFFF),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 // 显示电商平台图标与商品名称的容器（`Container`）组件。
                 Container(
@@ -28,13 +56,15 @@ class ProductDescription extends StatelessWidget {
                         height: 18.0,
                         width: 18.0,
                         margin: EdgeInsets.only(top: 0.0),
-                        child: Image.network(
-                          'http://img.yzcdn.cn/upload_files/2015/01/07/FvJHTJIhvAeSdg9u3pzAFdIuQXt2.jpg',
+                        child: Image.asset(
+                          taobaousertype == 1
+                              ? 'assets/platform_taobao_identifier.png'
+                              : 'assets/platform_tmall_identifier.png',
                           fit: BoxFit.contain,
                         ),
                       ),
                       Text(
-                        '    ' + '加厚珊瑚毯子冬季加绒床单单人沙发毯子空调小被子法兰绒毛',
+                        '    ' + title,
                         style: TextStyle(
                           color: Color(0xff333333),
                           fontFamily: 'PingFangMedium',
@@ -51,7 +81,10 @@ class ProductDescription extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        '天猫价：￥22.9',
+                        // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
+                        (taobaousertype == 1 ? '淘宝' : '天猫') +
+                            '价：￥' +
+                            reserveprice.toStringAsFixed(1),
                         style: TextStyle(
                           color: Color(0xffA8A8A8),
                           fontFamily: 'PingFangRegular',
@@ -59,7 +92,7 @@ class ProductDescription extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '已售39',
+                        '已售' + volume.toString(),
                         style: TextStyle(
                           color: Color(0xffA8A8A8),
                           fontFamily: 'PingFangRegular',
@@ -84,7 +117,8 @@ class ProductDescription extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          '预估收益：￥1.18',
+                          // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
+                          '预估收益：￥' + estimatedprice.toStringAsFixed(1),
                           style: TextStyle(
                             color: Color(0xffFE3A50),
                             fontFamily: 'PingFangMedium',
@@ -116,7 +150,7 @@ class ProductDescription extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '红磨坊旗放假舰店',
+                        nick,
                         style: TextStyle(
                           color: Color(0xff333333),
                           fontFamily: 'PingFangRegular',

@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/blocks/carousel_slider.dart';
-
-/// 最终、字符串列表变量，图片列表，商品图片列表。
-final List<String> imgList = [
-  'https://img.alicdn.com/i3/3634397379/O1CN011PyJbw24Nd4dwn0yC_!!3634397379.jpg_600x600.jpg',
-  'https://img.alicdn.com/i3/3634397379/O1CN01P5ekPm24Nd4ggN6Gs_!!3634397379.jpg_600x600.jpg',
-  'https://img.alicdn.com/i3/3634397379/O1CN01BaqU2D24Nd4gzwl8F_!!3634397379.jpg_600x600.jpg',
-  'https://img.alicdn.com/i2/3634397379/O1CN01ZA4GOu24Nd4eY8QIt_!!3634397379.jpg_600x600.jpg',
-];
+import 'package:cached_network_image/cached_network_image.dart';
 
 // 函数（`Function`）抽象类，所有函数类型的基类。
 /// 用给定的处理函数（`handler`）处理给定的列表数据（`list`），返回处理结果列表（`result`）。
@@ -24,6 +17,21 @@ List<T> worker<T>(List list, Function handler) {
 
 /// 自定义的商品展示区组件。
 class ProductExhibitionArea extends StatefulWidget {
+  /// 最终、字符串列表变量，图片列表，商品图片列表。
+  final List<dynamic> imgList;
+
+  /// 最终、字符串变量，图片地址的头部。
+  final String imageurlHead;
+
+  /// 最终、双精度变量，券后价。
+  final double zkfinalprice;
+
+  ProductExhibitionArea({
+    this.imgList,
+    this.imageurlHead,
+    this.zkfinalprice,
+  });
+
   @override
   _ProductExhibitionAreaState createState() => _ProductExhibitionAreaState();
 }
@@ -43,11 +51,11 @@ class _ProductExhibitionAreaState extends State<ProductExhibitionArea> {
         // 自定义的旋转木马滑块（`CarouselSlider`）组件。
         CarouselSlider(
           // 使用自定义的工人`agent`方法生成一个容器组件列表。
-          items: worker<Widget>(imgList, (index, i) {
+          items: worker<Widget>(widget.imgList, (index, i) {
             // 容器组件，结合了常见的绘图、定位和大小调整的容器。
             return GestureDetector(
-              child: Image.network(
-                i,
+              child: CachedNetworkImage(
+                imageUrl: widget.imageurlHead + i,
                 // 适应属性，如何在框里展示图像。
                 // https://docs.flutter.io/flutter/painting/BoxFit-class.html
                 fit: BoxFit.cover,
@@ -55,7 +63,7 @@ class _ProductExhibitionAreaState extends State<ProductExhibitionArea> {
               onTap: () {},
             );
           }),
-          autoPlay: imgList.length > 1,
+          autoPlay: widget.imgList.length > 1,
           autoPlayDuration: Duration(seconds: 1),
           interval: Duration(seconds: 5),
           viewportFraction: 1.0,
@@ -71,7 +79,7 @@ class _ProductExhibitionAreaState extends State<ProductExhibitionArea> {
           // 对准属性，如何调整子组件。
           alignment: Alignment.bottomCenter,
           // 如果运营位图片列表只有一个图片，就不显示指示条。
-          child: imgList.length > 1
+          child: widget.imgList.length > 1
               // 行组件，用于在水平布局中显示其子组件。
               ? Row(
                   // 主轴对齐（`mainAxisAlignment`）组件，如何将孩子放在主轴上。
@@ -101,7 +109,8 @@ class _ProductExhibitionAreaState extends State<ProductExhibitionArea> {
                       ),
                       // 显示商品券后价的文本（`Text`）组件。
                       child: Text(
-                        '券后价：￥12.9',
+                        // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
+                        '券后价：￥' + widget.zkfinalprice.toStringAsFixed(1),
                         style: TextStyle(
                           fontSize: 18.0,
                           color: Color(0xffFFFFFF),
@@ -135,7 +144,7 @@ class _ProductExhibitionAreaState extends State<ProductExhibitionArea> {
                       child: Text(
                         (_current + 1).toString() +
                             '/' +
-                            imgList.length.toString(),
+                            widget.imgList.length.toString(),
                         style: TextStyle(
                           fontSize: 11.0,
                           color: Color(0xffFFFFFF),

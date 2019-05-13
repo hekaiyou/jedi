@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/category/flash/blocks/appbar_title.dart';
+import 'package:jedi/category/flash/blocks/activity_bar.dart';
+import 'package:jedi/category/flash/blocks/brand_hot_sale_title.dart';
+import 'package:jedi/category/flash/blocks/brand_hot_sale.dart';
 import 'package:jedi/blocks/pulltore_fresh.dart';
 
 /// 自定义的品牌闪购页面组件。
@@ -40,7 +43,56 @@ class _FlashPageState extends State<FlashPage> {
   /// 构建列表视图（`ListView`）中要显示的初始化或常驻内容。
   List<Widget> _buildResidentData() {
     return <Widget>[
-      Text('sfd'),
+      ActivityBar(),
+      BrandHotSaleTitle(),
+      BrandHotSale(
+        hotData: <HotItem>[
+          HotItem(
+            objUrl:
+                'https://img.alicdn.com/i2/2615650292/O1CN011E1m5zcGXrNqYCH_!!2615650292.png_300x300.jpg',
+            title: '抽纸批发整箱30包雪亮家庭装婴儿卫生纸巾家用餐巾纸面巾纸实惠装',
+            rebatePrice: 26.99,
+            couponPrice: 3.0,
+          ),
+          HotItem(
+            objUrl:
+                'http://logo.taobaocdn.com/shop-logo/ee/a1/TB1AxwhOXXXXXcPapXXwu0bFXXX.png',
+            title: '【小魔鲸】A类女童内裤三角裤',
+            rebatePrice: 15.5,
+            couponPrice: 5.0,
+          ),
+          HotItem(
+            objUrl: 'http://images.huasheng100.com/public/1553568711182897.png',
+            title: '【Miss face】妆前乳美白防晒隔离霜',
+            rebatePrice: 74.9,
+            couponPrice: 15.0,
+          ),
+          HotItem(
+            objUrl:
+                'https://img.alicdn.com/i4/1097805039/TB2susMuBjTBKNjSZFwXXcG4XXa_!!1097805039.jpg_300x300.jpg',
+            title: '网红零食芒果干',
+            rebatePrice: 24.9,
+            couponPrice: 5.0,
+          ),
+          HotItem(
+            objUrl:
+                'https://img.alicdn.com/bao/uploaded/i2/273162744/O1CN01jd6G541W8nJLZyhRD_!!0-item_pic.jpg_300x300.jpg',
+            title: '彼丽空气隐形丝袜液体小泡沫喷雾女喷脖子遮瑕补水定妆买3送防晒',
+            rebatePrice: 9.0,
+            couponPrice: 20.0,
+          ),
+        ],
+      ),
+      Container(
+        height: 10.0,
+        color: Color(0xffF6F6F6),
+      ),
+      Container(
+        height: 54.0,
+        alignment: Alignment.center,
+        child: Image.asset('assets/flash_featured_brand.png'),
+        color: Color(0xffFFFFFF),
+      ),
     ];
   }
 

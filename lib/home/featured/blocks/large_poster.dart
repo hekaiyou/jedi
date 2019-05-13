@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/home/featured/blocks/buying_date.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 /// 自定义的大海报组件。
 class LargePoster extends StatelessWidget {
@@ -59,8 +60,8 @@ class LargePoster extends StatelessWidget {
                         13.0,
                       ),
                       height: 132.0,
-                      child: Image.network(
-                        posterPicture[0],
+                      child: CachedNetworkImage(
+                        imageUrl: posterPicture[0],
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -133,8 +134,8 @@ class LargePoster extends StatelessWidget {
                                   7.0,
                                 ),
                                 height: 80.0,
-                                child: Image.network(
-                                  posterPicture[1],
+                                child: CachedNetworkImage(
+                                  imageUrl: posterPicture[1],
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -191,8 +192,8 @@ class LargePoster extends StatelessWidget {
                                       5.0,
                                     ),
                                     height: 50.0,
-                                    child: Image.network(
-                                      posterPicture[2],
+                                    child: CachedNetworkImage(
+                                      imageUrl: posterPicture[2],
                                       fit: BoxFit.contain,
                                     ),
                                   ),
@@ -238,8 +239,8 @@ class LargePoster extends StatelessWidget {
                                       5.0,
                                     ),
                                     height: 50.0,
-                                    child: Image.network(
-                                      posterPicture[3],
+                                    child: CachedNetworkImage(
+                                      imageUrl: posterPicture[3],
                                       fit: BoxFit.contain,
                                     ),
                                   ),

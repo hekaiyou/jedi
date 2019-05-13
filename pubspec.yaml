@@ -133,6 +133,14 @@ flutter:
     - assets/limited_bar_plate_2.png
     - assets/limited_bar_title.png
     - assets/limited_estimated_price.png
+    - assets/flash_bar_plate_1.png
+    - assets/flash_bar_plate_2.png
+    - assets/flash_bar_title.png
+    - assets/flash_bar_more.png
+    - assets/flash_featured_brand.png
+    - assets/brand_discount_bottom_plate.png
+    - assets/platform_taobao_identifier.png
+    - assets/platform_tmall_identifier.png
     - assets/white_placeholder.png
     - assets/refresh.png
 

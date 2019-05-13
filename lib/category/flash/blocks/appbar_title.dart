@@ -10,7 +10,7 @@ class AppBarTitle extends StatelessWidget {
       // 装饰（`decoration`）属性，具体怎么画装饰。
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/limited_bar_plate_1.png'),
+          image: AssetImage('assets/flash_bar_plate_1.png'),
           fit: BoxFit.fill,
         ),
       ),
@@ -32,7 +32,7 @@ class AppBarTitle extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Container(
-              child: Image.asset('assets/limited_bar_title.png'),
+              child: Image.asset('assets/flash_bar_title.png'),
             ),
           ),
         ],
