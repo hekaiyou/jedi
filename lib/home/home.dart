@@ -17,66 +17,54 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   /// 集中管理标签栏（`TabBar`）、标签栏视图（`TabBarView`）和自定义的图片菜单组件的配置项。
-  final Map<String, List<Widget>> tabViewKey = {
+  final Map<String, List> tabViewKey = {
     '精选': [
       FeaturedPage(),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '猜你喜欢': [
       Text('猜你喜欢'),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '母婴': [
       Text('母婴'),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '食品': [
       Text('食品'),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '女装': [
       Text('女装'),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '彩妆': [
       Text('彩妆'),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '洗护': [
       Text('洗护'),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '内衣': [
       Text('内衣'),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '百货': [
       Text('百货'),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '家电': [
       Text('家电'),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '家居': [
       Text('家居'),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '数码': [
       Text('数码'),
-      Image.network(
-          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg')
+      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
   };
 
@@ -90,7 +78,7 @@ class _HomePageState extends State<HomePage>
   List<Widget> views = [];
 
   /// 自定义的图片菜单（`ImageMenu`）组件的配置项。
-  List<Widget> images = [];
+  List<String> images = [];
 
   /// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类的想要保持活动（`wantKeepAlive`）属性，
   /// 用于设置当前实例是否应保持活动状态（不因父组件的切换而重新绘制）。
@@ -100,7 +88,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     // 将配置项列表的值赋予标签栏、标签栏视图和自定义的图片菜单配置列表。
-    tabViewKey.forEach((String tab, List<Widget> view) {
+    tabViewKey.forEach((String tab, List view) {
       tabs.add(tab);
       views.add(view[0]);
       images.add(view[1]);
@@ -124,7 +112,7 @@ class _HomePageState extends State<HomePage>
 
   /// 打开自定义的图片菜单组件。
   void openImageMenu(context, double hight, List<String> tabs,
-      List<Widget> images, int select) {
+      List<String> images, int select) {
     // 导航器（`Navigator`）组件，用于管理具有堆栈规则的一组子组件。
     // 许多应用程序在其窗口组件层次结构的顶部附近有一个导航器，以便使用叠加显示其逻辑历史记录，
     // 最近访问过的页面可视化地显示在旧页面之上。使用此模式，

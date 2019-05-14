@@ -97,15 +97,27 @@ class _AppBarBottomState extends State<AppBarBottom> {
           ),
           // 手势探测器（`GestureDetector`）组件，检测手势的组件。
           GestureDetector(
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 13.0,
-              ),
-              child: Image.asset(
-                'assets/app_bar_more.png',
-                height: 12,
-                width: 12,
-              ),
+            child: Stack(
+              children: <Widget>[
+                Opacity(
+                  opacity: 0.0,
+                  child: Container(
+                    width: 38.0,
+                    height: 20.0,
+                    color: Color(0xffFFFFFF),
+                  ),
+                ),
+                Container(
+                  width: 38.0,
+                  height: 20.0,
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    'assets/app_bar_more.png',
+                    height: 12,
+                    width: 12,
+                  ),
+                ),
+              ],
             ),
             // 在点击（`onTap`）熟悉，已经发生了点击时触发。
             onTap: () async {

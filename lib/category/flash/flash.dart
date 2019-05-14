@@ -3,6 +3,8 @@ import 'package:jedi/category/flash/blocks/appbar_title.dart';
 import 'package:jedi/category/flash/blocks/activity_bar.dart';
 import 'package:jedi/category/flash/blocks/brand_hot_sale_title.dart';
 import 'package:jedi/category/flash/blocks/brand_hot_sale.dart';
+import 'package:jedi/category/flash/blocks/flash_featured_brand.dart';
+import 'package:jedi/category/flash/blocks/flash_featured_item.dart';
 import 'package:jedi/blocks/pulltore_fresh.dart';
 
 /// 自定义的品牌闪购页面组件。
@@ -101,13 +103,53 @@ class _FlashPageState extends State<FlashPage> {
       Future.delayed(Duration(milliseconds: 50), () {
         setState(() {
           widgetList = _buildResidentData();
-          widgetList.addAll([Text('123456')]);
+          widgetList.addAll([
+            FlashFeaturedBrand(
+              flashData: <FlashFeaturedItem>[
+                FlashFeaturedItem(
+                  id: 0,
+                ),
+                FlashFeaturedItem(
+                  id: 0,
+                ),
+                FlashFeaturedItem(
+                  id: 0,
+                ),
+                FlashFeaturedItem(
+                  id: 0,
+                ),
+                FlashFeaturedItem(
+                  id: 0,
+                ),
+              ],
+            )
+          ]);
         });
       });
     } else {
       Future.delayed(Duration(milliseconds: 50), () {
         setState(() {
-          widgetList.addAll([Text('123456')]);
+          widgetList.addAll([
+            FlashFeaturedBrand(
+              flashData: <FlashFeaturedItem>[
+                FlashFeaturedItem(
+                  id: 0,
+                ),
+                FlashFeaturedItem(
+                  id: 0,
+                ),
+                FlashFeaturedItem(
+                  id: 0,
+                ),
+                FlashFeaturedItem(
+                  id: 0,
+                ),
+                FlashFeaturedItem(
+                  id: 0,
+                ),
+              ],
+            )
+          ]);
         });
       });
     }

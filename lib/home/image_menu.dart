@@ -9,7 +9,7 @@ class ImageMenu extends StatefulWidget {
   final List<String> tabs;
 
   /// 每个可选择标签对应的图片组件列表。
-  final List<Widget> images;
+  final List<String> images;
 
   /// 接收到当前选择的标签下标。
   final int select;
@@ -53,24 +53,32 @@ class _ImageMenuState extends State<ImageMenu> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(
-              left: 13.0,
-              right: 13.0,
-              bottom: 13.0,
+              left: 8.0,
+              right: 8.0,
+              bottom: 16.0,
             ),
             child: GestureDetector(
               child: Column(
                 children: <Widget>[
-                  widget.images[i],
-                  SizedBox(
-                    height: 6.0,
+                  // 圆形剪裁（`ClipOval`）组件，通常用来裁剪头像图片。
+                  ClipOval(
+                    child: Image.network(
+                      widget.images[i],
+                      height: 50.0,
+                      width: 50.0,
+                      fit: BoxFit.cover,
+                    ),
                   ),
+                  SizedBox(height: 4.0),
                   Text(
                     widget.tabs[i],
                     style: TextStyle(
                       // 如果是当前用户选择的标签，显示不同颜色。
-                      color: _select == i ? Colors.red : Colors.grey[900],
+                      color:
+                          _select == i ? Color(0xffFF4964) : Color(0xff666666),
                       // 如果是当前用户选择的标签，显示不同字体大小。
-                      fontSize: _select == i ? 14.0 : 13.0,
+                      fontSize: 14.0,
+                      fontFamily: 'PingFangRegular',
                     ),
                   ),
                 ],
@@ -122,19 +130,21 @@ class _ImageMenuState extends State<ImageMenu> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  '更多频道',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: 13.0,
-                    fontWeight: FontWeight.bold,
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: 16.0,
+                    top: 16.0,
+                    bottom: 16.0,
                   ),
-                ),
-                SizedBox(
-                  height: 16.0,
+                  child: Text(
+                    '更多分类',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: Color(0xff333333),
+                      fontFamily: 'PingFangRegular',
+                    ),
+                  ),
                 ),
                 Column(
                   children: _imageColumn,

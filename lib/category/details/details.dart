@@ -73,7 +73,6 @@ class _DetailsPageState extends State<DetailsPage> {
         // 具体取决于未来（`Flutter`）返回的状态：加载、成功或失败。
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data);
             return Scaffold(
               // 自定义滚动视图（`CustomScrollView`）组件，用于创建一个自定义滚动效果的滚动视图。
               body: CustomScrollView(
