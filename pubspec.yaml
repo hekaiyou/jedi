@@ -141,6 +141,8 @@ flutter:
     - assets/brand_discount_bottom_plate.png
     - assets/platform_taobao_identifier.png
     - assets/platform_tmall_identifier.png
+    - assets/landing_phone.png
+    - assets/login_verification_code.png
     - assets/white_placeholder.png
     - assets/refresh.png
 

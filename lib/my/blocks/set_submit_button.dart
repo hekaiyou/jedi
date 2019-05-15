@@ -5,23 +5,29 @@ class SetSubmitButton extends StatelessWidget {
   /// 提交按钮的描述。
   final String title;
 
+  /// 按钮的内部填充。
+  final EdgeInsetsGeometry padding;
+
   /// 按钮的回调函数。
   final Function callback;
 
   SetSubmitButton({
     this.title,
     this.callback,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        top: 60.0,
-        left: 32.0,
-        right: 32.0,
-        bottom: 30.0,
-      ),
+      // 运算符`??`，表示如果为空。
+      padding: padding ??
+          EdgeInsets.only(
+            top: 60.0,
+            left: 32.0,
+            right: 32.0,
+            bottom: 30.0,
+          ),
       child: GestureDetector(
         onTap: callback,
         // 圆角矩形剪裁（`ClipRRect`）组件，使用圆角矩形剪辑其子项的组件。

@@ -115,7 +115,7 @@ class _FeaturedPageState extends State<FeaturedPage>
           }
         }
         apiGetGoodsgroups(typeid: 1).then((_list) {
-          for (Map _hotMap in _list[0]['outGoodsSimpleDetailList']) {
+          for (Map _hotMap in _list[0]['outGoodsDetailList']) {
             hotData.add(
               HotItem(
                 id: _hotMap['id'],

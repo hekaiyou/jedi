@@ -3,6 +3,7 @@ import 'package:jedi/home/image_menu.dart';
 import 'package:jedi/home/appbar_title.dart';
 import 'package:jedi/home/appbar_bottom.dart';
 import 'package:jedi/home/featured/featured.dart';
+import 'package:jedi/home/like/like.dart';
 
 /// 自定义的主页面组件。
 class HomePage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage>
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '猜你喜欢': [
-      Text('猜你喜欢'),
+      LikePage(),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '母婴': [

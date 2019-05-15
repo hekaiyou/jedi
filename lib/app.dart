@@ -7,6 +7,7 @@ import 'package:jedi/my/change_password.dart';
 import 'package:jedi/my/notification_settings.dart';
 import 'package:jedi/my/fans/fans.dart';
 import 'package:jedi/my/order/order.dart';
+import 'package:jedi/my/landing/landing.dart';
 import 'package:jedi/category/details/details.dart';
 import 'package:jedi/category/limited/limited.dart';
 import 'package:jedi/category/flash/flash.dart';
@@ -144,6 +145,12 @@ class _JediAppState extends State<JediApp> {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => OrderPage(),
+      );
+      // 我的-登陆页面路由。
+    } else if (name == '/my/landing') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => LandingPage(),
       );
       // 分类-详情页面路由。
     } else if (name == '/category/details') {

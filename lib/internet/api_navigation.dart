@@ -67,7 +67,7 @@ Future apiGetGetPagelayout({int categoryid}) async {
 ///   "goodsgroups": [
 ///     {
 ///       "groupname": "热销榜单",
-///       "goodsDetailList": [
+///       "outGoodsDetailList": [
 ///         {
 ///           "id": 1,
 ///           "title": "【正版包邮】蔡康永的情商课:为你自己活一次 2018蔡康永的说话之道后新书马东奇葩说推荐沟通交流的艺术把话说到人心情商提升书籍",
