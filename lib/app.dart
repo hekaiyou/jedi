@@ -13,7 +13,7 @@ import 'package:jedi/category/limited/limited.dart';
 import 'package:jedi/category/flash/flash.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
-// import 'package:nautilus/nautilus.dart' as nautilus;
+import 'package:nautilus/nautilus.dart' as nautilus;
 
 class JediApp extends StatefulWidget {
   @override
@@ -51,13 +51,15 @@ class _JediAppState extends State<JediApp> {
         print("在接收消息: $message");
       },
     );
-    // initNautilus();
     super.initState();
+    initTradeService();
   }
 
-  // initNautilus() async {
-  //   await nautilus.initTradeAsync();
-  // }
+  void initTradeService() {
+    nautilus.initTradeAsync(debuggable: false).then((data) {
+      print('初始化结果：${data.isSuccessful}');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +94,7 @@ class _JediAppState extends State<JediApp> {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => WebviewScaffold(
-              url: "https://www.baidu.com",
+              url: "https://oauth.taobao.com/authorize?response_type=code&client_id=25826707&redirect_uri=https://pgy.ngrok.xiaomiqiu.cn/api/callback&state=1212&view=wap",
               appBar: AppBar(
                 centerTitle: true,
                 title: Text("Widget webview"),

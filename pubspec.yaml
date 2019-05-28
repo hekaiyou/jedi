@@ -1,11 +1,9 @@
 name: jedi
 description: A new Flutter project.
 
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
+# 以下定义了应用程序的版本号和内部版本号。
+# 版本号是由点分隔的三个数字，如1.2.43，后跟由+分隔的可选构建号。
+# 通过分别指定--build-name和--build-number，可以在flutter构建中覆盖版本号和构建器号。
 # In Android, build-name is used as versionName while build-number used as versionCode.
 # Read more about Android versioning at https://developer.android.com/studio/publish/versioning
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
@@ -46,7 +44,7 @@ dependencies:
 
   # 阿里百川电商SDK在Flutter上的实现
   # https://pub.dartlang.org/packages/nautilus#-readme-tab-
-  # nautilus: ^0.0.6
+  nautilus: ^0.0.6
 
 dev_dependencies:
   flutter_test:

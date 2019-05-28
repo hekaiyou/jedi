@@ -22,6 +22,7 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 def keystoreProperties = new Properties()
@@ -32,6 +33,10 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     compileSdkVersion 28
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 
     lintOptions {
         disable 'InvalidPackage'
@@ -44,11 +49,11 @@ android {
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // 极光推送的配置。
         ndk{
-            // // 设置支持的SO库架构。
+            // 设置支持的SO库架构。
             abiFilters "armeabi-v7a"
         }
         manifestPlaceholders = [
@@ -80,16 +85,22 @@ android {
             }
 
             // 配置混淆代码
-            // minifyEnabled true
+            // shrinkResources false
             // useProguard true
 
             // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            shrinkResources false
         }
         debug {
+            signingConfig signingConfigs.debug
+
             ndk {
                 // 这里要加上，否则debug包会出问题，后面三个为可选，x86建议加上不然部分模拟器回报错
                 abiFilters "armeabi-v7a", 'x86'
             }
+
+            shrinkResources false
         }
     }
 
@@ -97,6 +108,7 @@ android {
     // packagingOptions {
     //     exclude "lib/arm64-v8a/librealm-jni.so"
     // }
+
 }
 
 flutter {
@@ -105,6 +117,7 @@ flutter {
 
 dependencies {
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

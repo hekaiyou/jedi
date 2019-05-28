@@ -30,6 +30,7 @@ Future apiGetGoodscategory() async {
     imageurlHeadGoodscategory = response.data['data']['imageurlhead'];
     return response.data['data']['goodscategory'];
   } catch (e) {
+    print('网络请求——获取分类信息：');
     print(e);
   }
 }
@@ -56,11 +57,12 @@ Future apiGetGetPagelayout({int categoryid}) async {
     imageurlHeadPagelayout = response.data['data']['imageurlhead'];
     return response.data['data']['pagelayout'];
   } catch (e) {
+    print('网络请求——获取页面布局：');
     print(e);
   }
 }
 
-/// 获取商品组。
+/// 获取商品组。(弃用)
 /// POST /api/get_goodsgroups/
 /// {
 ///   "imageurlhead": "http://39.105.23.168:8888/images/",
@@ -73,9 +75,9 @@ Future apiGetGetPagelayout({int categoryid}) async {
 ///           "title": "【正版包邮】蔡康永的情商课:为你自己活一次 2018蔡康永的说话之道后新书马东奇葩说推荐沟通交流的艺术把话说到人心情商提升书籍",
 ///           "picturl": "https://img.alicdn.com/tfscom/i2/2609694927/O1CN01WxQr5Y1mGbw41niLs_!!0-item_pic.jpg",
 ///           "volume": 783,
-///           "reserveprice": 42,
-///           "zkfinalprice": 20.4,
-///           "isselfupport": "2",
+///           "reserveprice": 42, 「商品原价」
+///           "zkfinalprice": 20.4, 「券后价」
+///           "isselfupport": "2", 「是否自平台商品」
 ///         {
 ///       ],
 ///     },
@@ -89,6 +91,45 @@ Future apiGetGoodsgroups({int typeid}) async {
     imageurlHeadGoodsgroups = response.data['data']['imageurlhead'];
     return response.data['data']['goodsgroups'];
   } catch (e) {
+    print('网络请求——获取商品组：');
+    print(e);
+  }
+}
+
+/// 通用搜索优惠劵。
+/// POST /api/taobao_material_optional/
+/// {
+///   "imageurlhead": "http://39.105.23.168:8888/images/",
+///   "materialoptional": [
+///     {
+///       "typeid": 0,
+///       "materialgroupname": "热销榜单",
+///       "outMaterialDetailList": [
+///         {
+///           "shortTitle": "欧美街头ins女装字母印花短袖t恤", 「商品短标题」
+///           "pictUrl": "https://img.alicQr5Y1mGbw41niLs_!!0-item_pic.jpg", 「商品主图」
+///           "couponTotalCount": 10000, 「优惠券总量」
+///           "couponRemainCount": 9181, 「优惠券剩余量」
+///           "zkFinalPrice": 42, 「商品原价」
+///           "couponAmount": 20.4, 「优惠券面额」
+///           "isselfupport": "2", 「是否自平台商品」
+///         {
+///       ],
+///     },
+///     ...
+///   ],
+/// }
+Future apiTaobaoMaterialOptional({
+  int typeid,
+  String q,
+}) async {
+  try {
+    Response response = await dio
+        .post('/taobao_material_optional/', data: {'typeid': typeid, 'q': q});
+    imageurlHeadGoodsgroups = response.data['data']['imageurlhead'];
+    return response.data['data']['materialoptional'];
+  } catch (e) {
+    print('网络请求——通用搜索优惠劵：');
     print(e);
   }
 }

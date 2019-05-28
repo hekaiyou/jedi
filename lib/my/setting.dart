@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/my/blocks/setting_options.dart';
 import 'package:jedi/my/blocks/set_submit_button.dart';
-//import 'package:nautilus/nautilus.dart' as nautilus;
-//nautilus.login();
+import 'package:nautilus/nautilus.dart' as nautilus;
 
 /// 自定义的设置页面组件。
 class SettingPage extends StatelessWidget {
@@ -78,6 +77,9 @@ class SettingPage extends StatelessWidget {
                   title: '退出登录',
                   callback: () {
                     print('退出登录');
+                    nautilus.logout().then((data) {
+                      print(data);
+                    });
                   },
                 ),
               ],

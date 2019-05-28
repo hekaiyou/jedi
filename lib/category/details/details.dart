@@ -68,7 +68,7 @@ class _DetailsPageState extends State<DetailsPage> {
       // 未来构建（`FutureBuilder`）组件附带未来（`Flutter`），可以轻松使用异步数据源。
       body: FutureBuilder(
         // 我们希望与之合作的未来（`Flutter`），我们将调用自定义的请求函数。
-        future: apiGetGoodsdetail(id: widget.id),
+        future: apiGetGoodsdetail(id: widget.id ),
         // 一个构建器函数，它告诉未来（`Flutter`）要呈现什么，
         // 具体取决于未来（`Flutter`）返回的状态：加载、成功或失败。
         builder: (context, snapshot) {

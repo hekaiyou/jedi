@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:nautilus/nautilus.dart' as nautilus;
 
 /// 自定义的设置选项组件。
 class SettingOptions extends StatefulWidget {
@@ -77,10 +78,70 @@ class _SettingOptionsState extends State<SettingOptions> {
           },
         ),
         _buildOperationRow(
-          title: '支付宝绑定',
+          title: '淘宝授权',
           callback: () {
-            print('支付宝绑定');
+            nautilus.login().then((data) {
+              if (data.isSuccessful) {
+                nautilus.getUser().then((data) {
+                  // pageUrl：页面地址；backUrl：返回地址；extParams：传递的临时参数；
+                  // taoKeParams：传递的淘客参数；needPush：是否需要推送，仅适用于iOS；
+                  // schemeType：方案类型，支持`tmall_scheme`和`taobao_scheme`，默认值为`tmall_scheme`；
+                  // openType：打开类型；openNativeFailedMode：打开本机失败模式；
+                  nautilus
+                      .openUrl(
+                    openType: nautilus.OpenType.H5,
+                    pageUrl:
+                        "https://oauth.taobao.com/authorize?response_type=code&client_id=25826707&redirect_uri=https://www.yujianshenghuo.com/api/auth_callback&state=1212&view=wap",
+                  )
+                      .then((onValue) {
+                    print('服务器返回信息：');
+                    print('*' * 10);
+                    print(
+                        'openResultCode：' + onValue.openResultCode.toString());
+                    print('platform：' + onValue.platform.toString());
+                    print('isSuccessful：' + onValue.isSuccessful.toString());
+                    print('tradeResultType：' +
+                        onValue.tradeResultType.toString());
+                    print('paySuccessOrders' +
+                        onValue.paySuccessOrders.toString());
+                    print(
+                        'payFailedOrders' + onValue.payFailedOrders.toString());
+                    print('errorCode' + onValue.errorCode.toString());
+                    print('errorMessage' + onValue.errorMessage.toString());
+                    print('*' * 10);
+                  });
+                });
+              } else {
+                showDialog<Null>(
+                    context: context,
+                    barrierDismissible: true,
+                    builder: (BuildContext context) {
+                      return CupertinoAlertDialog(
+                        content: Text(
+                          data.errorMessage,
+                          style: TextStyle(
+                            fontFamily: 'PingFangRegular',
+                            fontSize: 15.0,
+                          ),
+                        ),
+                        actions: [
+                          CupertinoDialogAction(
+                            child: Text('确定'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    });
+                //print('错误信息->${}');
+              }
+            });
           },
+        ),
+        _buildOperationRow(
+          title: '支付宝绑定',
+          callback: () {},
         ),
         _buildOperationRow(
           title: '微信绑定',

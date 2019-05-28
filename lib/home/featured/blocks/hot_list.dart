@@ -12,22 +12,26 @@ class HotItem {
   /// 销售商品名称。
   final String title;
 
-  /// 折扣后价格。
-  final double zkfinalprice;
+  /// 优惠券面额。
+  final String couponAmount;
 
   /// 折扣前价格。
-  final double reserveprice;
+  final String zkFinalPrice;
 
-  /// 领劵总人数。
-  final int volume;
+  /// 优惠券总量。
+  final int couponTotalCount;
+
+  /// 优惠券剩余量。
+  final int couponRemainCount;
 
   HotItem({
     this.id,
     this.picturl,
     this.title,
-    this.zkfinalprice,
-    this.reserveprice,
-    this.volume,
+    this.couponAmount,
+    this.zkFinalPrice,
+    this.couponRemainCount,
+    this.couponTotalCount
   });
 }
 
@@ -74,11 +78,8 @@ class HotList extends StatelessWidget {
               child: Center(
                 child: Text(
                   // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
-                  (hotItem.volume / 10000).toStringAsFixed(1) +
-                      'w人已领 | ' +
-                      (hotItem.reserveprice - hotItem.zkfinalprice)
-                          .toStringAsFixed(0) +
-                      '元劵',
+                  (hotItem.couponTotalCount - hotItem.couponRemainCount).toStringAsFixed(0) +
+                      '人已领 | ${hotItem.couponAmount} 元劵',
                   style: TextStyle(
                     color: Color(0xffFFFFFF),
                     fontFamily: 'PingFangRegular',
@@ -122,7 +123,11 @@ class HotList extends StatelessWidget {
                       text: '¥',
                       children: [
                         TextSpan(
-                          text: hotItem.zkfinalprice.toString(),
+                          // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
+                          text: (double.parse(hotItem.zkFinalPrice) -
+                                  double.parse(hotItem.couponAmount))
+                              .toStringAsFixed(1)
+                              .toString(),
                           style: TextStyle(
                             // 字母间距（`letterSpacing`）属性，每个字母之间添加的空间量。
                             // 以逻辑像素为单位，可以使用负值来使字母更接近。
@@ -144,7 +149,7 @@ class HotList extends StatelessWidget {
                       text: '¥',
                       children: [
                         TextSpan(
-                          text: hotItem.reserveprice.toString(),
+                          text: hotItem.zkFinalPrice,
                           style: TextStyle(
                             // 字母间距（`letterSpacing`）属性，每个字母之间添加的空间量。
                             // 以逻辑像素为单位，可以使用负值来使字母更接近。

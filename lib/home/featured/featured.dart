@@ -114,18 +114,19 @@ class _FeaturedPageState extends State<FeaturedPage>
             posterPicture.add(imageurlHeadPagelayout + amap['layoutimage']);
           }
         }
-        apiGetGoodsgroups(typeid: 1).then((_list) {
-          for (Map _hotMap in _list[0]['outGoodsDetailList']) {
+        apiTaobaoMaterialOptional(typeid: 0, q: '热销榜单').then((_list) {
+          for (Map _hotMap in _list['outMaterialDetailList']) {
             hotData.add(
               HotItem(
-                id: _hotMap['id'],
+                id: _hotMap['categoryId'],
                 picturl: _hotMap['isselfupport'] == "2"
-                    ? _hotMap['picturl']
-                    : imageurlHeadGoodsgroups + _hotMap['picturl'],
-                title: _hotMap['title'],
-                zkfinalprice: _hotMap['zkfinalprice'],
-                reserveprice: _hotMap['reserveprice'],
-                volume: _hotMap['volume'],
+                    ? _hotMap['pictUrl']
+                    : imageurlHeadGoodsgroups + _hotMap['pictUrl'],
+                title: _hotMap['shortTitle'],
+                couponAmount: _hotMap['couponAmount'],
+                zkFinalPrice: _hotMap['zkFinalPrice'],
+                couponTotalCount: _hotMap['couponTotalCount'],
+                couponRemainCount: _hotMap['couponRemainCount'],
               ),
             );
           }
