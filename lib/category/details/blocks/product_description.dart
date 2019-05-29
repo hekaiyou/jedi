@@ -8,7 +8,7 @@ class ProductDescription extends StatelessWidget {
   /// 最终、字符串变量，商品名称。
   final String title;
 
-  /// 最终、整型变量，购买平台，1=淘宝、2=天猫。
+  /// 最终、整型变量，购买平台，0=淘宝、1=天猫。
   final int taobaousertype;
 
   /// 最终、双精度变量，目前商品已售数量。
@@ -57,7 +57,7 @@ class ProductDescription extends StatelessWidget {
                         width: 18.0,
                         margin: EdgeInsets.only(top: 0.0),
                         child: Image.asset(
-                          taobaousertype == 1
+                          taobaousertype == 0
                               ? 'assets/platform_taobao_identifier.png'
                               : 'assets/platform_tmall_identifier.png',
                           fit: BoxFit.contain,

@@ -78,6 +78,7 @@ Future apiGetGetPagelayout({int categoryid}) async {
 ///           "reserveprice": 42, 「商品原价」
 ///           "zkfinalprice": 20.4, 「券后价」
 ///           "isselfupport": "2", 「是否自平台商品」
+///           "couponShareUrl": "//uland.taobao.com/coupon/edetail?e=Rrw...", 「二合一页面链接」
 ///         {
 ///       ],
 ///     },
@@ -113,6 +114,12 @@ Future apiGetGoodsgroups({int typeid}) async {
 ///           "zkFinalPrice": 42, 「商品原价」
 ///           "couponAmount": 20.4, 「优惠券面额」
 ///           "isselfupport": "2", 「是否自平台商品」
+///           "title": "欧美街头ins女装WORK HARD AND BE NICE字母印花短袖T恤 夏季新款", 「商品标题」
+///           "userType": 0, 「卖家类型」
+///           "smallImages": [ 「商品图片」
+///             "https://img.alicdn.com/i4/1098689030/TB2bK_KFTJYBeNjy1zeXXahzVXa_!!1098689030.jpg",
+///             ...
+///           ]
 ///         {
 ///       ],
 ///     },

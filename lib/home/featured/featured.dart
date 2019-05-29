@@ -118,15 +118,20 @@ class _FeaturedPageState extends State<FeaturedPage>
           for (Map _hotMap in _list['outMaterialDetailList']) {
             hotData.add(
               HotItem(
-                id: _hotMap['categoryId'],
+                itemId: _hotMap['itemId'],
+                isselfupport: _hotMap['isselfupport'],
                 picturl: _hotMap['isselfupport'] == "2"
                     ? _hotMap['pictUrl']
                     : imageurlHeadGoodsgroups + _hotMap['pictUrl'],
-                title: _hotMap['shortTitle'],
+                shortTitle: _hotMap['shortTitle'],
                 couponAmount: _hotMap['couponAmount'],
                 zkFinalPrice: _hotMap['zkFinalPrice'],
                 couponTotalCount: _hotMap['couponTotalCount'],
                 couponRemainCount: _hotMap['couponRemainCount'],
+                shopTitle:  _hotMap['shopTitle'],
+                smallImages: _hotMap['smallImages'],
+                title: _hotMap['title'],
+                couponShareUrl: _hotMap['couponShareUrl'],
               ),
             );
           }

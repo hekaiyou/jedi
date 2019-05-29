@@ -4,13 +4,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 /// 自定义的热销项目类，包含自定义的热销榜单组件需要的数据。
 class HotItem {
   /// 商品ID。
-  final int id;
+  final int itemId;
 
   /// 商品图片地址。
   final String picturl;
 
-  /// 销售商品名称。
-  final String title;
+  /// 商品短名称。
+  final String shortTitle;
 
   /// 优惠券面额。
   final String couponAmount;
@@ -24,14 +24,38 @@ class HotItem {
   /// 优惠券剩余量。
   final int couponRemainCount;
 
+  /// 商品标题。
+  final String title;
+
+  /// 卖家类型。
+  final int userType;
+
+  /// 店铺名称。
+  final String shopTitle;
+
+  /// 商品图片。
+  final List smallImages;
+
+  /// 是否自平台商品。
+  final String isselfupport;
+
+  /// 二合一页面链接。
+  final String couponShareUrl;
+
   HotItem({
-    this.id,
+    this.itemId,
     this.picturl,
-    this.title,
+    this.shortTitle,
     this.couponAmount,
     this.zkFinalPrice,
     this.couponRemainCount,
-    this.couponTotalCount
+    this.couponTotalCount,
+    this.title,
+    this.userType,
+    this.shopTitle,
+    this.smallImages,
+    this.isselfupport,
+    this.couponShareUrl,
   });
 }
 
@@ -78,7 +102,8 @@ class HotList extends StatelessWidget {
               child: Center(
                 child: Text(
                   // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
-                  (hotItem.couponTotalCount - hotItem.couponRemainCount).toStringAsFixed(0) +
+                  (hotItem.couponTotalCount - hotItem.couponRemainCount)
+                          .toStringAsFixed(0) +
                       '人已领 | ${hotItem.couponAmount} 元劵',
                   style: TextStyle(
                     color: Color(0xffFFFFFF),
@@ -97,7 +122,7 @@ class HotList extends StatelessWidget {
                 top: 4.0,
               ),
               child: Text(
-                hotItem.title,
+                hotItem.shortTitle,
                 // 溢出的文本以省略号（`...`）显示。
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -225,7 +250,21 @@ class HotList extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       '/category/details',
-                      arguments: hotItem.id,
+                      arguments: {
+                        'itemId': hotItem.itemId,
+                        'title': hotItem.title,
+                        'zkFinalPrice': hotItem.zkFinalPrice,
+                        'userType': hotItem.userType,
+                        'volume': hotItem.couponTotalCount -
+                                hotItem.couponRemainCount,
+                        'shopTitle': hotItem.shopTitle,
+                        'smallImages': hotItem.smallImages,
+                        'isselfupport': hotItem.isselfupport,
+                        'zkfinalprices': double.parse(hotItem.zkFinalPrice) -
+                            double.parse(hotItem.couponAmount),
+                        'couponAmount': hotItem.couponAmount,
+                        'couponShareUrl': hotItem.couponShareUrl,
+                      },
                     );
                   },
                   child: _buildCard(hotItem));
