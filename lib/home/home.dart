@@ -4,6 +4,7 @@ import 'package:jedi/home/appbar_title.dart';
 import 'package:jedi/home/appbar_bottom.dart';
 import 'package:jedi/home/featured/featured.dart';
 import 'package:jedi/home/like/like.dart';
+import 'package:jedi/home/classification/classification.dart';
 
 /// 自定义的主页面组件。
 class HomePage extends StatefulWidget {
@@ -28,43 +29,43 @@ class _HomePageState extends State<HomePage>
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '母婴': [
-      Text('母婴'),
+      ClassificationPage(typeName: '母婴'),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '食品': [
-      Text('食品'),
+      ClassificationPage(typeName: '食品'),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '女装': [
-      Text('女装'),
+      ClassificationPage(typeName: '女装'),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '彩妆': [
-      Text('彩妆'),
+      ClassificationPage(typeName: '彩妆'),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '洗护': [
-      Text('洗护'),
+      ClassificationPage(typeName: '洗护'),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '内衣': [
-      Text('内衣'),
+      ClassificationPage(typeName: '内衣'),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '百货': [
-      Text('百货'),
+      ClassificationPage(typeName: '百货'),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '家电': [
-      Text('家电'),
+      ClassificationPage(typeName: '家电'),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '家居': [
-      Text('家居'),
+      ClassificationPage(typeName: '家居'),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
     '数码': [
-      Text('数码'),
+      ClassificationPage(typeName: '数码'),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
   };

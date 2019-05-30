@@ -129,10 +129,23 @@ Future apiGetGoodsgroups({int typeid}) async {
 Future apiTaobaoMaterialOptional({
   int typeid,
   String q,
+  int pagesize,
+  int pageno,
+  String sort,
 }) async {
   try {
+    Map responseData = {'typeid': typeid, 'q': q};
+    if (pagesize != null) {
+      responseData['pagesize'] = pagesize;
+    }
+    if (pageno != null) {
+      responseData['pageno'] = pageno;
+    }
+    if (sort != null) {
+      responseData['sort'] = sort;
+    }
     Response response = await dio
-        .post('/taobao_material_optional/', data: {'typeid': typeid, 'q': q});
+        .post('/taobao_material_optional/', data: responseData);
     imageurlHeadGoodsgroups = response.data['data']['imageurlhead'];
     return response.data['data']['materialoptional'];
   } catch (e) {

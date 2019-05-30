@@ -1,8 +1,62 @@
 import 'package:flutter/material.dart';
 
-/// 自定义的猜你喜欢列表瓷砖组件。
-class LikeListTile extends StatelessWidget {
-  
+/// 自定义的分类商品列表瓷砖组件。
+class ClassificationListTile extends StatelessWidget {
+  /// 商品ID。
+  // final int itemId;
+
+  /// 商品图片地址。
+  final String picturl;
+
+  /// 商品短名称。
+  // final String shortTitle;
+
+  /// 优惠券面额。
+  // final String couponAmount;
+
+  /// 折扣前价格。
+  // final String zkFinalPrice;
+
+  /// 优惠券总量。
+  // final int couponTotalCount;
+
+  /// 优惠券剩余量。
+  // final int couponRemainCount;
+
+  /// 商品标题。
+  final String title;
+
+  /// 卖家类型。
+  // final int userType;
+
+  /// 店铺名称。
+  // final String shopTitle;
+
+  /// 商品图片。
+  // final List smallImages;
+
+  /// 是否自平台商品。
+  // final String isselfupport;
+
+  /// 二合一页面链接。
+  // final String couponShareUrl;
+
+  ClassificationListTile({
+    // this.itemId,
+    this.picturl,
+    // this.shortTitle,
+    // this.couponAmount,
+    // this.zkFinalPrice,
+    // this.couponRemainCount,
+    // this.couponTotalCount,
+    this.title,
+    // this.userType,
+    // this.shopTitle,
+    // this.smallImages,
+    // this.isselfupport,
+    // this.couponShareUrl,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +81,7 @@ class LikeListTile extends StatelessWidget {
                         top: Radius.circular(5.0),
                       ),
                       child: Image.network(
-                        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557845972529&di=c30518d798a79b89527cee541664aad6&imgtype=0&src=http%3A%2F%2Fimg000.hc360.cn%2Fhb%2FMTQ1OTgwMTY1MDcxNy00MTkxODU3OTI%3D.jpg',
+                        picturl,
                         height: 106.0,
                         width: 106.0,
                         fit: BoxFit.cover,
@@ -85,11 +139,11 @@ class LikeListTile extends StatelessWidget {
                         ),
                         // 显示订单商品描述的文本（`Text`）组件。
                         Text(
-                          '     ' + '阿斯顿发送到asdfasf阿斯顿发142342324发asdf撒地方',
+                          '     ' + title,
                           style: TextStyle(
                             color: Color(0xff333333),
                             fontFamily: 'PingFangMedium',
-                            fontSize: 12.0,
+                            fontSize: 13.0,
                           ),
                         ),
                       ],

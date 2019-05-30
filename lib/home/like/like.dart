@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/home/like/blocks/like_list_tile.dart';
+import 'package:jedi/internet/api_navigation.dart';
 import 'package:jedi/blocks/pulltore_fresh.dart';
 
 /// 自定义的猜你喜欢页面组件。
@@ -33,12 +34,23 @@ class _LikePageState extends State<LikePage> {
 
   Future _loadData(bool isPullDown) async {
     if (isPullDown) {
-      Future.delayed(Duration(milliseconds: 50), () {
+      apiTaobaoMaterialOptional(typeid: 0, q: '猜你喜欢', pagesize: 20, pageno: 0)
+          .then((_list) {
+        for (Map _hotMap in _list['outMaterialDetailList']) {
+          widgetList.add(LikeListTile(
+            
+          ));
+        }
         setState(() {
-          widgetList = [LikeListTile()];
           widgetList.addAll([LikeListTile()]);
         });
       });
+      // Future.delayed(Duration(milliseconds: 50), () {
+      //   setState(() {
+      //     widgetList = [LikeListTile()];
+      //     widgetList.addAll([LikeListTile()]);
+      //   });
+      // });
     } else {
       Future.delayed(Duration(milliseconds: 50), () {
         setState(() {
