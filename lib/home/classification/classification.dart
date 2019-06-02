@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/home/classification/blocks/classification_list_tile.dart';
+import 'package:jedi/home/classification/blocks/classification_segment.dart';
 import 'package:jedi/internet/api_navigation.dart';
 import 'package:jedi/blocks/pulltore_fresh.dart';
+import 'package:jedi/home/classification/blocks/processing_sorting_style.dart';
 import 'package:jedi/home/classification/blocks/sort_operation.dart';
+import 'package:jedi/home/classification/blocks/classified_ads_indicator.dart';
 
 /// 自定义的分类商品页面组件。
 class ClassificationPage extends StatefulWidget {
@@ -21,7 +23,7 @@ class ClassificationPage extends StatefulWidget {
 /// 为自动保持活动（`AutomaticKeepAlive`）的客户提供方便的方法，与State子类一起使用。
 /// 可以避免作为父组件的标签栏视图（`TabBarView`）组件切换时被重新绘制。
 class _ClassificationPageState extends State<ClassificationPage>
-    with AutomaticKeepAliveClientMixin {
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   /// 列表视图（`ListView`）中要显示的数据。
   List<Widget> widgetList = [];
 
@@ -37,11 +39,39 @@ class _ClassificationPageState extends State<ClassificationPage>
   /// 排序设置，可以在这里设置默认排序。
   String sortSet = '';
 
+  /// 风格设置，可以在这里设置默认排序。
+  int stypeSet = 0;
+
   /// 总结果数，用于计算分页。
   int totalResults = 0;
 
   /// 当前页数。
   int pagenoNum = 0;
+
+  /// 当前页面的分类项目。
+  Widget classificationSegment;
+
+  /// 顶部裂片的高度。
+  double expandedHeight = 192.0;
+
+  /// 细分项目列表。
+  List<SegmentItem> segment = [];
+
+  /// 图片列表，运营位图片列表。
+  List<List<String>> imgList = [
+    [
+      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552850106279&di=66945cb570b8b229ef2cd44439f29191&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20170916%2Fa941249e25e8495e81ff845b53a0a631.gif',
+      ''
+    ],
+    [
+      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552849040492&di=466f5b51f52223e7855a60c522f9caed&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Fback_pic%2F05%2F51%2F77%2F175ae675f513899.jpg',
+      ''
+    ],
+    [
+      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552848913675&di=27dcd7c44c7f26207b62f77cb1bd3c0d&imgtype=0&src=http%3A%2F%2Fpic.90sjimg.com%2Fdesign%2F00%2F66%2F06%2F05%2Fe348ca963a431520d0b6898dffd47fe4.jpg',
+      ''
+    ],
+  ];
 
   /// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类的想要保持活动（`wantKeepAlive`）属性，
   /// 用于设置当前实例是否应保持活动状态（不因父组件的切换而重新绘制）。
@@ -54,17 +84,44 @@ class _ClassificationPageState extends State<ClassificationPage>
     WidgetsBinding.instance.addPostFrameCallback((context) {
       triggerPullController.triggerPull();
     });
+    int ie = 0;
+    for (Map _map in goodscategoryList) {
+      if (_map['categoryname'] == widget.typeName) {
+        for (Map _child in _map['childsOutGoodsCategory']) {
+          ie++;
+          segment.add(SegmentItem(
+            image: imageurlHeadGoodscategory + _child['categoryimage'],
+            title: _child['categoryname'],
+          ));
+        }
+      }
+    }
+    classificationSegment = ClassificationSegment(segment: segment);
+    if (ie > 5) {
+      expandedHeight += 85.0 * (ie ~/ 5);
+    } else {
+      classificationSegment = SizedBox();
+    }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   void _sortCallback(String sort) {
     totalResults = 0;
     sortSet = sort;
-    widgetList = [
-      SortOperation(
-        sortCallback: _sortCallback,
-      ),
-    ];
+    widgetList = [];
+    _taobaoMaterialOptional();
+  }
+
+  void _stypeCallback(int stype) {
+    totalResults = 0;
+    stypeSet = stype;
+    widgetList = [];
     _taobaoMaterialOptional();
   }
 
@@ -80,24 +137,10 @@ class _ClassificationPageState extends State<ClassificationPage>
         totalResults = _list['totalResults'];
         pagenoNum = 0;
       }
-      for (Map _hotMap in _list['outMaterialDetailList']) {
-        widgetList.add(ClassificationListTile(
-          // itemId: _hotMap['itemId'],
-          // isselfupport: _hotMap['isselfupport'],
-          picturl: _hotMap['isselfupport'] == "2"
-              ? _hotMap['pictUrl']
-              : imageurlHeadGoodsgroups + _hotMap['pictUrl'],
-          // shortTitle: _hotMap['shortTitle'],
-          // couponAmount: _hotMap['couponAmount'],
-          // zkFinalPrice: _hotMap['zkFinalPrice'],
-          // couponTotalCount: _hotMap['couponTotalCount'],
-          // couponRemainCount: _hotMap['couponRemainCount'],
-          // shopTitle: _hotMap['shopTitle'],
-          // smallImages: _hotMap['smallImages'],
-          title: _hotMap['title'],
-          // couponShareUrl: _hotMap['couponShareUrl'],
-        ));
-      }
+      widgetList.addAll(processingSortingStyle(
+        stype: stypeSet,
+        hotMaps: _list['outGetMaterialDetailList'],
+      ));
       setState(() {});
     });
   }
@@ -105,15 +148,9 @@ class _ClassificationPageState extends State<ClassificationPage>
   Future _loadData(bool isPullDown) async {
     if (isPullDown) {
       totalResults = 0;
-      widgetList = [
-        SortOperation(
-          sortCallback: _sortCallback,
-        ),
-      ];
+      widgetList = [];
       _taobaoMaterialOptional();
     } else {
-      print(totalResults);
-      print(pagenoNum);
       if (pagenoNum * 20 < totalResults) {
         pagenoNum += 1;
         _taobaoMaterialOptional();
@@ -135,13 +172,58 @@ class _ClassificationPageState extends State<ClassificationPage>
       // 可通过此对象的方法调用触发下拉刷新。
       triggerPullController: triggerPullController,
       // 用于上下拉的滑动控件。
-      listView: ListView.builder(
-        itemCount: widgetList.length,
+      listView: CustomScrollView(
         controller: controller,
         physics: scrollPhysics,
-        itemBuilder: (BuildContext context, int index) {
-          return widgetList[index];
-        },
+        slivers: <Widget>[
+          // 裂片应用栏（`SliverAppBar`）组件，与自定义滚动视图（`CustomScrollView`）组件集成的应用栏。
+          SliverAppBar(
+            backgroundColor: Color(0xffFFFFFF),
+            // 浮动（`floating`）属性，滑动到最上面，再滑动是否隐藏导航栏的文字和标题等的具体内容，
+            // 为`true`是隐藏，为`false`（默认）是不隐藏。
+            floating: false,
+            // 固定（`pinned`）属性，是否固定导航栏，为`true`是固定，为`false`（默认）是不固定，往上滑，导航栏可以隐藏。
+            pinned: true,
+            // 只跟浮动（`floating`）属性相对应，如果为`true`，浮动（`floating`）属性必须为`true`，
+            // 也就是向下滑动一点儿，整个大背景就会动画显示全部，往上滑动整个导航栏的内容就会消失。
+            snap: false,
+            expandedHeight: expandedHeight,
+            // 灵活的空间（`flexibleSpace`）属性，堆叠在工具栏和标签栏后面，它的高度��应用栏的整体高度相同。
+            // 灵活的空间栏（`FlexibleSpaceBar`）组件，可以扩展和折叠的应用栏子组件。
+            flexibleSpace: FlexibleSpaceBar(
+              // 背景（`background`）属性，展开后显示在标题后面。
+              background: Column(
+                children: <Widget>[
+                  ClassifiedAdsIndicator(imgList: imgList),
+                  classificationSegment,
+                ],
+              ),
+              // 折叠模式（`collapseMode`）属性，滚动时折叠效果。
+              collapseMode: CollapseMode.parallax,
+            ),
+            // 底部（`bottom`）属性，此组件显示在应用栏的底部。
+            // 首选大小（`PreferredSize`）组件，具有首选大小，它不会对其子项施加任何约束，也不会以任何方式影响子项的布局。
+            // 它只是宣传了父级组件可以使用���首选大小。
+            bottom: PreferredSize(
+              child: SortOperation(
+                sortCallback: _sortCallback,
+                stypeCallback: _stypeCallback,
+              ),
+              // 首选大���（`preferredSize`）属性，如果它不受限制，这个组件��更喜欢它的大小。
+              preferredSize: Size.fromHeight(-24.0),
+            ),
+          ),
+          // 裂片固定范围列表（`SliverFixedExtentList`）组件，沿着滚动轴具有相同范围的子项的线性列表。
+          SliverFixedExtentList(
+            itemExtent: stypeSet == 0 ? 128.0 : 243.0,
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return widgetList[index];
+              },
+              childCount: widgetList.length,
+            ),
+          ),
+        ],
       ),
       // 加载数据的回调。
       loadData: (isPullDown) async {

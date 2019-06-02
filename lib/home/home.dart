@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/home/image_menu.dart';
-import 'package:jedi/home/appbar_title.dart';
-import 'package:jedi/home/appbar_bottom.dart';
 import 'package:jedi/home/featured/featured.dart';
 import 'package:jedi/home/like/like.dart';
 import 'package:jedi/home/classification/classification.dart';
+import 'package:jedi/home/image_menu.dart';
+import 'package:jedi/home/appbar_title.dart';
+import 'package:jedi/home/appbar_bottom.dart';
+import 'package:jedi/internet/api_navigation.dart';
 
 /// 自定义的主页面组件。
 class HomePage extends StatefulWidget {
@@ -28,46 +29,6 @@ class _HomePageState extends State<HomePage>
       LikePage(),
       'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
     ],
-    '母婴': [
-      ClassificationPage(typeName: '母婴'),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
-    '食品': [
-      ClassificationPage(typeName: '食品'),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
-    '女装': [
-      ClassificationPage(typeName: '女装'),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
-    '彩妆': [
-      ClassificationPage(typeName: '彩妆'),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
-    '洗护': [
-      ClassificationPage(typeName: '洗护'),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
-    '内衣': [
-      ClassificationPage(typeName: '内衣'),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
-    '百货': [
-      ClassificationPage(typeName: '百货'),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
-    '家电': [
-      ClassificationPage(typeName: '家电'),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
-    '家居': [
-      ClassificationPage(typeName: '家居'),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
-    '数码': [
-      ClassificationPage(typeName: '数码'),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
   };
 
   /// 标签控制器（`TabController`）组件，在标签栏（`TabBar`）和标签栏视图（`TabBarView`）组件之间协调选项卡选择。
@@ -89,6 +50,12 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
+    for (Map _map in goodscategoryList) {
+      tabViewKey[_map['categoryname']] = [
+        ClassificationPage(typeName: _map['categoryname']),
+        imageurlHeadGoodscategory + _map['categoryimage'],
+      ];
+    }
     // 将配置项列表的值赋予标签栏、标签栏视图和自定义的图片菜单配置列表。
     tabViewKey.forEach((String tab, List view) {
       tabs.add(tab);
@@ -206,15 +173,18 @@ class _HomePageState extends State<HomePage>
             tabController: _tabController,
             tabs: tabs,
             onTapCallback: () {
-              openImageMenu(context, _appBarKey.currentContext.size.height,
-                  tabs, images, _tabController.index);
+              openImageMenu(
+                  context,
+                  _appBarKey.currentContext.size.height,
+                  tabs,
+                  images,
+                  _tabController.index);
             },
           ),
           // 首选大小（`preferredSize`）属性，如果它不受限制，这个组件会更喜欢它的大小。
           preferredSize: Size.fromHeight(30.0),
         ),
       ),
-      // 标签栏视图（`TabBarView`)组件，显示与当前所选选项卡对应的窗口组件的页面视图。
       body: TabBarView(
         // 控制器（`controller`）属性，此组件的选择和动画状态。
         controller: _tabController,

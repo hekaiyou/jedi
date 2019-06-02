@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/home/like/blocks/like_list_tile.dart';
 import 'package:jedi/internet/api_navigation.dart';
 import 'package:jedi/blocks/pulltore_fresh.dart';
+import 'package:jedi/blocks/recommend_you_item.dart';
 
 /// 自定义的猜你喜欢页面组件。
 class LikePage extends StatefulWidget {
@@ -23,6 +23,12 @@ class _LikePageState extends State<LikePage> {
   /// 通过按钮等其他方式，通过方法调用触发下拉刷新。
   TriggerPullController triggerPullController = TriggerPullController();
 
+  /// 总结果数，用于计算分页。
+  int totalResults = 0;
+
+  /// 当前页数。
+  int pagenoNum = 0;
+
   @override
   void initState() {
     // 第一次构建后会被调用。
@@ -32,31 +38,77 @@ class _LikePageState extends State<LikePage> {
     super.initState();
   }
 
+  void _taobaoMaterialOptional() {
+    apiTaobaoMaterialOptional(typeid: 0, q: '猜你喜欢', pagesize: 20, pageno: 0)
+        .then((_list) {
+      // 每行可以显示的数量。
+      int rowNum = 2;
+      // 当前行已经有多少组件。
+      int _row = 0;
+      // 包装在灵活（`Flexible`）组件里的容器（`Container`）组件列表。
+      // 临时存储当前行的数据，最大行数满了就清理一次。
+      List<Flexible> _columnList = [];
+      for (Map _hotMap in _list['outGetMaterialDetailList']) {
+        _columnList.add(
+          // 控制行（`Row`）、列（`Column`）或柔性（`Flex`）的子项如何灵活放置的组件。
+          Flexible(
+            // 柔性（`flex`）属性，用于这个子组件的弹性因子。
+            flex: 1,
+            child: RecommendYouItem(
+              row: _row,
+              recommendItem: RecommendItem(
+                title: _hotMap['title'],
+                objUrl: _hotMap['isselfupport'] == "2"
+                    ? _hotMap['pictUrl']
+                    : imageurlHeadGoodsgroups + _hotMap['pictUrl'],
+                rebatePrice: double.parse(_hotMap['zkFinalPrice']) -
+                    double.parse(_hotMap['couponAmount']),
+                costPrice: double.parse(_hotMap['zkFinalPrice']),
+                couponPrice: double.parse(_hotMap['couponAmount']),
+                earnSum: 10.0,
+                purchaseNum:
+                    _hotMap['couponTotalCount'] - _hotMap['couponRemainCount'],
+              ),
+            ),
+          ),
+        );
+        // 当前行数执行自加操作。
+        _row++;
+        // 当前行数等于每行最大可以显示的数量时，将数据添加进返回的数据列表，同时清理临时数据列表。
+        if (_row == rowNum) {
+          widgetList.add(
+            Container(
+              margin: EdgeInsets.only(
+                top: 6.0,
+                left: 13.0,
+                right: 13.0,
+                bottom: 6.0,
+              ),
+              child: Row(
+                children: _columnList,
+              ),
+            ),
+          );
+          _columnList = [];
+          _row = 0;
+        }
+      }
+      setState(() {});
+    });
+  }
+
   Future _loadData(bool isPullDown) async {
     if (isPullDown) {
-      apiTaobaoMaterialOptional(typeid: 0, q: '猜你喜欢', pagesize: 20, pageno: 0)
-          .then((_list) {
-        for (Map _hotMap in _list['outMaterialDetailList']) {
-          widgetList.add(LikeListTile(
-            
-          ));
-        }
-        setState(() {
-          widgetList.addAll([LikeListTile()]);
-        });
-      });
-      // Future.delayed(Duration(milliseconds: 50), () {
-      //   setState(() {
-      //     widgetList = [LikeListTile()];
-      //     widgetList.addAll([LikeListTile()]);
-      //   });
-      // });
+      totalResults = 0;
+      widgetList = [];
+      _taobaoMaterialOptional();
     } else {
-      Future.delayed(Duration(milliseconds: 50), () {
-        setState(() {
-          widgetList.addAll([LikeListTile()]);
-        });
-      });
+      if (pagenoNum * 20 < totalResults) {
+        pagenoNum += 1;
+        _taobaoMaterialOptional();
+      } else {
+        setState(() {});
+      }
     }
   }
 

@@ -5,6 +5,8 @@ String imageurlHeadGoodscategory;
 String imageurlHeadPagelayout;
 String imageurlHeadGoodsgroups;
 
+List<dynamic> goodscategoryList;
+
 /// 获取分类信息。
 /// POST /api/get_goodscategory/
 /// {
@@ -28,7 +30,8 @@ Future apiGetGoodscategory() async {
   try {
     Response response = await dio.post('/get_goodscategory/');
     imageurlHeadGoodscategory = response.data['data']['imageurlhead'];
-    return response.data['data']['goodscategory'];
+    goodscategoryList = response.data['data']['goodscategory'];
+    return goodscategoryList;
   } catch (e) {
     print('网络请求——获取分类信息：');
     print(e);
@@ -105,7 +108,7 @@ Future apiGetGoodsgroups({int typeid}) async {
 ///     {
 ///       "typeid": 0,
 ///       "materialgroupname": "热销榜单",
-///       "outMaterialDetailList": [
+///       "outGetMaterialDetailList": [
 ///         {
 ///           "shortTitle": "欧美街头ins女装字母印花短袖t恤", 「商品短标题」
 ///           "pictUrl": "https://img.alicQr5Y1mGbw41niLs_!!0-item_pic.jpg", 「商品主图」

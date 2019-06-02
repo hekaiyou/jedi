@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 /// 自定义的排序操作组件。
 class SortOperation extends StatefulWidget {
   final Function sortCallback;
+  final Function stypeCallback;
 
   SortOperation({
     this.sortCallback,
+    this.stypeCallback,
   });
 
   @override
@@ -16,6 +18,9 @@ class SortOperation extends StatefulWidget {
 class _SortOperationState extends State<SortOperation> {
   /// 排序设置。
   String sort = '';
+
+  /// 组件风格。
+  int stype = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +80,10 @@ class _SortOperationState extends State<SortOperation> {
                           // 字体系列。
                           fontFamily: 'PingFangRegular',
                           // 颜色。
-                          color: const Color(0xFF999999),
+                          color: sort == 'total_sales_asc' ||
+                                  sort == 'total_sales_des'
+                              ? Color(0xFFFE7C30)
+                              : Color(0xFF999999),
                         ),
                       ),
                       Stack(
@@ -145,7 +153,9 @@ class _SortOperationState extends State<SortOperation> {
                           // 字体系列。
                           fontFamily: 'PingFangRegular',
                           // 颜色。
-                          color: const Color(0xFF999999),
+                          color: sort == 'price_asc' || sort == 'price_des'
+                              ? Color(0xFFFE7C30)
+                              : Color(0xFF999999),
                         ),
                       ),
                       Stack(
@@ -174,6 +184,34 @@ class _SortOperationState extends State<SortOperation> {
                         ],
                       ),
                     ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  if (stype == 0) {
+                    stype = 1;
+                  } else if (stype == 1) {
+                    stype = 0;
+                  }
+                });
+                widget.stypeCallback(stype);
+              },
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  Container(
+                    height: 30.0,
+                    color: Color(0xffFFFFFF),
+                  ),
+                  Icon(
+                    Icons.dashboard,
+                    size: 18.0,
                   ),
                 ],
               ),

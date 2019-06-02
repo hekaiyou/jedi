@@ -114,8 +114,9 @@ class _FeaturedPageState extends State<FeaturedPage>
             posterPicture.add(imageurlHeadPagelayout + amap['layoutimage']);
           }
         }
+        print(posterPicture);
         apiTaobaoMaterialOptional(typeid: 0, q: '热销榜单').then((_list) {
-          for (Map _hotMap in _list['outMaterialDetailList']) {
+          for (Map _hotMap in _list['outGetMaterialDetailList']) {
             hotData.add(
               HotItem(
                 itemId: _hotMap['itemId'],

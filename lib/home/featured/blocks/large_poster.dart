@@ -193,7 +193,7 @@ class LargePoster extends StatelessWidget {
                                     ),
                                     height: 50.0,
                                     child: CachedNetworkImage(
-                                      imageUrl: posterPicture[2],
+                                      imageUrl: posterPicture[1],//2
                                       fit: BoxFit.contain,
                                     ),
                                   ),
@@ -240,7 +240,7 @@ class LargePoster extends StatelessWidget {
                                     ),
                                     height: 50.0,
                                     child: CachedNetworkImage(
-                                      imageUrl: posterPicture[3],
+                                      imageUrl: posterPicture[1],//3
                                       fit: BoxFit.contain,
                                     ),
                                   ),

@@ -11,6 +11,7 @@ import 'package:jedi/my/landing/landing.dart';
 import 'package:jedi/category/details/details.dart';
 import 'package:jedi/category/limited/limited.dart';
 import 'package:jedi/category/flash/flash.dart';
+import 'package:jedi/initiate.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:nautilus/nautilus.dart' as nautilus;
@@ -71,7 +72,8 @@ class _JediAppState extends State<JediApp> {
       // home属性，应用程序默认路径（即`Navigator.defaultRouteName`或`/`）的组件。
       // 除非指定了initialRoute属性，否则这是在应用程序正常启动时首先显示的路由。
       // 如果无法显示initialRoute属性的路径，它也是显示的路径。
-      home: NavigationPage(),
+      // home: NavigationPage(),
+      // 初始路由属性，如果构建了导航器（`Navigator`）组件，则是启动时第一条路由的名称。
       initialRoute: '/',
       // 在生成路由上属性，应用程序导航到命名路由时使用的路由生成器回调。
       onGenerateRoute: _getRoute,
@@ -85,6 +87,13 @@ class _JediAppState extends State<JediApp> {
     final String name = settings.name;
 
     if (name == '/') {
+      return MaterialPageRoute<void>(
+        settings: settings,
+        builder: (BuildContext context) => InitiatePage(),
+        fullscreenDialog: true,
+      );
+      // 主页面路由。
+    } else if (name == '/navigation') {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => NavigationPage(),
@@ -94,7 +103,8 @@ class _JediAppState extends State<JediApp> {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => WebviewScaffold(
-              url: "https://oauth.taobao.com/authorize?response_type=code&client_id=25826707&redirect_uri=https://pgy.ngrok.xiaomiqiu.cn/api/callback&state=1212&view=wap",
+              url:
+                  "https://oauth.taobao.com/authorize?response_type=code&client_id=25826707&redirect_uri=https://pgy.ngrok.xiaomiqiu.cn/api/callback&state=1212&view=wap",
               appBar: AppBar(
                 centerTitle: true,
                 title: Text("Widget webview"),
@@ -158,7 +168,8 @@ class _JediAppState extends State<JediApp> {
     } else if (name == '/category/details') {
       return MaterialPageRoute(
         settings: settings,
-        builder: (BuildContext context) => DetailsPage(item: settings.arguments),
+        builder: (BuildContext context) =>
+            DetailsPage(item: settings.arguments),
       );
       // 分类-限时抢购页面路由。
     } else if (name == '/category/limited') {
