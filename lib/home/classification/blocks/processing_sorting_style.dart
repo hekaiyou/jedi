@@ -6,6 +6,7 @@ import 'package:jedi/blocks/recommend_you_item.dart';
 /// 自定义的根据用户选择风格组件。
 List<Widget> processingSortingStyle({int stype, List<dynamic> hotMaps}) {
   List<Widget> widgetList = [];
+  // 如果用户选择风格为0时的处理方式。
   if (stype == 0) {
     for (Map _hotMap in hotMaps) {
       widgetList.add(ClassificationListTile(
@@ -25,6 +26,7 @@ List<Widget> processingSortingStyle({int stype, List<dynamic> hotMaps}) {
         // couponShareUrl: _hotMap['couponShareUrl'],
       ));
     }
+    // 如果用户选择风格为1或其他时的处理方式。
   } else {
     // 每行可以显示的数量。
     int rowNum = 2;

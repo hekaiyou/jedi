@@ -8,6 +8,7 @@ import 'package:jedi/home/classification/blocks/classified_ads_indicator.dart';
 
 /// 自定义的分类商品页面组件。
 class ClassificationPage extends StatefulWidget {
+  /// 分类名称，用于接口请求参数。
   final String typeName;
 
   ClassificationPage({
@@ -85,6 +86,7 @@ class _ClassificationPageState extends State<ClassificationPage>
       triggerPullController.triggerPull();
     });
     int ie = 0;
+    // 获取初始化时获取的分类信息，然后执行遍历操作。
     for (Map _map in goodscategoryList) {
       if (_map['categoryname'] == widget.typeName) {
         for (Map _child in _map['childsOutGoodsCategory']) {
@@ -100,6 +102,7 @@ class _ClassificationPageState extends State<ClassificationPage>
     if (ie > 5) {
       expandedHeight += 85.0 * (ie ~/ 5);
     } else {
+      // 如果分类内容不足，就不显示自定义的分类商品细分组件。
       classificationSegment = SizedBox();
     }
     super.initState();
@@ -111,6 +114,7 @@ class _ClassificationPageState extends State<ClassificationPage>
     super.dispose();
   }
 
+  /// 自定义的排序操作组件需要的排序规则变更回调。
   void _sortCallback(String sort) {
     totalResults = 0;
     sortSet = sort;
@@ -118,6 +122,7 @@ class _ClassificationPageState extends State<ClassificationPage>
     _taobaoMaterialOptional();
   }
 
+  /// 自定义的排序操作组件需要的项目风格变更回调。
   void _stypeCallback(int stype) {
     totalResults = 0;
     stypeSet = stype;
@@ -125,6 +130,7 @@ class _ClassificationPageState extends State<ClassificationPage>
     _taobaoMaterialOptional();
   }
 
+  /// 请求通用搜索优惠劵接口，然后使用获取的数据添加列表视图（ListView）中要显示的数据。
   void _taobaoMaterialOptional() {
     apiTaobaoMaterialOptional(
       typeid: 0,
@@ -141,6 +147,7 @@ class _ClassificationPageState extends State<ClassificationPage>
         stype: stypeSet,
         hotMaps: _list['outGetMaterialDetailList'],
       ));
+      // 更新状态使变更的内容生效。
       setState(() {});
     });
   }
@@ -215,7 +222,7 @@ class _ClassificationPageState extends State<ClassificationPage>
           ),
           // 裂片固定范围列表（`SliverFixedExtentList`）组件，沿着滚动轴具有相同范围的子项的线性列表。
           SliverFixedExtentList(
-            itemExtent: stypeSet == 0 ? 128.0 : 243.0,
+            itemExtent: stypeSet == 0 ? 128.0 : 244.0,
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return widgetList[index];

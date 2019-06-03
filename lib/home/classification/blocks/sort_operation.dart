@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 /// 自定义的排序操作组件。
 class SortOperation extends StatefulWidget {
+  /// 排序规则变更回调。
   final Function sortCallback;
+
+  /// 项目风格变更回调。
   final Function stypeCallback;
 
   SortOperation({
@@ -16,10 +19,10 @@ class SortOperation extends StatefulWidget {
 
 /// 与自定义的排序操作组件关联的状态子类。
 class _SortOperationState extends State<SortOperation> {
-  /// 排序设置。
+  /// 排序设置，默认不传，用服务器的默认排序。
   String sort = '';
 
-  /// 组件风格。
+  /// 组件风格，0表示1行1个，1表示1行2个。
   int stype = 0;
 
   @override
@@ -47,6 +50,7 @@ class _SortOperationState extends State<SortOperation> {
           Expanded(
             flex: 1,
             child: GestureDetector(
+              // 选择销量排序规则的按钮点击事件。
               onTap: () {
                 setState(() {
                   if (sort == '') {
@@ -120,6 +124,7 @@ class _SortOperationState extends State<SortOperation> {
           Expanded(
             flex: 1,
             child: GestureDetector(
+              // 选择价格排序规则的按钮点击事件。
               onTap: () {
                 setState(() {
                   if (sort == '') {
@@ -192,6 +197,7 @@ class _SortOperationState extends State<SortOperation> {
           Expanded(
             flex: 1,
             child: GestureDetector(
+              // 切换列表风格的按钮点击事件。
               onTap: () {
                 setState(() {
                   if (stype == 0) {

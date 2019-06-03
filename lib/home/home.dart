@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jedi/home/featured/featured.dart';
 import 'package:jedi/home/like/like.dart';
 import 'package:jedi/home/classification/classification.dart';
-import 'package:jedi/home/image_menu.dart';
-import 'package:jedi/home/appbar_title.dart';
-import 'package:jedi/home/appbar_bottom.dart';
+import 'package:jedi/home/blocks/image_menu.dart';
+import 'package:jedi/home/blocks/appbar_title.dart';
+import 'package:jedi/home/blocks/appbar_bottom.dart';
 import 'package:jedi/internet/api_navigation.dart';
 
 /// 自定义的主页面组件。
@@ -104,6 +104,7 @@ class _HomePageState extends State<HomePage>
               select: select,
             );
           },
+          /* 从上往下的效果没有那么理想，就不用过度效果了。
           // 转换生成器（`transitionsBuilder`）属性，用于构建路径的转换。
           transitionsBuilder:
               (_, Animation<double> animation, __, Widget child) {
@@ -128,7 +129,8 @@ class _HomePageState extends State<HomePage>
                 child: child,
               ),
             );
-          }),
+          } */
+          ),
     )
         .then((value) {
       // 如果自定义的图片菜单组件返回不为空时，更新
@@ -173,12 +175,8 @@ class _HomePageState extends State<HomePage>
             tabController: _tabController,
             tabs: tabs,
             onTapCallback: () {
-              openImageMenu(
-                  context,
-                  _appBarKey.currentContext.size.height,
-                  tabs,
-                  images,
-                  _tabController.index);
+              openImageMenu(context, _appBarKey.currentContext.size.height,
+                  tabs, images, _tabController.index);
             },
           ),
           // 首选大小（`preferredSize`）属性，如果它不受限制，这个组件会更喜欢它的大小。

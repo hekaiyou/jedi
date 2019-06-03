@@ -3,7 +3,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 /// 自定义的细分项目类，包含自定义的精选细分组件需要的数据。
 class SegmentItem {
+  /// 细分项目的图标图片。
   final String image;
+
+  /// 细分项目的二三字名称。
   final String title;
 
   SegmentItem({
