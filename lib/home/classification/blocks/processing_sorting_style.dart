@@ -10,20 +10,21 @@ List<Widget> processingSortingStyle({int stype, List<dynamic> hotMaps}) {
   if (stype == 0) {
     for (Map _hotMap in hotMaps) {
       widgetList.add(ClassificationListTile(
-        // itemId: _hotMap['itemId'],
-        // isselfupport: _hotMap['isselfupport'],
+        itemId: _hotMap['itemId'],
+        isselfupport: _hotMap['isselfupport'],
         picturl: _hotMap['isselfupport'] == "2"
             ? _hotMap['pictUrl']
             : imageurlHeadGoodsgroups + _hotMap['pictUrl'],
-        // shortTitle: _hotMap['shortTitle'],
-        // couponAmount: _hotMap['couponAmount'],
-        // zkFinalPrice: _hotMap['zkFinalPrice'],
-        // couponTotalCount: _hotMap['couponTotalCount'],
-        // couponRemainCount: _hotMap['couponRemainCount'],
-        // shopTitle: _hotMap['shopTitle'],
-        // smallImages: _hotMap['smallImages'],
+        couponAmount: _hotMap['couponAmount'],
+        commissionRate: _hotMap['commissionRate'],
+        userType: _hotMap['userType'],
+        zkFinalPrice: _hotMap['zkFinalPrice'],
+        couponTotalCount: _hotMap['couponTotalCount'],
+        couponRemainCount: _hotMap['couponRemainCount'],
+        shopTitle: _hotMap['shopTitle'],
+        smallImages: _hotMap['smallImages'],
         title: _hotMap['title'],
-        // couponShareUrl: _hotMap['couponShareUrl'],
+        couponShareUrl: _hotMap['couponShareUrl'],
       ));
     }
     // 如果用户选择风格为1或其他时的处理方式。

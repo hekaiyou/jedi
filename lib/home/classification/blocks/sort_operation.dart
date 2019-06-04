@@ -63,10 +63,15 @@ class _SortOperationState extends State<SortOperation> {
             child: GestureDetector(
               // 综合排序的按钮点击事件。
               onTap: () {
-                // 调整到顶部。
-                setState(() {
-                  widget.controller.jumpTo(widget.hight - 32.0);
+                if (sort != '' &&
+                    sort != 'tk_total_commi_des' &&
+                    sort != 'tk_total_commi_asc' &&
+                    sort != 'tk_rate_des') {
                   sort = '';
+                }
+                setState(() {
+                  // 调整到顶部。
+                  widget.controller.jumpTo(widget.hight - 32.0);
                   isWithMore = true;
                 });
                 // 导航器（`Navigator`）组件，用于管理具有堆栈规则的一组子组件。
@@ -85,7 +90,6 @@ class _SortOperationState extends State<SortOperation> {
                     // 页面构建器（`pageBuilder`）属性，用于构建路径的主要内容。
                     pageBuilder: (BuildContext context, _, __) {
                       return IntegratedSort(
-                        hight: widget.hight - 50.0,
                         sortOld: sort,
                       );
                     },
@@ -100,9 +104,15 @@ class _SortOperationState extends State<SortOperation> {
                     });
                     widget.sortCallback(sort);
                   } else {
+                    if (sort != 'tk_total_commi_des' &&
+                        sort != 'tk_total_commi_asc' &&
+                        sort != 'tk_rate_des') {
+                      sort = '';
+                    }
                     setState(() {
                       isWithMore = false;
                     });
+                    widget.sortCallback(sort);
                   }
                 });
               },
@@ -248,7 +258,7 @@ class _SortOperationState extends State<SortOperation> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        '价格',
+                        '劵后价',
                         style: TextStyle(
                           // 字体大小。
                           fontSize: 15.0,

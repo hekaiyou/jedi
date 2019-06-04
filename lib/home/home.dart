@@ -20,16 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   /// 集中管理标签栏（`TabBar`）、标签栏视图（`TabBarView`）和自定义的图片菜单组件的配置项。
-  final Map<String, List> tabViewKey = {
-    '精选': [
-      FeaturedPage(),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
-    '猜你喜欢': [
-      LikePage(),
-      'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic706.jpg',
-    ],
-  };
+  final Map<String, List> tabViewKey = {};
 
   /// 标签控制器（`TabController`）组件，在标签栏（`TabBar`）和标签栏视图（`TabBarView`）组件之间协调选项卡选择。
   TabController _tabController;
@@ -51,10 +42,22 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     for (Map _map in goodscategoryList) {
-      tabViewKey[_map['categoryname']] = [
-        ClassificationPage(typeName: _map['categoryname']),
-        imageurlHeadGoodscategory + _map['categoryimage'],
-      ];
+      if (_map['categoryname'] == '精选') {
+        tabViewKey[_map['categoryname']] = [
+          FeaturedPage(),
+          imageurlHeadGoodscategory + _map['categoryimage'],
+        ];
+      } else if (_map['categoryname'] == '猜你喜欢') {
+        tabViewKey[_map['categoryname']] = [
+          LikePage(),
+          imageurlHeadGoodscategory + _map['categoryimage'],
+        ];
+      } else {
+        tabViewKey[_map['categoryname']] = [
+          ClassificationPage(typeName: _map['categoryname']),
+          imageurlHeadGoodscategory + _map['categoryimage'],
+        ];
+      }
     }
     // 将配置项列表的值赋予标签栏、标签栏视图和自定义的图片菜单配置列表。
     tabViewKey.forEach((String tab, List view) {
@@ -93,18 +96,18 @@ class _HomePageState extends State<HomePage>
         .push(
       // 页面路由生成器（`PageRouteBuilder`）组件，用于根据回调定义一次性页面路由的实用程序类。
       PageRouteBuilder(
-          // 转换完成后路由是否会遮盖以前的路由。
-          opaque: false,
-          // 页面构建器（`pageBuilder`）属性，用于构建路径的主要内容。
-          pageBuilder: (BuildContext context, _, __) {
-            return ImageMenu(
-              hight: hight,
-              tabs: tabs,
-              images: images,
-              select: select,
-            );
-          },
-          /* 从上往下的效果没有那么理想，就不用过度效果了。
+        // 转换完成后路由是否会遮盖以前的路由。
+        opaque: false,
+        // 页面构建器（`pageBuilder`）属性，用于构建路径的主要内容。
+        pageBuilder: (BuildContext context, _, __) {
+          return ImageMenu(
+            hight: hight,
+            tabs: tabs,
+            images: images,
+            select: select,
+          );
+        },
+        /* 从上往下的效果没有那么理想，就不用过度效果了。
           // 转换生成器（`transitionsBuilder`）属性，用于构建路径的转换。
           transitionsBuilder:
               (_, Animation<double> animation, __, Widget child) {
@@ -130,7 +133,7 @@ class _HomePageState extends State<HomePage>
               ),
             );
           } */
-          ),
+      ),
     )
         .then((value) {
       // 如果自定义的图片菜单组件返回不为空时，更新
@@ -162,8 +165,8 @@ class _HomePageState extends State<HomePage>
         brightness: Brightness.light,
         // 海拔（`elevation`）属性，将此应用栏相对于其父级放置的z坐标。
         elevation: 0.0,
-        // 标题间距（`titleSpacing`��属性，横轴上标题内容周围的间距，即使没有前导内容或操作，也会应用此间距。
-        // 如果希望标题（`title`）属性占用所有可用空间，请将此值设置为0.0。
+        // 标题间距（`titleSpacing`��属性，横轴上标题内容周围的间距，即使没有前导内容或操作���也会应用此间距。
+        // 如果希望标题（`title`）属性占用所有可用空间，���将此值设置为0.0。
         titleSpacing: 0.0,
         // 应用栏（`AppBar`）中显示的主要组件。
         title: AppBarTitle(),
