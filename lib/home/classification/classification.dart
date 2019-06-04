@@ -119,7 +119,7 @@ class _ClassificationPageState extends State<ClassificationPage>
     totalResults = 0;
     sortSet = sort;
     widgetList = [];
-    _taobaoMaterialOptional();
+    _taobaoMaterialOptional(true);
   }
 
   /// 自定义的排序操作组件需要的项目风格变更回调。
@@ -127,11 +127,11 @@ class _ClassificationPageState extends State<ClassificationPage>
     totalResults = 0;
     stypeSet = stype;
     widgetList = [];
-    _taobaoMaterialOptional();
+    _taobaoMaterialOptional(false);
   }
 
   /// 请求通用搜索优惠劵接口，然后使用获取的数据添加列表视图（ListView）中要显示的数据。
-  void _taobaoMaterialOptional() {
+  void _taobaoMaterialOptional(bool isJump) {
     apiTaobaoMaterialOptional(
       typeid: 0,
       q: widget.typeName,
@@ -147,6 +147,10 @@ class _ClassificationPageState extends State<ClassificationPage>
         stype: stypeSet,
         hotMaps: _list['outGetMaterialDetailList'],
       ));
+      // 如果需要调整到顶部。
+      if (isJump) {
+        controller.jumpTo(expandedHeight - 32.0);
+      }
       // 更新状态使变更的内容生效。
       setState(() {});
     });
@@ -156,11 +160,11 @@ class _ClassificationPageState extends State<ClassificationPage>
     if (isPullDown) {
       totalResults = 0;
       widgetList = [];
-      _taobaoMaterialOptional();
+      _taobaoMaterialOptional(false);
     } else {
       if (pagenoNum * 20 < totalResults) {
         pagenoNum += 1;
-        _taobaoMaterialOptional();
+        _taobaoMaterialOptional(false);
       } else {
         setState(() {});
       }
@@ -198,7 +202,7 @@ class _ClassificationPageState extends State<ClassificationPage>
             // 灵活的空间（`flexibleSpace`）属性，堆叠在工具栏和标签栏后面，它的高度��应用栏的整体高度相同。
             // 灵活的空间栏（`FlexibleSpaceBar`）组件，可以扩展和折叠的应用栏子组件。
             flexibleSpace: FlexibleSpaceBar(
-              // 背景（`background`）属性，展开后显示在标题后面。
+              // 背景（`background`）属性，展开后显示在标题后面�����
               background: Column(
                 children: <Widget>[
                   ClassifiedAdsIndicator(imgList: imgList),
@@ -213,6 +217,8 @@ class _ClassificationPageState extends State<ClassificationPage>
             // 它只是宣传了父级组件可以使用���首选大小。
             bottom: PreferredSize(
               child: SortOperation(
+                hight: expandedHeight,
+                controller: controller,
                 sortCallback: _sortCallback,
                 stypeCallback: _stypeCallback,
               ),
@@ -222,7 +228,7 @@ class _ClassificationPageState extends State<ClassificationPage>
           ),
           // 裂片固定范围列表（`SliverFixedExtentList`）组件，沿着滚动轴具有相同范围的子项的线性列表。
           SliverFixedExtentList(
-            itemExtent: stypeSet == 0 ? 128.0 : 244.0,
+            itemExtent: stypeSet == 0 ? 128.0 : 270.0,
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return widgetList[index];

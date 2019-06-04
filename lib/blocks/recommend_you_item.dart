@@ -181,7 +181,8 @@ class RecommendYouItem extends StatelessWidget {
                             text: '¥',
                             children: [
                               TextSpan(
-                                text: recommendItem.rebatePrice.toString(),
+                                // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
+                                text: recommendItem.rebatePrice.toStringAsFixed(1),
                                 style: TextStyle(
                                   // 字母间距（`letterSpacing`）属性，每个字母之间添加的空间量。
                                   // 以逻辑像素为单位，可以使用负值来使字母更接近。

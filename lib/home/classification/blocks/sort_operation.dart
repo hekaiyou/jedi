@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:jedi/home/classification/blocks/integrated_sort.dart';
 
 /// 自定义的排序操作组件。
 class SortOperation extends StatefulWidget {
+  /// 综合排序页面的顶部高度。
+  final double hight;
+
+  /// 滚动控制器（`ScrollController`）类，控制可滚动的组件。
+  final ScrollController controller;
+
   /// 排序规则变更回调。
   final Function sortCallback;
 
@@ -9,6 +16,8 @@ class SortOperation extends StatefulWidget {
   final Function stypeCallback;
 
   SortOperation({
+    this.hight,
+    this.controller,
     this.sortCallback,
     this.stypeCallback,
   });
@@ -24,6 +33,8 @@ class _SortOperationState extends State<SortOperation> {
 
   /// 组件风格，0表示1行1个，1表示1行2个。
   int stype = 0;
+
+  bool isWithMore = false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +58,92 @@ class _SortOperationState extends State<SortOperation> {
       width: double.infinity,
       child: Row(
         children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: GestureDetector(
+              // 综合排序的按钮点击事件。
+              onTap: () {
+                // 调整到顶部。
+                setState(() {
+                  widget.controller.jumpTo(widget.hight - 32.0);
+                  sort = '';
+                  isWithMore = true;
+                });
+                // 导航器（`Navigator`）组件，用于管理具有堆栈规则的一组子组件。
+                // 许多应用程序在其窗口组件层次结构的顶部附近有一个导航器，以便使用叠加显示其逻辑历史记录，
+                // 最近访问过的页面可视化地显示在旧页面之上。使用此模式，
+                // 导航器可以通过在叠加层中移动组件来直观地从一个页面转换到另一个页面。
+                // 类似地，导航器可用于通过将对话框窗口组件放置在当前页面上方来显示对话框。
+                // 导航器（`Navigator`）组件的关于（`of`）方法，来自此类的最近实例的状态，它包含给定的上下文。
+                // 导航器（`Navigator`）组件的推（`push`）方法，将给定路径推送到最紧密包围给定上下文的导航器。
+                Navigator.of(context)
+                    .push(
+                  // 页面路由生成器（`PageRouteBuilder`）组件，用于根据回调定义一次性页面路由的实用程序类。
+                  PageRouteBuilder(
+                    // 转换完成后路由是否会遮盖以前的路由。
+                    opaque: false,
+                    // 页面构建器（`pageBuilder`）属性，用于构建路径的主要内容。
+                    pageBuilder: (BuildContext context, _, __) {
+                      return IntegratedSort(
+                        hight: widget.hight - 50.0,
+                        sortOld: sort,
+                      );
+                    },
+                  ),
+                )
+                    .then((value) {
+                  // 如果自定义的综合排序组件返回不为空时，更新
+                  if (value != null) {
+                    setState(() {
+                      sort = value;
+                      isWithMore = false;
+                    });
+                    widget.sortCallback(sort);
+                  } else {
+                    setState(() {
+                      isWithMore = false;
+                    });
+                  }
+                });
+              },
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  Container(
+                    height: 30.0,
+                    color: Color(0xffFFFFFF),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        '综合',
+                        style: TextStyle(
+                          // 字体大小。
+                          fontSize: 15.0,
+                          // 字体系列。
+                          fontFamily: 'PingFangRegular',
+                          // 颜色。
+                          color: isWithMore
+                              ? Color(0xFFFE7C30)
+                              : Color(0xFF999999),
+                        ),
+                      ),
+                      Icon(
+                        isWithMore
+                            ? Icons.arrow_drop_up
+                            : Icons.arrow_drop_down,
+                        color:
+                            isWithMore ? Color(0xFFFE7C30) : Color(0xFF999999),
+                        size: 20.0,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
           Expanded(
             flex: 1,
             child: GestureDetector(
