@@ -186,7 +186,7 @@ class LimitedListTile extends StatelessWidget {
                                   ],
                                 ),
                                 SizedBox(height: 4.0),
-                                DiscountRate(couponPrice: 10.0),
+                                DiscountRate(couponPrice: '10.0'),
                               ],
                             ),
                             GestureDetector(

@@ -45,17 +45,23 @@ List<Widget> processingSortingStyle({int stype, List<dynamic> hotMaps}) {
           child: RecommendYouItem(
             row: _row,
             recommendItem: RecommendItem(
+              itemId: _hotMap['itemId'],
               title: _hotMap['title'],
-              objUrl: _hotMap['isselfupport'] == "2"
+              picturl: _hotMap['isselfupport'] == "2"
                   ? _hotMap['pictUrl']
                   : imageurlHeadGoodsgroups + _hotMap['pictUrl'],
+              isselfupport: _hotMap['isselfupport'],
+              userType: _hotMap['userType'],
               rebatePrice: double.parse(_hotMap['zkFinalPrice']) -
                   double.parse(_hotMap['couponAmount']),
-              costPrice: double.parse(_hotMap['zkFinalPrice']),
-              couponPrice: double.parse(_hotMap['couponAmount']),
-              earnSum: 10.0,
-              purchaseNum:
-                  _hotMap['couponTotalCount'] - _hotMap['couponRemainCount'],
+              commissionRate: _hotMap['commissionRate'],
+              couponAmount: _hotMap['couponAmount'],
+              zkFinalPrice: _hotMap['zkFinalPrice'],
+              couponTotalCount: _hotMap['couponTotalCount'],
+              smallImages: _hotMap['smallImages'],
+              couponRemainCount: _hotMap['couponRemainCount'],
+              shopTitle: _hotMap['shopTitle'],
+              couponShareUrl: _hotMap['couponShareUrl'],
             ),
           ),
         ),
@@ -66,7 +72,8 @@ List<Widget> processingSortingStyle({int stype, List<dynamic> hotMaps}) {
       if (_row == rowNum) {
         widgetList.add(
           Container(
-            margin: EdgeInsets.only(
+            color: Color(0xffFFFFFF),
+            padding: EdgeInsets.only(
               top: 6.0,
               left: 13.0,
               right: 13.0,

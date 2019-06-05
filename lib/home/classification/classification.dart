@@ -228,7 +228,7 @@ class _ClassificationPageState extends State<ClassificationPage>
           ),
           // 裂片固定范围列表（`SliverFixedExtentList`）组件，沿着滚动轴具有相同范围的子项的线性列表。
           SliverFixedExtentList(
-            itemExtent: stypeSet == 0 ? 128.0 : 270.0,
+            itemExtent: stypeSet == 0 ? 130.0 : 270.0,
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return widgetList[index];

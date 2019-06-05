@@ -323,8 +323,9 @@ class _SortOperationState extends State<SortOperation> {
                     color: Color(0xffFFFFFF),
                   ),
                   Icon(
-                    Icons.dashboard,
+                    stype == 0 ? Icons.dashboard : Icons.view_day,
                     size: 18.0,
+                    color: Color(0xff999999),
                   ),
                 ],
               ),

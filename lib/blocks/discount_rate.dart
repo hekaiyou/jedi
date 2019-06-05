@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// 自定义的优惠券组件。
 class DiscountRate extends StatelessWidget {
   /// 优惠券折扣。
-  final double couponPrice;
+  final String couponPrice;
 
   DiscountRate({
     this.couponPrice,
@@ -34,7 +34,7 @@ class DiscountRate extends StatelessWidget {
           ),
           // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
           child: Text(
-            '￥' + couponPrice.toStringAsFixed(0),
+            '￥' + couponPrice,
             style: TextStyle(
               color: Color(0xffFFFFFF),
               fontFamily: 'PingFangMedium',

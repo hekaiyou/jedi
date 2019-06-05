@@ -103,13 +103,12 @@ class ClassificationListTile extends StatelessWidget {
                       // 圆角矩形剪裁（`ClipRRect`）组件，使用圆角矩形剪辑其子项的组件。
                       child: ClipRRect(
                         // 边界半径（`borderRadius`）属性，圆角的边界半径。
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(5.0),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5.0),
                         ),
                         child: CachedNetworkImage(
                           imageUrl: picturl,
                           height: 106.0,
-                          width: 106.0,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -158,9 +157,9 @@ class ClassificationListTile extends StatelessWidget {
                       Stack(
                         children: <Widget>[
                           Padding(
-                            padding: EdgeInsets.only(top: 2.0),
-                            child: // 展示商品平台图标的图片。
-                                Image.asset(
+                            padding: EdgeInsets.only(top: 3.0),
+                            // 展示商品平台图标的图片。
+                            child: Image.asset(
                               userType == 0
                                   ? 'assets/platform_taobao_identifier.png'
                                   : 'assets/platform_tmall_identifier.png',
@@ -172,10 +171,15 @@ class ClassificationListTile extends StatelessWidget {
                           // 显示订单商品描述的文本（`Text`）组件。
                           Text(
                             '     ' + title,
+                            // 溢出的文本以省略号（`...`）显示。
+                            overflow: TextOverflow.ellipsis,
+                            // 最大线（`maxLines`）属性，文本要跨越的可选最大行数，必要时包装。
+                            // 如果文本超过给定的行数，则会根据溢出（`overflow`）将其截断。
+                            maxLines: 2,
                             style: TextStyle(
                               color: Color(0xff333333),
-                              fontFamily: 'PingFangMedium',
-                              fontSize: 13.0,
+                              fontFamily: 'PingFangBold',
+                              fontSize: 14.0,
                             ),
                           ),
                         ],

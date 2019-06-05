@@ -100,44 +100,4 @@ class RecommendYouTitle extends StatelessWidget {
 }
 
 List _items = [
-  RecommendItem(
-    objUrl:
-        'https://img.alicdn.com/i1/2291154335/TB2ID5kpNWYBuNjy1zkXXXGGpXa_!!2291154335.jpg_300x300.jpg',
-    title: '雅格电蚊拍充电式家用强力锂电池多功能LED灯电蝇打苍蝇灭蚊子拍',
-    rebatePrice: 13.9,
-    costPrice: 23.9,
-    couponPrice: 10.0,
-    purchaseNum: 29292,
-    earnSum: 1.87,
-  ),
-  RecommendItem(
-    objUrl:
-        'https://img.alicdn.com/i4/527252170/TB2rD0EsVXXXXcTXpXXXXXXXXXX_!!527252170.jpg_300x300.jpg',
-    title: '【靓涤】加厚卷装垃圾袋5卷100只',
-    rebatePrice: 4.8,
-    costPrice: 5.8,
-    couponPrice: 1.0,
-    purchaseNum: 152487,
-    earnSum: 0.97,
-  ),
-  RecommendItem(
-    objUrl:
-        'https://img.alicdn.com/bao/uploaded/i3/3380008174/O1CN01E1za5B2AFjwEcaGLG_!!0-item_pic.jpg_300x300.jpg',
-    title: '宝宝学饮杯儿童水杯吸管杯防摔幼儿园婴儿防漏防呛带手柄壶',
-    rebatePrice: 14.9,
-    costPrice: 39.9,
-    couponPrice: 25.0,
-    purchaseNum: 192,
-    earnSum: 1.34,
-  ),
-  RecommendItem(
-    objUrl:
-        'https://img.alicdn.com/bao/uploaded/i3/736093685/O1CN01vEvxEN1d5m0hYjzoh_!!0-item_pic.jpg_300x300.jpg',
-    title: '新货【西域美农_树上黄葡萄干500g】新疆特产吐鲁番休闲零食果干',
-    rebatePrice: 13.99,
-    costPrice: 16.99,
-    couponPrice: 3.0,
-    purchaseNum: 6857,
-    earnSum: 1.25,
-  ),
 ];

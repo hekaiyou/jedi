@@ -57,17 +57,22 @@ class _LikePageState extends State<LikePage> {
             child: RecommendYouItem(
               row: _row,
               recommendItem: RecommendItem(
+                itemId: _hotMap['itemId'],
                 title: _hotMap['title'],
-                objUrl: _hotMap['isselfupport'] == "2"
+                picturl: _hotMap['isselfupport'] == "2"
                     ? _hotMap['pictUrl']
                     : imageurlHeadGoodsgroups + _hotMap['pictUrl'],
+                isselfupport: _hotMap['isselfupport'],
+                userType: _hotMap['userType'],
                 rebatePrice: double.parse(_hotMap['zkFinalPrice']) -
                     double.parse(_hotMap['couponAmount']),
-                costPrice: double.parse(_hotMap['zkFinalPrice']),
-                couponPrice: double.parse(_hotMap['couponAmount']),
-                earnSum: 10.0,
-                purchaseNum:
-                    _hotMap['couponTotalCount'] - _hotMap['couponRemainCount'],
+                couponAmount: _hotMap['couponAmount'],
+                zkFinalPrice: _hotMap['zkFinalPrice'],
+                couponTotalCount: _hotMap['couponTotalCount'],
+                smallImages: _hotMap['smallImages'],
+                couponRemainCount: _hotMap['couponRemainCount'],
+                shopTitle: _hotMap['shopTitle'],
+                couponShareUrl: _hotMap['couponShareUrl'],
               ),
             ),
           ),

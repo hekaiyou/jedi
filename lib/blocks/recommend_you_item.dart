@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/blocks/discount_rate.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 /// 自定义的推荐项目类，包含自定义的为你推荐组件需要的数据。
 class RecommendItem {
   /// 商品图片地址。
-  final String objUrl;
+  final String picturl;
+
+  /// 商品ID。
+  final int itemId;
 
   /// 销售商品名称。
   final String title;
@@ -13,25 +17,50 @@ class RecommendItem {
   final double rebatePrice;
 
   /// 折扣前价格。
-  final double costPrice;
+  final String zkFinalPrice;
 
-  /// 优惠券折扣。
-  final double couponPrice;
+  /// 优惠券面额。
+  final String couponAmount;
 
-  /// 领劵总人数。
-  final int purchaseNum;
+  /// 优惠券总量。
+  final int couponTotalCount;
 
-  /// 预估收益。
-  final double earnSum;
+  /// 优惠券剩余量。
+  final int couponRemainCount;
+
+  /// 卖家类型，0=淘宝、1=天猫。。
+  final int userType;
+
+  /// 店铺名称。
+  final String shopTitle;
+
+  /// 商品图片。
+  final List smallImages;
+
+  /// 是否自平台商品。
+  final String isselfupport;
+
+  /// 二合一页面链接。
+  final String couponShareUrl;
+
+  /// 佣金比率，1550表示15.5%。
+  final String commissionRate;
 
   RecommendItem({
-    this.objUrl,
+    this.picturl,
     this.title,
     this.rebatePrice,
-    this.costPrice,
-    this.couponPrice,
-    this.purchaseNum,
-    this.earnSum,
+    this.zkFinalPrice,
+    this.couponAmount,
+    this.couponRemainCount,
+    this.couponTotalCount,
+    this.itemId,
+    this.userType,
+    this.shopTitle,
+    this.smallImages,
+    this.isselfupport,
+    this.couponShareUrl,
+    this.commissionRate,
   });
 }
 
@@ -50,7 +79,25 @@ class RecommendYouItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // 使用命名路由导航到第二个屏幕。
-        Navigator.pushNamed(context, '/category/details');
+        Navigator.pushNamed(
+          context,
+          '/category/details',
+          arguments: {
+            'itemId': recommendItem.itemId,
+            'title': recommendItem.title,
+            'zkFinalPrice': recommendItem.zkFinalPrice,
+            'userType': recommendItem.userType,
+            'volume': recommendItem.couponTotalCount -
+                recommendItem.couponRemainCount,
+            'shopTitle': recommendItem.shopTitle,
+            'smallImages': recommendItem.smallImages,
+            'isselfupport': recommendItem.isselfupport,
+            'zkfinalprices': double.parse(recommendItem.zkFinalPrice) -
+                double.parse(recommendItem.couponAmount),
+            'couponAmount': recommendItem.couponAmount,
+            'couponShareUrl': recommendItem.couponShareUrl,
+          },
+        );
       },
       child: Container(
         margin: EdgeInsets.only(
@@ -79,53 +126,49 @@ class RecommendYouItem extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 166.0,
-              decoration: BoxDecoration(
-                color: Color(0xffFFFFFF),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(6.0),
+              // 圆角矩形剪裁（`ClipRRect`）组件，使用圆角矩形剪辑其子项的组件。
+              child: ClipRRect(
+                // 边界半径（`borderRadius`）属性，圆角的边界半径。
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(6.0),
                 ),
-              ),
-              child: Image.network(
-                recommendItem.objUrl,
-                fit: BoxFit.contain,
+                child: CachedNetworkImage(
+                  height: 166.0,
+                  imageUrl: recommendItem.picturl,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             // 用来显示销售商图片和商品名称的容器（`Container`）组件。
             Container(
               padding: EdgeInsets.all(4.0),
-              child: Row(
-                children: <Widget>[
-                  // 用来显示销售商图片的图片（`Image`）组件。
-                  Image.network(
-                    'http://pngimg.com/uploads/pokemon_logo/pokemon_logo_PNG3.png',
-                    height: 12,
-                    width: 21,
+              child: Stack(children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(top: 3.0),
+                  // 展示商品平台图标的图片。
+                  child: Image.asset(
+                    recommendItem.userType == 0
+                        ? 'assets/platform_taobao_identifier.png'
+                        : 'assets/platform_tmall_identifier.png',
+                    width: 13.0,
+                    height: 13.0,
                     fit: BoxFit.contain,
                   ),
-                  // 扩展（`Expanded`）组件，用于展开行（`Row`）、列（`Column`）或柔性（`Flex`）的子项。
-                  Expanded(
-                    // 用来显示销售商品名称的填充（`Padding`）组件。
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 4.0,
-                      ),
-                      child: Text(
-                        recommendItem.title,
-                        // 溢出的文本以省略号（`...`）显示。
-                        overflow: TextOverflow.ellipsis,
-                        // 最大线（`maxLines`）属性，文本要跨越的可选最大行数，必要时包装。
-                        // 如果文本超过给定的行数，则会根据溢出（`overflow`）将其截断。
-                        maxLines: 2,
-                        style: TextStyle(
-                          color: Color(0xff333333),
-                          fontFamily: 'PingFangBold',
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ),
+                ),
+                Text(
+                  '     ' + recommendItem.title,
+                  // 溢出的文本以省略号（`...`）显示。
+                  overflow: TextOverflow.ellipsis,
+                  // 最大线（`maxLines`）属性，文本要跨越的可选最大行数，必要时包装。
+                  // 如果文本超过给定的行数，则会根据溢出（`overflow`）将其截断。
+                  maxLines: 2,
+                  style: TextStyle(
+                    color: Color(0xff333333),
+                    fontFamily: 'PingFangBold',
+                    fontSize: 13.0,
                   ),
-                ],
-              ),
+                ),
+              ]),
             ),
             // 用来显示优惠券折扣和预估收益的容器（`Container`）组件。
             Container(
@@ -137,7 +180,7 @@ class RecommendYouItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  DiscountRate(couponPrice: recommendItem.couponPrice),
+                  DiscountRate(couponPrice: recommendItem.couponAmount),
                   Container(
                     padding: EdgeInsets.only(
                       left: 7.0,
@@ -150,7 +193,7 @@ class RecommendYouItem extends StatelessWidget {
                     ),
                     // 用来显示预估收益的文本（`Text`）组件。
                     child: Text(
-                      '预估收益：¥' + recommendItem.earnSum.toString(),
+                      '预估收益：¥${(int.parse(recommendItem.commissionRate) / 10000 * double.parse(recommendItem.couponAmount)).toStringAsFixed(1)}',
                       style: TextStyle(
                         color: Color(0xffFE823A),
                         fontFamily: 'PingFangBold',
@@ -182,10 +225,11 @@ class RecommendYouItem extends StatelessWidget {
                             children: [
                               TextSpan(
                                 // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
-                                text: recommendItem.rebatePrice.toStringAsFixed(1),
+                                text: recommendItem.rebatePrice
+                                    .toStringAsFixed(1),
                                 style: TextStyle(
-                                  // 字母间距（`letterSpacing`）属性，每个字母之间添加的空间量。
-                                  // 以逻辑像素为单位，可以使用负值来使字母更接近。
+                                  // 字母间距（`letterSpacing`）属性，每个字母之���添加的空间量。
+                                  // 以逻辑像素为单位，���以使用负值来使字母更接近。
                                   letterSpacing: 0.0,
                                 ),
                               ),
@@ -207,7 +251,7 @@ class RecommendYouItem extends StatelessWidget {
                             text: '¥',
                             children: [
                               TextSpan(
-                                text: recommendItem.costPrice.toString(),
+                                text: recommendItem.zkFinalPrice,
                                 style: TextStyle(
                                   // 字母间距（`letterSpacing`）属性，每个字母之间添加的空间量。
                                   // 以逻辑像素为单位，可以使用负值来使字母更接近。
@@ -235,12 +279,16 @@ class RecommendYouItem extends StatelessWidget {
                     child: Text(
                       // 字符串为固定（`toStringAsFixed`）方法，返回保留几位小数的字符串。
                       // 领劵总人数大于10000时，以“万”为单位显示。
-                      recommendItem.purchaseNum > 10000
+                      recommendItem.couponTotalCount -
+                                  recommendItem.couponRemainCount >
+                              10000
                           ? '已售' +
-                              (recommendItem.purchaseNum / 10000)
+                              ((recommendItem.couponTotalCount -
+                                          recommendItem.couponRemainCount) /
+                                      10000)
                                   .toStringAsFixed(1) +
                               '万'
-                          : '已售' + recommendItem.purchaseNum.toString(),
+                          : '已售${recommendItem.couponTotalCount - recommendItem.couponRemainCount}',
                       style: TextStyle(
                         color: Color(0xff999999),
                         fontFamily: 'PingFangRegular',
