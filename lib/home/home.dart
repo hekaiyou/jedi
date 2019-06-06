@@ -155,6 +155,7 @@ class _HomePageState extends State<HomePage>
     GlobalKey _appBarKey = GlobalKey();
 
     return Scaffold(
+      backgroundColor: Color(0xffFFFFFF),
       appBar: AppBar(
         key: _appBarKey,
         // 背景色（`backgroundColor`）属性，用于应用栏材质的颜色。

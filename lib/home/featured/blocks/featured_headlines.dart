@@ -13,6 +13,7 @@ class FeaturedHeadlines extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Color(0xffFFFFFF),
       padding: EdgeInsets.symmetric(
         horizontal: 13.0,
       ),

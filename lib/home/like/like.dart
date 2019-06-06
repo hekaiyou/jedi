@@ -39,8 +39,16 @@ class _LikePageState extends State<LikePage> {
   }
 
   void _taobaoMaterialOptional() {
-    apiTaobaoMaterialOptional(typeid: 0, q: '猜你喜欢', pagesize: 20, pageno: 0)
-        .then((_list) {
+    apiTaobaoMaterialOptional(
+      typeid: 0,
+      q: '猜你喜欢',
+      pagesize: 20,
+      pageno: pagenoNum,
+    ).then((_list) {
+      if (totalResults == 0) {
+        totalResults = _list['totalResults'];
+        pagenoNum = 0;
+      }
       // 每行可以显示的数量。
       int rowNum = 2;
       // 当前行已经有多少组件。
@@ -66,6 +74,7 @@ class _LikePageState extends State<LikePage> {
                 userType: _hotMap['userType'],
                 rebatePrice: double.parse(_hotMap['zkFinalPrice']) -
                     double.parse(_hotMap['couponAmount']),
+                commissionRate: _hotMap['commissionRate'],
                 couponAmount: _hotMap['couponAmount'],
                 zkFinalPrice: _hotMap['zkFinalPrice'],
                 couponTotalCount: _hotMap['couponTotalCount'],
@@ -83,7 +92,8 @@ class _LikePageState extends State<LikePage> {
         if (_row == rowNum) {
           widgetList.add(
             Container(
-              margin: EdgeInsets.only(
+              color: Color(0xffFFFFFF),
+              padding: EdgeInsets.only(
                 top: 6.0,
                 left: 13.0,
                 right: 13.0,
@@ -121,10 +131,8 @@ class _LikePageState extends State<LikePage> {
   Widget build(BuildContext context) {
     return PullAndPush(
       // 简单的配置头部和底部的样式。
-      defaultRefreshBoxTipText: '松开将为你刷新数据……',
       defaultRefreshBoxTextColor: Color(0xff666666),
-      defaultRefreshBoxBackgroundColor: Color(0xffF6F6F6),
-      defaultRefreshBoxRefreshIconPath: 'assets/refresh.png',
+      defaultRefreshBoxBackgroundColor: Color(0xffFFFFFF),
       // 可通过此对象的方法调用触发下拉刷新。
       triggerPullController: triggerPullController,
       // 用于上下拉的滑动控件。

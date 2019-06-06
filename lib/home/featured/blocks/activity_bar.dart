@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/home/blocks/carousel_with_indicator.dart';
+import 'package:jedi/home/featured/blocks/carousel_with_indicator.dart';
 
 /// 自定义的弧形裁剪组件。
 /// 自定义剪辑（`CustomClipper`）抽象类，用于提供自定义剪辑的界面。

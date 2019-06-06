@@ -142,7 +142,7 @@ flutter:
     - assets/landing_phone.png
     - assets/login_verification_code.png
     - assets/white_placeholder.png
-    - assets/refresh.png
+    - assets/refresh.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

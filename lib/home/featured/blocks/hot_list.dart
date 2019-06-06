@@ -80,12 +80,13 @@ class HotList extends StatelessWidget {
           children: <Widget>[
             // 用来显示商品图片的容器（`Container`）组件。
             Container(
-              padding: EdgeInsets.only(
-                top: 6.0,
-                bottom: 1.0,
-              ),
+              width: double.infinity,
               height: 70.0,
-              child: CachedNetworkImage(imageUrl: hotItem.picturl),
+              child: CachedNetworkImage(
+                imageUrl: hotItem.picturl,
+                height: 70.0,
+                fit: BoxFit.cover,
+              ),
             ),
             // 用来显示优惠劵简介的容器（`Container`）组件。
             Container(
@@ -204,7 +205,8 @@ class HotList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Padding(
+        Container(
+          color: Color(0xffFFFFFF),
           padding: EdgeInsets.symmetric(
             vertical: 17.0,
           ),
@@ -232,43 +234,46 @@ class HotList extends StatelessWidget {
             ],
           ),
         ),
-        // 单个组件滚动视图（`SingleChildScrollView`）组件。
-        // 可以滚动单个组件的框，当有一个完全可见的单个框时，此组件非常有用。
-        // 例如时间选择器中的时钟面，但如果容器在一个轴上太小，则需要确保它可以滚动。
-        SingleChildScrollView(
-          // 滚动方向（`scrollDirection`）属性，滚动视图滚动的轴方向。
-          scrollDirection: Axis.horizontal,
-          // 填充（`padding`）属性，插入子组件的空间量。
-          padding: EdgeInsets.symmetric(
-            horizontal: 11.0,
-          ),
-          child: Row(
-            children: hotData.map((HotItem hotItem) {
-              return GestureDetector(
-                  onTap: () {
-                    // 使用命名路由导航到第二个屏幕。
-                    Navigator.pushNamed(
-                      context,
-                      '/category/details',
-                      arguments: {
-                        'itemId': hotItem.itemId,
-                        'title': hotItem.title,
-                        'zkFinalPrice': hotItem.zkFinalPrice,
-                        'userType': hotItem.userType,
-                        'volume': hotItem.couponTotalCount -
-                                hotItem.couponRemainCount,
-                        'shopTitle': hotItem.shopTitle,
-                        'smallImages': hotItem.smallImages,
-                        'isselfupport': hotItem.isselfupport,
-                        'zkfinalprices': double.parse(hotItem.zkFinalPrice) -
-                            double.parse(hotItem.couponAmount),
-                        'couponAmount': hotItem.couponAmount,
-                        'couponShareUrl': hotItem.couponShareUrl,
-                      },
-                    );
-                  },
-                  child: _buildCard(hotItem));
-            }).toList(),
+        Container(
+          color: Color(0xffFFFFFF),
+          // 单个组件滚动视图（`SingleChildScrollView`）组件。
+          // 可以滚动单个组件的框，当有一个完全可见的单个框时，此组件非常有用。
+          // 例如时间选择器中的时钟面，但如果容器在一个轴上太小，则需要确保它可以滚动。
+          child: SingleChildScrollView(
+            // 滚动方向（`scrollDirection`）属性，滚动视图滚动的轴方向。
+            scrollDirection: Axis.horizontal,
+            // 填充（`padding`）属性，插入子组件的空间量。
+            padding: EdgeInsets.symmetric(
+              horizontal: 11.0,
+            ),
+            child: Row(
+              children: hotData.map((HotItem hotItem) {
+                return GestureDetector(
+                    onTap: () {
+                      // 使用命名路由导航到第二个屏幕。
+                      Navigator.pushNamed(
+                        context,
+                        '/category/details',
+                        arguments: {
+                          'itemId': hotItem.itemId,
+                          'title': hotItem.title,
+                          'zkFinalPrice': hotItem.zkFinalPrice,
+                          'userType': hotItem.userType,
+                          'volume': hotItem.couponTotalCount -
+                              hotItem.couponRemainCount,
+                          'shopTitle': hotItem.shopTitle,
+                          'smallImages': hotItem.smallImages,
+                          'isselfupport': hotItem.isselfupport,
+                          'zkfinalprices': double.parse(hotItem.zkFinalPrice) -
+                              double.parse(hotItem.couponAmount),
+                          'couponAmount': hotItem.couponAmount,
+                          'couponShareUrl': hotItem.couponShareUrl,
+                        },
+                      );
+                    },
+                    child: _buildCard(hotItem));
+              }).toList(),
+            ),
           ),
         ),
         // 用大小框���`SizedBox`）组件来占一块空间。

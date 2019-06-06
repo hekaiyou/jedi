@@ -14,6 +14,7 @@ class LargePoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Color(0xffFFFFFF),
       padding: EdgeInsets.all(14.0),
       height: 199.0,
       // 用行（`Row`）组件把第一块瓷砖与第二块、第三块、第四块瓷砖分开。

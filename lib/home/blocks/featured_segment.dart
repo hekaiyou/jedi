@@ -75,6 +75,7 @@ class FeaturedSegment extends StatelessWidget {
     }
 
     return Container(
+      color: Color(0xffFFFFFF),
       padding: EdgeInsets.symmetric(
         horizontal: 14.0,
       ),

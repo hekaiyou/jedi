@@ -84,10 +84,8 @@ class _MyOrderListState extends State<MyOrderList>
     super.build(context);
     return PullAndPush(
       // 简单的配置头部和底部的样式。
-      defaultRefreshBoxTipText: '松开将为你刷新数据……',
       defaultRefreshBoxTextColor: Color(0xff666666),
       defaultRefreshBoxBackgroundColor: Color(0xffF6F6F6),
-      defaultRefreshBoxRefreshIconPath: 'assets/refresh.png',
       // 可通过此对象的方法调用触发下拉刷新。
       triggerPullController: triggerPullController,
       // 用于上下拉的滑动控件。

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/home/blocks/activity_bar.dart';
+import 'package:jedi/home/featured/blocks/activity_bar.dart';
 import 'package:jedi/home/blocks/featured_segment.dart';
-import 'package:jedi/home/blocks/featured_headlines.dart';
+import 'package:jedi/home/featured/blocks/featured_headlines.dart';
 import 'package:jedi/home/featured/blocks/large_poster.dart';
 import 'package:jedi/home/featured/blocks/hot_list.dart';
-import 'package:jedi/home/blocks/recommend_you.dart';
+import 'package:jedi/home/featured/blocks/recommend_you.dart';
 import 'package:jedi/blocks/pulltore_fresh.dart';
 import 'package:jedi/internet/api_navigation.dart';
+import 'package:jedi/blocks/recommend_you_item.dart';
 
 /// 自定义的精选页面组件。
 class FeaturedPage extends StatefulWidget {
@@ -31,6 +32,12 @@ class _FeaturedPageState extends State<FeaturedPage>
 
   /// 通过按钮等其他方式，通过方法调用触发下拉刷新。
   TriggerPullController triggerPullController = TriggerPullController();
+
+  /// 总结果数，用于计算分页。
+  int totalResults = 0;
+
+  /// 当前页数。
+  int pagenoNum = 0;
 
   /// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类的想要保持活动（`wantKeepAlive`）属性，
   /// 用于设置当前实例是否应保持活动状态（不因父组件的切换而重新绘制）。
@@ -88,6 +95,80 @@ class _FeaturedPageState extends State<FeaturedPage>
     ];
   }
 
+  void _taobaoMaterialOptional() {
+    apiTaobaoMaterialOptional(
+      typeid: 0,
+      q: '精选',
+      pagesize: 20,
+      pageno: pagenoNum,
+    ).then((_list) {
+      if (totalResults == 0) {
+        totalResults = _list['totalResults'];
+        pagenoNum = 0;
+      }
+      // 每行可以显示的数量。
+      int rowNum = 2;
+      // 当前行已经有多少组件。
+      int _row = 0;
+      // 包装在灵活（`Flexible`）组件里的容器（`Container`）组件列表。
+      // 临时存储当前行的数据，最大行数满了就清理一次。
+      List<Flexible> _columnList = [];
+      for (Map _hotMap in _list['outGetMaterialDetailList']) {
+        _columnList.add(
+          // 控制行（`Row`）、列（`Column`）或柔性（`Flex`）的子项如何灵活放置的组件。
+          Flexible(
+            // 柔性（`flex`）属性，用于这个子组件的弹性因子。
+            flex: 1,
+            child: RecommendYouItem(
+              row: _row,
+              recommendItem: RecommendItem(
+                itemId: _hotMap['itemId'],
+                title: _hotMap['title'],
+                picturl: _hotMap['isselfupport'] == "2"
+                    ? _hotMap['pictUrl']
+                    : imageurlHeadGoodsgroups + _hotMap['pictUrl'],
+                isselfupport: _hotMap['isselfupport'],
+                userType: _hotMap['userType'],
+                rebatePrice: double.parse(_hotMap['zkFinalPrice']) -
+                    double.parse(_hotMap['couponAmount']),
+                commissionRate: _hotMap['commissionRate'],
+                couponAmount: _hotMap['couponAmount'],
+                zkFinalPrice: _hotMap['zkFinalPrice'],
+                couponTotalCount: _hotMap['couponTotalCount'],
+                smallImages: _hotMap['smallImages'],
+                couponRemainCount: _hotMap['couponRemainCount'],
+                shopTitle: _hotMap['shopTitle'],
+                couponShareUrl: _hotMap['couponShareUrl'],
+              ),
+            ),
+          ),
+        );
+        // 当前行数执行自加操作。
+        _row++;
+        // 当前行数等于每行最大可以显示的数量时，将数据添加进返回的数据列表，同时清理临时数据列表。
+        if (_row == rowNum) {
+          widgetList.add(
+            Container(
+              color: Color(0xffFFFFFF),
+              padding: EdgeInsets.only(
+                top: 6.0,
+                left: 13.0,
+                right: 13.0,
+                bottom: 6.0,
+              ),
+              child: Row(
+                children: _columnList,
+              ),
+            ),
+          );
+          _columnList = [];
+          _row = 0;
+        }
+      }
+      setState(() {});
+    });
+  }
+
   Future _loadData(bool isPullDown) async {
     if (isPullDown) {
       apiGetGetPagelayout(categoryid: 1).then((_map) {
@@ -114,7 +195,6 @@ class _FeaturedPageState extends State<FeaturedPage>
             posterPicture.add(imageurlHeadPagelayout + amap['layoutimage']);
           }
         }
-        print(posterPicture);
         apiTaobaoMaterialOptional(typeid: 0, q: '热销榜单').then((_list) {
           for (Map _hotMap in _list['outGetMaterialDetailList']) {
             hotData.add(
@@ -129,13 +209,14 @@ class _FeaturedPageState extends State<FeaturedPage>
                 zkFinalPrice: _hotMap['zkFinalPrice'],
                 couponTotalCount: _hotMap['couponTotalCount'],
                 couponRemainCount: _hotMap['couponRemainCount'],
-                shopTitle:  _hotMap['shopTitle'],
+                shopTitle: _hotMap['shopTitle'],
                 smallImages: _hotMap['smallImages'],
                 title: _hotMap['title'],
                 couponShareUrl: _hotMap['couponShareUrl'],
               ),
             );
           }
+          widgetList = [];
           setState(() {
             widgetList = _buildResidentData(
               imgList: imgList,
@@ -144,16 +225,18 @@ class _FeaturedPageState extends State<FeaturedPage>
               posterPicture: posterPicture,
               hotData: hotData,
             );
-            widgetList.addAll(recommendYou());
           });
+          totalResults = 0;
+          _taobaoMaterialOptional();
         });
       });
     } else {
-      Future.delayed(Duration(milliseconds: 50), () {
-        setState(() {
-          widgetList.addAll(recommendYou());
-        });
-      });
+      if (pagenoNum * 20 < totalResults) {
+        pagenoNum += 1;
+        _taobaoMaterialOptional();
+      } else {
+        setState(() {});
+      }
     }
   }
 
@@ -162,10 +245,8 @@ class _FeaturedPageState extends State<FeaturedPage>
     super.build(context);
     return PullAndPush(
       // 简单的配置头部和底部的样式。
-      defaultRefreshBoxTipText: '松开将为你刷新数据……',
       defaultRefreshBoxTextColor: Color(0xff666666),
-      defaultRefreshBoxBackgroundColor: Color(0xffF6F6F6),
-      defaultRefreshBoxRefreshIconPath: 'assets/refresh.png',
+      defaultRefreshBoxBackgroundColor: Color(0xffFFFFFF),
       // 可通过此对象的方法调用触发下拉刷新。
       triggerPullController: triggerPullController,
       // 用于上下拉的滑动控件。
