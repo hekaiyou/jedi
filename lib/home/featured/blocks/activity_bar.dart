@@ -88,7 +88,7 @@ class ActivityBar extends StatelessWidget {
           // 对准属性，如何调整子组件。
           alignment: Alignment.center,
           child: Container(
-            padding: EdgeInsets.fromLTRB(14.0, 6.0, 14.0, 12.0),
+            padding: EdgeInsets.fromLTRB(0.0, 6.0, 0.0, 12.0),
             child: CarouselWithIndicator(imgList: imgList),
           ),
         ),

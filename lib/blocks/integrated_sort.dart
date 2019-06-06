@@ -5,8 +5,12 @@ class IntegratedSort extends StatefulWidget {
   /// 上一个页面传递的排序规则。
   final String sortOld;
 
+  /// 页面的顶部高度。
+  final double topHeight;
+
   IntegratedSort({
     this.sortOld,
+    this.topHeight,
   });
 
   @override
@@ -35,7 +39,7 @@ class _IntegratedSortState extends State<IntegratedSort> {
               // 媒体查询数据（`MediaQueryData`）类的大小（`size`）属性，逻辑像素中的媒体大小，即屏幕的大小。
               // 媒体查询数据（`MediaQueryData`）类的填充（`padding`）属性，应用程序可以呈现的显示矩形每一侧的物理像素数。
               // 填充（`padding`）属性的顶部（`top`）值是状态栏高度，底部（`bottom`）值是系统操作栏高度。
-              height: MediaQuery.of(context).padding.top + 117.0,
+              height: MediaQuery.of(context).padding.top + widget.topHeight,
               color: Colors.grey[900],
             ),
           ),
@@ -73,7 +77,7 @@ class _IntegratedSortState extends State<IntegratedSort> {
                       ),
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    height: 36.0,
+                    height: 40.0,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -123,7 +127,7 @@ class _IntegratedSortState extends State<IntegratedSort> {
                       ),
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    height: 36.0,
+                    height: 40.0,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -173,7 +177,7 @@ class _IntegratedSortState extends State<IntegratedSort> {
                       ),
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    height: 36.0,
+                    height: 40.0,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -223,7 +227,7 @@ class _IntegratedSortState extends State<IntegratedSort> {
                       ),
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    height: 36.0,
+                    height: 40.0,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[

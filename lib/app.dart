@@ -11,6 +11,7 @@ import 'package:jedi/my/landing/landing.dart';
 import 'package:jedi/category/details/details.dart';
 import 'package:jedi/category/limited/limited.dart';
 import 'package:jedi/category/flash/flash.dart';
+import 'package:jedi/category/single/single.dart';
 import 'package:jedi/initiate.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
@@ -182,6 +183,13 @@ class _JediAppState extends State<JediApp> {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => FlashPage(),
+      );
+      // 分类-单分类页面路由。
+    } else if (name == '/category/single') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) =>
+            SinglePage(parameter: settings.arguments),
       );
     } else {
       return null;

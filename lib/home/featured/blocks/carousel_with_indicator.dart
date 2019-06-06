@@ -46,15 +46,18 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
           items: worker<Widget>(widget.imgList, (index, i) {
             // 容器组件，结合了常见的绘图、定位和大小调整的容器。
             return GestureDetector(
-              // 圆角矩形剪裁（`ClipRRect`）组件，使用圆角矩形剪辑其子项的组件。
-              child: ClipRRect(
-                // 边界半径（`borderRadius`）属性，圆角的边界半径。
-                borderRadius: BorderRadius.all(Radius.circular(13.0)),
-                child: Container(
-                  width: double.infinity,
-                  child: CachedNetworkImage(
-                    imageUrl: i[0],
-                    fit: BoxFit.cover,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(14.0, 0.0, 14.0, 0.0),
+                // 圆角矩形剪裁（`ClipRRect`）组件，使用圆角矩形剪辑其子项的组件。
+                child: ClipRRect(
+                  // 边界半径（`borderRadius`）属性，圆角的边界半径。
+                  borderRadius: BorderRadius.all(Radius.circular(13.0)),
+                  child: Container(
+                    width: double.infinity,
+                    child: CachedNetworkImage(
+                      imageUrl: i[0],
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

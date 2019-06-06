@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jedi/home/classification/blocks/classification_segment.dart';
 import 'package:jedi/internet/api_navigation.dart';
 import 'package:jedi/blocks/pulltore_fresh.dart';
-import 'package:jedi/home/classification/blocks/processing_sorting_style.dart';
-import 'package:jedi/home/classification/blocks/sort_operation.dart';
+import 'package:jedi/blocks/processing_sorting_style.dart';
+import 'package:jedi/blocks/sort_operation.dart';
 import 'package:jedi/home/classification/blocks/classified_ads_indicator.dart';
 
 /// 自定义的分类商品页面组件。
@@ -215,6 +215,7 @@ class _ClassificationPageState extends State<ClassificationPage>
             // 它只是宣传了父级组件可以使用���首选大小。
             bottom: PreferredSize(
               child: SortOperation(
+                topHeight: 117.0,
                 hight: expandedHeight,
                 controller: controller,
                 sortCallback: _sortCallback,

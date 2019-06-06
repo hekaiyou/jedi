@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/home/classification/blocks/integrated_sort.dart';
+import 'package:jedi/blocks/integrated_sort.dart';
 
 /// 自定义的排序操作组件。
 class SortOperation extends StatefulWidget {
-  /// 综合排序页面的顶部高度。
+  /// 页面的顶部高度。
   final double hight;
+
+  /// 综合排序页面的顶部高度。
+  final double topHeight;
 
   /// 滚动控制器（`ScrollController`）类，控制可滚动的组件。
   final ScrollController controller;
@@ -17,6 +20,7 @@ class SortOperation extends StatefulWidget {
 
   SortOperation({
     this.hight,
+    this.topHeight,
     this.controller,
     this.sortCallback,
     this.stypeCallback,
@@ -91,6 +95,7 @@ class _SortOperationState extends State<SortOperation> {
                     pageBuilder: (BuildContext context, _, __) {
                       return IntegratedSort(
                         sortOld: sort,
+                        topHeight: widget.topHeight,
                       );
                     },
                   ),

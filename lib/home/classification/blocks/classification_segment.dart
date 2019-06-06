@@ -29,7 +29,7 @@ class ClassificationSegment extends StatelessWidget {
     // 存储用于列（`Column`）组件的行（`Row`）组件列表。
     List<Row> _columnRow = [];
     // 存储用于行（`Row`）组件的容器（`Container`）组件列表。
-    List<Container> _rows = [];
+    List<GestureDetector> _rows = [];
     // 遍历细分项目列表。
     for (int i = 0; i < segment.length; i++) {
       // 控制每行只有5个细分项目。
@@ -38,31 +38,43 @@ class ClassificationSegment extends StatelessWidget {
       }
       // 使用细分项目的数据构建容器（`Container`）组件。
       _rows.add(
-        Container(
-          width: 59.0,
-          height: 67.0,
-          margin: EdgeInsets.symmetric(
-            vertical: 9.0,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              CachedNetworkImage(
-                imageUrl: segment[i].image,
-                height: 45.0,
-                width: 45.0,
-                fit: BoxFit.contain,
-              ),
-              Text(
-                segment[i].title,
-                style: TextStyle(
-                  color: Color(0xff666666),
-                  fontFamily: 'PingFangRegular',
-                  fontSize: 13.0,
+        GestureDetector(
+          onTap: () {
+            // 使用命名路由导航到第二个屏幕。
+            Navigator.pushNamed(
+              context,
+              '/category/single',
+              arguments: {
+                'typeName': segment[i].title,
+              },
+            );
+          },
+          child: Container(
+            width: 59.0,
+            height: 67.0,
+            margin: EdgeInsets.symmetric(
+              vertical: 9.0,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                CachedNetworkImage(
+                  imageUrl: segment[i].image,
+                  height: 45.0,
+                  width: 45.0,
+                  fit: BoxFit.contain,
                 ),
-              ),
-            ],
+                Text(
+                  segment[i].title,
+                  style: TextStyle(
+                    color: Color(0xff666666),
+                    fontFamily: 'PingFangRegular',
+                    fontSize: 13.0,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
