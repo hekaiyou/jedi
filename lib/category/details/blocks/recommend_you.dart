@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/blocks/recommend_you_item.dart';
+import 'package:jedi/internet/api_navigation.dart';
 
 /// 自定义的为你推荐组件。
 class RecommendYou extends StatefulWidget {
+  final List<dynamic> items;
+
+  RecommendYou({
+    this.items,
+  });
+
   @override
   _RecommendYouState createState() => _RecommendYouState();
 }
@@ -24,7 +31,7 @@ class _RecommendYouState extends State<RecommendYou> {
     /// 临时存储当前行的数据，最大行数满了就清理一次。
     List<Flexible> _columnList = [];
 
-    for (RecommendItem recommendItem in _items) {
+    for (Map _hotMap in widget.items) {
       _columnList.add(
         // 控制行（`Row`）、列（`Column`）或柔性（`Flex`）的子项如何灵活放置的组件。
         Flexible(
@@ -32,7 +39,25 @@ class _RecommendYouState extends State<RecommendYou> {
           flex: 1,
           child: RecommendYouItem(
             row: _row,
-            recommendItem: recommendItem,
+            recommendItem: RecommendItem(
+              itemId: _hotMap['itemId'],
+              title: _hotMap['title'],
+              picturl: _hotMap['isselfupport'] == "2"
+                  ? _hotMap['pictUrl']
+                  : imageurlHeadGoodsgroups + _hotMap['pictUrl'],
+              isselfupport: _hotMap['isselfupport'],
+              userType: _hotMap['userType'],
+              rebatePrice: double.parse(_hotMap['zkFinalPrice']) -
+                  double.parse(_hotMap['couponAmount']),
+              commissionRate: _hotMap['commissionRate'],
+              couponAmount: _hotMap['couponAmount'],
+              zkFinalPrice: _hotMap['zkFinalPrice'],
+              couponTotalCount: _hotMap['couponTotalCount'],
+              smallImages: _hotMap['smallImages'],
+              couponRemainCount: _hotMap['couponRemainCount'],
+              shopTitle: _hotMap['shopTitle'],
+              couponShareUrl: _hotMap['couponShareUrl'],
+            ),
           ),
         ),
       );
@@ -75,6 +100,3 @@ class _RecommendYouState extends State<RecommendYou> {
     );
   }
 }
-
-List _items = [
-];
