@@ -193,8 +193,10 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
           );
         }
-        return Center(
-          child: CircularProgressIndicator(),
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
         );
       },
     );
