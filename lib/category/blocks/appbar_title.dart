@@ -61,7 +61,10 @@ class AppBarTitle extends StatelessWidget {
                   ],
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                // 使用命名路由导航到第二个屏幕。
+                Navigator.pushNamed(context, '/category/search');
+              },
             ),
           ),
           GestureDetector(

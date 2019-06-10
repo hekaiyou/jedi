@@ -11,7 +11,8 @@ import 'package:jedi/my/landing/landing.dart';
 import 'package:jedi/category/details/details.dart';
 import 'package:jedi/category/limited/limited.dart';
 import 'package:jedi/category/flash/flash.dart';
-import 'package:jedi/category/single/single.dart';
+import 'package:jedi/category/blocks/single.dart';
+import 'package:jedi/category/search/search.dart';
 import 'package:jedi/initiate.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
@@ -190,6 +191,12 @@ class _JediAppState extends State<JediApp> {
         settings: settings,
         builder: (BuildContext context) =>
             SinglePage(parameter: settings.arguments),
+      );
+      // 分类-搜索页面路由。
+    } else if (name == '/category/search') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => SearchPage(),
       );
     } else {
       return null;
