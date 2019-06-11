@@ -46,6 +46,12 @@ dependencies:
   # https://pub.dartlang.org/packages/nautilus#-readme-tab-
   nautilus: ^0.0.6
 
+  # 包含NSUserDefaults（在iOS上）和SharedPreferences（在Android上），
+  # 为简单数据提供持久存储。数据以异步方式持久保存到磁盘。
+  # 这两个平台都不能保证在返回后写入将持久保存到磁盘，并且此插件不能用于存储关键数据。
+  # https://pub.dev/packages/shared_preferences#-readme-tab-
+  shared_preferences: ^0.5.3+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/category/search/blocks/appbar_title.dart';
 import 'package:jedi/category/search/blocks/search_item.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// 自定义的搜索页面组件。
 class SearchPage extends StatefulWidget {
@@ -22,17 +23,42 @@ class _SearchPageState extends State<SearchPage> {
   ];
 
   /// 历史搜索项目的字符串（`String`）列表。
-  List<String> history = [
-    '和',
-    '任天堂二手Switch游戏 NS 赛尔达传说 荒野之息 中文 现货供应 正版',
-    '现在简约客厅灯',
-    '好',
-    '现在',
-    '哈',
-    '测试环境的手机号登陆接口性能有明显降低',
-    '玉桂狗',
-    '体育用品',
-  ];
+  List<String> history = [];
+
+  @override
+  void initState() {
+    _loadHistory();
+    super.initState();
+  }
+
+  /// 在启动时加载历史搜索数据。
+  _loadHistory() async {
+    // 要读取数据，我们可以使用SharedPreferences类提供的相应getter方法。对于每个setter，
+    // 都有一个相应的getter。例如，我们可以使用getInt，getBool和getString方法。
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      // 尝试从历史搜索键读取数据。如果它不存在，则返回空列表。
+      history = (prefs.getStringList('history') ?? []);
+    });
+  }
+
+  /// 增加历史搜索数据。
+  _addSearch(String onSubmitted) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      history.add(onSubmitted);
+      prefs.setStringList('history', history);
+    });
+  }
+
+  /// 清理历史搜索数据。
+  _deleteSearch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      history = [];
+      prefs.setStringList('history', history);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +79,9 @@ class _SearchPageState extends State<SearchPage> {
         // 设置应用栏是否需要显示前置组件，就是系统默认的返回按钮。
         automaticallyImplyLeading: false,
         // 应用栏（`AppBar`）中显示的主要组件。
-        title: AppBarTitle(),
+        title: AppBarTitle(
+          submittedCallback: _addSearch,
+        ),
       ),
       body: ListView(
         children: <Widget>[
@@ -81,24 +109,56 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           SearchItem(searchs: popular),
+          SizedBox(height: 2.0),
           Padding(
             padding: EdgeInsets.all(14.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Icon(
-                  Icons.restore,
-                  size: 19.0,
-                  color: const Color(0xFF666666),
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.restore,
+                      size: 19.0,
+                      color: const Color(0xFF666666),
+                    ),
+                    Text(
+                      ' 搜索历史',
+                      style: TextStyle(
+                        // 字体大小。
+                        fontSize: 15.0,
+                        // 字体系列。
+                        fontFamily: 'PingFangMedium',
+                        // 颜色。
+                        color: const Color(0xFF666666),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  ' 搜索历史',
-                  style: TextStyle(
-                    // 字体大小。
-                    fontSize: 15.0,
-                    // 字体系列。
-                    fontFamily: 'PingFangMedium',
-                    // 颜色。
-                    color: const Color(0xFF666666),
+                GestureDetector(
+                  onTap: () {
+                    _deleteSearch();
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                        height: 21.0,
+                        width: 39.0,
+                        color: Color(0xffFFFFFF),
+                      ),
+                      Text(
+                        '清除',
+                        style: TextStyle(
+                          // 字体大小。
+                          fontSize: 15.0,
+                          // 字体系列。
+                          fontFamily: 'PingFangRegular',
+                          // 颜色。
+                          color: const Color(0xFF666666),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

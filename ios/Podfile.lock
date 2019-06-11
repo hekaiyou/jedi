@@ -15,6 +15,8 @@ PODS:
     - Flutter
   - path_provider (0.0.1):
     - Flutter
+  - shared_preferences (0.0.1):
+    - Flutter
   - sqflite (0.0.1):
     - Flutter
     - FMDB (~> 2.7.2)
@@ -25,6 +27,7 @@ DEPENDENCIES:
   - jpush_flutter (from `.symlinks/plugins/jpush_flutter/ios`)
   - nautilus (from `.symlinks/plugins/nautilus/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
@@ -44,6 +47,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/nautilus/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
 
@@ -56,6 +61,7 @@ SPEC CHECKSUMS:
   jpush_flutter: d7e3a79466eb9447fd940233f02661b514f137c6
   nautilus: 0a75cc0d811635e3bd6a51bcab691abb17e3e1c2
   path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
+  shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
   sqflite: ff1d9da63c06588cc8d1faf7256d741f16989d5a
 
 PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09
