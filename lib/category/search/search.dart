@@ -45,10 +45,19 @@ class _SearchPageState extends State<SearchPage> {
   /// 增加历史搜索数据。
   _addSearch(String onSubmitted) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    history.removeWhere((item) => item == onSubmitted);
     setState(() {
-      history.add(onSubmitted);
+      history.insert(0, onSubmitted);
       prefs.setStringList('history', history);
     });
+    // 使用命名路由导航到第二个屏幕。
+    Navigator.pushNamed(
+      context,
+      '/category/result',
+      arguments: {
+        'typeName': onSubmitted,
+      },
+    );
   }
 
   /// 清理历史搜索数据。

@@ -24,10 +24,10 @@ class SearchItem extends StatelessWidget {
     // 当前具体显示组件的左边距离。
     double _widgetLeft = 0.0;
     for (String _search in searchs) {
-      double _azwd = 4.0;
-      double _intwd = 4.0;
-      double _aZwd = 3.0;
-      double _zeroSpace = (_search.split(' ').length - 1) * 2.0;
+      double _azwd = 5.0;
+      double _intwd = 5.0;
+      double _aZwd = 5.0;
+      double _zeroSpace = (_search.split(' ').length - 1) * 5.0;
       _zeroSpace += (_search.split('q').length - 1) * _azwd;
       _zeroSpace += (_search.split('w').length - 1) * _azwd;
       _zeroSpace += (_search.split('e').length - 1) * _azwd;
@@ -147,7 +147,16 @@ class SearchItem extends StatelessWidget {
               ),
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            // 使用命名路由导航到第二个屏幕。
+            Navigator.pushNamed(
+              context,
+              '/category/result',
+              arguments: {
+                'typeName': _search,
+              },
+            );
+          },
         ),
       );
       if (_temporaryRowList.length >= 1) {

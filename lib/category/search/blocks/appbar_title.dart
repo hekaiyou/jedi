@@ -113,9 +113,6 @@ class AppBarTitle extends StatelessWidget {
               Navigator.of(context).pop();
             },
           ),
-          SizedBox(
-            height: 50.0,
-          ),
         ],
       ),
     );
