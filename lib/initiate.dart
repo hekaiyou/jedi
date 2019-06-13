@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/internet/api_navigation.dart';
+import 'package:jedi/internet/api_commodity.dart';
 
 /// 启动页面组件。
 class InitiatePage extends StatefulWidget {
@@ -20,8 +21,10 @@ class _InitiatePageState extends State<InitiatePage> {
   // 加载信息。
   _loadInformation() async {
     apiGetGoodscategory().then((onValue) {
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil('/navigation', (Route<dynamic> route) => false);
+      apiGetBbscategory().then((onValue) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/navigation', (Route<dynamic> route) => false);
+      });
     });
   }
 

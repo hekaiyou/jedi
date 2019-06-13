@@ -13,7 +13,7 @@ class ExplosionItem extends StatelessWidget {
   final String describe;
 
   /// 商品列表，包含图片、预估收益等信息。
-  final List<Map> subList;
+  final List<dynamic> subList;
 
   ExplosionItem({
     this.name,

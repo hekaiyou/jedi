@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/community/daily_explosion.dart';
+import 'package:jedi/community/blocks/single_category.dart';
+import 'package:jedi/internet/api_commodity.dart';
 
 /// 自定义的社区页面组件。
 class CommunityPage extends StatefulWidget {
@@ -17,20 +18,10 @@ class _CommunityPageState extends State<CommunityPage>
   TabController tabController;
 
   /// 标签栏（`TabBar`）组件的配置项。
-  List<String> tabs = [
-    '每日爆款',
-    '趣分享',
-    '宣传素材',
-    '花粉学堂',
-  ];
+  List<String> tabs = [];
 
   /// 标签栏视图（`TabBarView`）组件的配置项。
-  List<Widget> views = [
-    DailyExplosionPage(),
-    Text('趣分享'),
-    Text('宣传素材'),
-    Text('花粉学堂'),
-  ];
+  List<Widget> views = [];
 
   /// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类的想要保持活动（`wantKeepAlive`）属性，
   /// 用于设置当前实例是否应保持活动状态（不因父组件的切换而重新绘制）。
@@ -39,6 +30,16 @@ class _CommunityPageState extends State<CommunityPage>
 
   @override
   void initState() {
+    for (Map _map in bbscategoryList) {
+      tabs.add(_map['categoryname']);
+      if (_map['outBbsCategoryList'].length == 0) {
+        views.add(SingleCategoryPage(
+          id: _map['id'],
+        ));
+      } else {
+        views.add(Text(_map['categoryname']));
+      }
+    }
     // 初始化标签控制器（`TabController`）组件。
     tabController = TabController(
       // 长度（`length`）属性，标签总数，通常大于1。

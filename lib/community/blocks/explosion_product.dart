@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jedi/community/blocks/explosion_item_image.dart';
 
 /// 构建展示爆款产品的组件，根据产品数量不同给出不同的效果。
-Widget explosionProduct(List<Map> subList) {
+Widget explosionProduct(List<dynamic> subList) {
   // 如果只有一个商品。
   if (subList.length == 1) {
     return Row(

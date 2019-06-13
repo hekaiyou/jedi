@@ -1,36 +1,97 @@
 import 'package:dio/dio.dart';
 import 'package:jedi/internet/internet.dart';
 
-String imageurlHeadGoodsdetail;
+String imageurlHeadGetBbsdetail;
 
-/// 获取商品详情。(弃用)
-/// POST /api/get_goodsdetail/
+List<dynamic> bbscategoryList;
+
+/// 获取社区分类。
+/// POST /api/get_bbscategory/
 /// {
-///   "imageurlhead": "http://39.105.23.168:8888/images/",
-///   "goodsdetail": [
-///     id": 1,
-///     "picturl": "https://img.alicdn.com/tfscom/i2/2609694927/O1CN01WxQr5Y1mGbw41niLs_!!0-item_pic.jpg",
-///     "smallimageslist": "https://img.alicdn.com/tfscom/i1/2609694927/O1CN01YANjZG1mGbw2SGxwg_!!2609694927.jpg\",
-///                     \"https://img.alicdn.com/tfscom/i3/2609694927/O1CN01aTCV8S1mGbv8hvblc_!!0-item_pic.jpg\",
-///                     \"https://img.alicdn.com/tfscom/i3/2609694927/O1CN01DzgcWH1mGbuWV409l_!!2609694927.jpg\",
-///                     \"https://img.alicdn.com/tfscom/i4/2609694927/O1CN01gitaur1mGbtVPOY9s_!!2609694927.jpg",
-///     "isselfupport": "2" 「是否自平台」
-///     "title": "111111",
-///     "reserveprice": 42, 「商品原价」
-///     "zkfinalprice": 20.4, 「券后价」
-///     "volume": 783,
-///     "estimatedprice": 20.4, 「预估收益」
-///     "taobaousertype": 1,
-///     "nick": "晋源图书专营店",
+///   "bbscategory": [
+///     {
+///       "id": 12, 「分类ID」
+///       "isvalid": "1",
+///       "ordersn": 1,
+///       "level": 1,
+///       "position": "tr_0",
+///       "categoryname": "宣传素材", 「分类名称」
+///       "parentid": 0,
+///       "outBbsCategoryList": [
+///         {
+///           "id": 1201, 「分类ID」
+///           "isvalid": "1",
+///           "ordersn": 1,
+///           "level": 2,
+///           "position": "tr_0 tr_12",
+///           "categoryname": "早安日签", 「分类名称」
+///           "parentid": 12,
+///           "outBbsCategoryList": [],
+///         },
+///         ...
+///     }
+///     ...
 ///   ],
 /// }
-Future apiGetGoodsdetail({int id}) async {
+Future apiGetBbscategory() async {
   try {
-    Response response = await dio.post('/get_goodsdetail/', data: {'id': id});
-    imageurlHeadGoodsdetail = response.data['data']['imageurlhead'];
-    return response.data['data']['goodsdetail'];
+    Response response = await dio.post('/get_bbscategory/');
+    bbscategoryList = response.data['data']['bbscategory'];
+    return bbscategoryList;
   } catch (e) {
-    print('网络请求——获取商品详情：');
+    print('网络请求——获取社区分类：');
+    print(e);
+  }
+}
+
+/// 获取社区内容。
+/// POST /api/get_bbsdetail/
+/// {
+///   "imageurlhead": "http://39.105.23.168:9999",
+///   "bbsdetail": [
+///     {
+///       "id": 1,
+///       "categoryid": 1201,
+///       "username": "Ji69l",
+///       "avatar": "/attachment/images/2019/06/03/image_1519955.png",
+///       "cda": "2019-05-21 21:45:21.0",
+///       "detail": "好货",
+///       "outBbsAttachList": [
+///         {
+///           "imagetype": "1",
+///           "content": {
+///             "categoryId":50013878,
+///             "categoryName":"发饰",
+///             "commissionRate":"900",
+///             "couponAmount":"5",
+///             "couponStartTime":"2019-05-18"
+///             "couponEndTime":"2019-05-24",
+///             "couponId":"7998a397bcc14a909edc0c29cd0c88f7",
+///             "couponInfo":"满10.00元减5元",
+///             "couponRemainCount":99000,
+///             "couponShareUrl":"//uland.taobao.com/...",
+///             "couponStartFee":"10.00",
+///             "couponTotalCount":100000,
+///             "itemId":573642589872,
+///             ...
+///           },
+///           "image": "https://img.alicdn.com/bao/uploaded/i4/2...3.jpg"
+///         }
+///         ...
+///       ]
+///     }
+///     ...
+///   ],
+/// }
+Future apiGetBbsdetail({int categoryid}) async {
+  try {
+    Response response = await dio.post('/get_bbsdetail/', data: {
+      'categoryid': categoryid,
+    });
+    imageurlHeadGetBbsdetail = response.data['data']['imageurlhead'];
+    return response.data['data']['bbsdetail'];
+  } catch (e) {
+    print('网络请求——获取社区内容：');
     print(e);
   }
 }
