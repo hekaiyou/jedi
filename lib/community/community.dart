@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/community/blocks/single_category.dart';
+import 'package:jedi/community/blocks/many_category.dart';
 import 'package:jedi/internet/api_commodity.dart';
 
 /// 自定义的社区页面组件。
@@ -37,7 +38,9 @@ class _CommunityPageState extends State<CommunityPage>
           id: _map['id'],
         ));
       } else {
-        views.add(Text(_map['categoryname']));
+        views.add(ManyCategoryPage(
+          outBbsCategoryList: _map['outBbsCategoryList'],
+        ));
       }
     }
     // 初始化标签控制器（`TabController`）组件。

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jedi/home/featured/featured.dart';
-import 'package:jedi/home/like/like.dart';
+import 'package:jedi/home/blocks/like.dart';
 import 'package:jedi/home/classification/classification.dart';
 import 'package:jedi/home/blocks/image_menu.dart';
 import 'package:jedi/home/blocks/appbar_title.dart';
