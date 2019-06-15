@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:jedi/blocks/pulltore_fresh.dart';
 import 'package:jedi/community/blocks/explosion_item.dart';
 import 'package:jedi/internet/api_commodity.dart';
@@ -33,6 +34,8 @@ class _SingleCategoryPageState extends State<SingleCategoryPage>
   /// 通过按钮等其他方式，通过方法调用触发下拉刷新。
   TriggerPullController triggerPullController = TriggerPullController();
 
+  bool _isPushEnable = true;
+
   /// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类的想要保持活动（`wantKeepAlive`）属性，
   /// 用于设置当前实例是否应保持活动状态（不因父组件的切换而重新绘制）。
   @protected
@@ -55,7 +58,7 @@ class _SingleCategoryPageState extends State<SingleCategoryPage>
 
   Future _loadData(bool isPullDown) async {
     if (isPullDown) {
-      apiGetBbsdetail(categoryid: 1201).then((item) {// widget.id
+      apiGetBbsdetail(categoryid: widget.id).then((item) {
         widgetList = [];
         List<Widget> _list = [];
         for (Map _map in item) {
@@ -66,13 +69,24 @@ class _SingleCategoryPageState extends State<SingleCategoryPage>
             subList: _map['outBbsAttachList'],
           ));
         }
+        if (_list.length == 0) {
+          _list.add(
+            Container(
+              height: MediaQuery.of(context).size.height / 2,
+              alignment: Alignment.center,
+              child: Image.asset('assets/error503.png'),
+            ),
+          );
+          _isPushEnable = false;
+        } else {
+          _isPushEnable = true;
+        }
         setState(() {
           widgetList = _list;
         });
       });
     } else {
-      apiGetBbsdetail(categoryid: 1201).then((item) {// widget.id
-        print(item);
+      apiGetBbsdetail(categoryid: widget.id).then((item) {
         List<Widget> _list = [];
         for (Map _map in item) {
           _list.add(ExplosionItem(
@@ -93,9 +107,10 @@ class _SingleCategoryPageState extends State<SingleCategoryPage>
   Widget build(BuildContext context) {
     super.build(context);
     return PullAndPush(
+      isPushEnable: _isPushEnable,
       // 简单的配置头部和底部的样式。
       defaultRefreshBoxTextColor: Color(0xff666666),
-      defaultRefreshBoxBackgroundColor: Color(0xffFFFFFF),
+      defaultRefreshBoxBackgroundColor: Color(0xffF6F6F6),
       // 可通过此对象的方法调用触发下拉刷新。
       triggerPullController: triggerPullController,
       // 用于上下拉的滑动控件。

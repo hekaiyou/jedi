@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jedi/community/blocks/single_category.dart';
 
 /// 自定义的多分类页面组件。
 class ManyCategoryPage extends StatefulWidget {
@@ -29,14 +30,6 @@ class _ManyCategoryPageState extends State<ManyCategoryPage>
   @protected
   bool get wantKeepAlive => true;
 
-  /// 底部导航栏的组件选项。
-  final _widgetOptions = [
-    Text('Index 0: 我是第0个页面的替身'),
-    Text('Index 1: 我是第1个页面的替身'),
-    Text('Index 2: 我是第2个页面的替身'),
-    Text('Index 3: 我是第3个页面的替身'),
-  ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -48,6 +41,7 @@ class _ManyCategoryPageState extends State<ManyCategoryPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    List<Widget> _widgetOptions = [];
     List<Widget> _label = [];
     for (int i = 0; i < widget.outBbsCategoryList.length; i++) {
       Map _map = widget.outBbsCategoryList[i];
@@ -82,7 +76,8 @@ class _ManyCategoryPageState extends State<ManyCategoryPage>
               color:
                   _selectedIndex == i ? Color(0xffFE7C30) : Color(0xffFFFFFF),
               border: Border.all(
-                color: _selectedIndex == i ? Color(0xffFE7C30) : Color(0xffDDDDDD),
+                color:
+                    _selectedIndex == i ? Color(0xffFE7C30) : Color(0xffDDDDDD),
                 width: 1.0,
               ),
               // 边界半径（`borderRadius`）属性，如果为非空值，则此属性将对此框的角进行舍入。
@@ -94,6 +89,8 @@ class _ManyCategoryPageState extends State<ManyCategoryPage>
             child: Text(
               _map['categoryname'],
               style: TextStyle(
+                color:
+                    _selectedIndex == i ? Color(0xffFFFFFF) : Color(0xff333333),
                 fontFamily: 'PingFangRegular',
                 fontSize: 14.0,
               ),
@@ -101,14 +98,17 @@ class _ManyCategoryPageState extends State<ManyCategoryPage>
           ),
         ),
       );
+      _widgetOptions.add(SingleCategoryPage(id: _map['id']));
     }
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
       body: Column(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: _label,
+          Container(
+            color: Color(0xffFFFFFF),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: _label,
+            ),
           ),
           Expanded(
             // 页面视图（`PageView`）组件，可逐页工作的可滚动列表，每个子项都被强制与视窗大小相同。
