@@ -39,6 +39,8 @@ class _FeaturedPageState extends State<FeaturedPage>
   /// 当前页数。
   int pagenoNum = 0;
 
+  bool _isPushEnable = true;
+
   /// 自动保持活动客户端混合（`AutomaticKeepAliveClientMixin`）抽象类的想要保持活动（`wantKeepAlive`）属性，
   /// 用于设置当前实例是否应保持活动状态（不因父组件的切换而重新绘制）。
   @protected
@@ -69,21 +71,31 @@ class _FeaturedPageState extends State<FeaturedPage>
   }) {
     return <Widget>[
       ActivityBar(imgList: imgList),
-      FeaturedSegment(segment: segment),
-      Divider(
-        height: 1.0,
-        color: Color(0xffE2E2E2),
-      ),
-      FeaturedHeadlines(headlines: headlines),
-      Container(
-        height: 10.0,
-        color: Color(0xffF6F6F6),
-      ),
-      LargePoster(posterPicture: posterPicture),
-      Container(
-        height: 10.0,
-        color: Color(0xffF6F6F6),
-      ),
+      segment.length != 0 ? FeaturedSegment(segment: segment) : SizedBox(),
+      segment.length != 0
+          ? Divider(
+              height: 1.0,
+              color: Color(0xffE2E2E2),
+            )
+          : SizedBox(),
+      headlines.length != 0
+          ? FeaturedHeadlines(headlines: headlines)
+          : SizedBox(),
+      headlines.length != 0
+          ? Container(
+              height: 10.0,
+              color: Color(0xffF6F6F6),
+            )
+          : SizedBox(),
+      posterPicture.length != 0
+          ? LargePoster(posterPicture: posterPicture)
+          : SizedBox(),
+      posterPicture.length != 0
+          ? Container(
+              height: 10.0,
+              color: Color(0xffF6F6F6),
+            )
+          : SizedBox(),
       HotList(
         hotData: hotData,
       ),
@@ -98,7 +110,7 @@ class _FeaturedPageState extends State<FeaturedPage>
   void _taobaoMaterialOptional() {
     apiTaobaoMaterialOptional(
       typeid: 0,
-      q: '精选',
+      q: '为你推荐',
       pagesize: 20,
       pageno: pagenoNum,
     ).then((_list) {
@@ -218,6 +230,7 @@ class _FeaturedPageState extends State<FeaturedPage>
           }
           widgetList = [];
           setState(() {
+            _isPushEnable = true;
             widgetList = _buildResidentData(
               imgList: imgList,
               segment: segment,
@@ -235,7 +248,9 @@ class _FeaturedPageState extends State<FeaturedPage>
         pagenoNum += 1;
         _taobaoMaterialOptional();
       } else {
-        setState(() {});
+        setState(() {
+          _isPushEnable = false;
+        });
       }
     }
   }
@@ -244,9 +259,10 @@ class _FeaturedPageState extends State<FeaturedPage>
   Widget build(BuildContext context) {
     super.build(context);
     return PullAndPush(
+      isPushEnable: _isPushEnable,
       // 简单的配置头部和底部的样式。
       defaultRefreshBoxTextColor: Color(0xff666666),
-      defaultRefreshBoxBackgroundColor: Color(0xffF6F6F6),
+      defaultRefreshBoxBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
       // 可通过此对象的方法调用触发下拉刷新。
       triggerPullController: triggerPullController,
       // 用于上下拉的滑动控件。

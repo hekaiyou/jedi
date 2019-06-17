@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 Dio dio = Dio()
   ..options.baseUrl = 'https://www.yujianshenghuo.com/api'
   ..options.connectTimeout = 5000
-  ..options.receiveTimeout = 3000
+  ..options.receiveTimeout = 4000
   ..options.headers = {
     'Content-Type': 'application/json',
   };

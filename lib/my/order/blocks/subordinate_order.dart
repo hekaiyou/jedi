@@ -85,7 +85,7 @@ class _SubordinateOrderState extends State<SubordinateOrder>
     return PullAndPush(
       // 简单的配置头部和底部的样式。
       defaultRefreshBoxTextColor: Color(0xff666666),
-      defaultRefreshBoxBackgroundColor: Color(0xffF6F6F6),
+      defaultRefreshBoxBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
       // 可通过此对象的方法调用触发下拉刷新。
       triggerPullController: triggerPullController,
       // 用于上下拉的滑动控件。

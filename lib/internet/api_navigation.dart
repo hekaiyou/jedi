@@ -28,7 +28,9 @@ List<dynamic> goodscategoryList;
 /// }
 Future apiGetGoodscategory() async {
   try {
-    Response response = await dio.post('/get_goodscategory/');
+    Response response = await dio.post('/get_goodscategory/', data: {
+      'parentid': 0,
+    });
     imageurlHeadGoodscategory = response.data['data']['imageurlhead'];
     goodscategoryList = response.data['data']['goodscategory'];
     return goodscategoryList;
@@ -61,41 +63,6 @@ Future apiGetGetPagelayout({int categoryid}) async {
     return response.data['data']['pagelayout'];
   } catch (e) {
     print('网络请求——获取页面布局：');
-    print(e);
-  }
-}
-
-/// 获取商品组。(弃用)
-/// POST /api/get_goodsgroups/
-/// {
-///   "imageurlhead": "http://39.105.23.168:8888/images/",
-///   "goodsgroups": [
-///     {
-///       "groupname": "热销榜单",
-///       "outGoodsDetailList": [
-///         {
-///           "id": 1,
-///           "title": "【正版包邮】蔡康永的情商课:为你自己活一次 2018蔡康永的说话之道后新书马东奇葩说推荐沟通交流的艺术把话说到人心情商提升书籍",
-///           "picturl": "https://img.alicdn.com/tfscom/i2/2609694927/O1CN01WxQr5Y1mGbw41niLs_!!0-item_pic.jpg",
-///           "volume": 783,
-///           "reserveprice": 42, 「商品原价」
-///           "zkfinalprice": 20.4, 「券后价」
-///           "isselfupport": "2", 「是否自平台商品」
-///           "couponShareUrl": "//uland.taobao.com/coupon/edetail?e=Rrw...", 「二合一页面链接」
-///         {
-///       ],
-///     },
-///     ...
-///   ],
-/// }
-Future apiGetGoodsgroups({int typeid}) async {
-  try {
-    Response response =
-        await dio.post('/get_goodsgroups/', data: {'typeid': typeid});
-    imageurlHeadGoodsgroups = response.data['data']['imageurlhead'];
-    return response.data['data']['goodsgroups'];
-  } catch (e) {
-    print('网络请求——获取商品组：');
     print(e);
   }
 }
@@ -147,8 +114,8 @@ Future apiTaobaoMaterialOptional({
     if (sort != null) {
       responseData['sort'] = sort;
     }
-    Response response = await dio
-        .post('/taobao_material_optional/', data: responseData);
+    Response response =
+        await dio.post('/taobao_material_optional/', data: responseData);
     imageurlHeadGoodsgroups = response.data['data']['imageurlhead'];
     return response.data['data']['materialoptional'];
   } catch (e) {

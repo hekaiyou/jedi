@@ -47,6 +47,9 @@ class AppBarTitle extends StatelessWidget {
                   ),
                   Expanded(
                     child: TextField(
+                      // 最大线（`maxLines`）属性，文本要跨越的可选最大行数，必要时包装。
+                      // 如果文本超过给定的行数，则会根据溢出（`overflow`）将其截断。
+                      maxLines: 1,
                       // 光标颜色属性，绘制光标时使用的颜色。
                       cursorColor: const Color(0xFFFE7C30),
                       // 光标宽度属性，光标的厚度，默认是2.0。

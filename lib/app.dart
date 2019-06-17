@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jedi/navigation.dart';
 import 'package:jedi/my/setting.dart';
@@ -61,7 +62,7 @@ class _JediAppState extends State<JediApp> {
 
   void initTradeService() {
     nautilus.initTradeAsync(debuggable: false).then((data) {
-      print('初始化结果：${data.isSuccessful}');
+      print('阿里百川初始化结果：${data.isSuccessful}');
     });
   }
 
@@ -80,6 +81,7 @@ class _JediAppState extends State<JediApp> {
       initialRoute: '/',
       // 在生成路由上属性，应用程序导航到命名路由时使用的路由生成器回调。
       onGenerateRoute: _getRoute,
+      navigatorObservers: [],
     );
   }
 
@@ -106,13 +108,13 @@ class _JediAppState extends State<JediApp> {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => WebviewScaffold(
-              url:
-                  "https://oauth.taobao.com/authorize?response_type=code&client_id=25826707&redirect_uri=https://pgy.ngrok.xiaomiqiu.cn/api/callback&state=1212&view=wap",
-              appBar: AppBar(
-                centerTitle: true,
-                title: Text("Widget webview"),
-              ),
-            ),
+          url:
+              "https://oauth.taobao.com/authorize?response_type=code&client_id=25826707&redirect_uri=https://pgy.ngrok.xiaomiqiu.cn/api/callback&state=1212&view=wap",
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text("Widget webview"),
+          ),
+        ),
       );
       // 设置页面路由。
     } else if (name == '/my/setting') {
@@ -174,7 +176,7 @@ class _JediAppState extends State<JediApp> {
         builder: (BuildContext context) =>
             DetailsPage(item: settings.arguments),
       );
-      // 分类-限时抢购页面路由。
+      // ��类-限时抢购页面路由。
     } else if (name == '/category/limited') {
       return MaterialPageRoute(
         settings: settings,

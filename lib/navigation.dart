@@ -4,6 +4,7 @@ import 'package:jedi/category/category.dart';
 import 'package:jedi/community/community.dart';
 import 'package:jedi/earnings/earnings.dart';
 import 'package:jedi/my/my.dart';
+import 'package:flutter/services.dart';
 
 /// 自定义的导航项目类，包含底部导航栏项目（`BottomNavigationBarItem`）组件需要的数据。
 class NavigationItem {
@@ -25,7 +26,8 @@ class NavigationPage extends StatefulWidget {
 }
 
 /// 与自定义的导航页面组件关联的状态子类。
-class _NavigationPageState extends State<NavigationPage> {
+class _NavigationPageState extends State<NavigationPage>
+    with WidgetsBindingObserver {
   /// 当前选择的索引。
   int _selectedIndex = 0;
 
@@ -80,9 +82,41 @@ class _NavigationPageState extends State<NavigationPage> {
   }
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      getClipboardContents();
+    }
+  }
+
+  /// 使用异步调用获取系统剪贴板的返回值。
+  getClipboardContents() async {
+    ClipboardData clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
+    if (clipboardData != null && clipboardData.text.trim() != '') {
+      String _name = clipboardData.text.trim();
+      if (RegExp(r'[\uffe5]+.+[\uffe5]').hasMatch(_name)) {
+        // 使用命名路由导航到第二个屏幕。
+        Navigator.pushNamed(
+          context,
+          '/category/result',
+          arguments: {
+            'typeName': clipboardData.text,
+          },
+        );
+      }
+    }
   }
 
   @override
