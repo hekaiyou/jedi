@@ -5,6 +5,7 @@ import 'package:jedi/community/community.dart';
 import 'package:jedi/earnings/earnings.dart';
 import 'package:jedi/my/my.dart';
 import 'package:flutter/services.dart';
+import 'package:jedi/blocks/amoy_password.dart';
 
 /// 自定义的导航项目类，包含底部导航栏项目（`BottomNavigationBarItem`）组件需要的数据。
 class NavigationItem {
@@ -107,14 +108,40 @@ class _NavigationPageState extends State<NavigationPage>
     if (clipboardData != null && clipboardData.text.trim() != '') {
       String _name = clipboardData.text.trim();
       if (RegExp(r'[\uffe5]+.+[\uffe5]').hasMatch(_name)) {
-        // 使用命名路由导航到第二个屏幕。
-        Navigator.pushNamed(
-          context,
-          '/category/result',
-          arguments: {
-            'typeName': clipboardData.text,
-          },
-        );
+        // 导航器（`Navigator`）组件，用于管理具有堆栈规则的一组子组件。
+        // 许多应用程序在其窗口组件层次结构的顶部附近有一个导航器，以便使用叠加显示其逻辑历史记录，
+        // 最近访问过的页面可视化地显示在旧页面之上。使用此模式，
+        // 导航器可以通过在叠加层中移动组件来直观地从一个页面转换到另一个页面。
+        // 类似地，导航器可用于通过将对话框窗口组件放置在当前页面上方来显示对话框。
+        // 导航器（`Navigator`）组件的关于（`of`）方法，来自此类的最近实例的状态，它包含给定的上下文。
+        // 导航器（`Navigator`）组件的推（`push`）方法，将给定路径推送到最紧密包围给定上下文的导航器。
+        Navigator.of(context)
+            .push(
+          // 页面路由生成器（`PageRouteBuilder`）组件，用于根据回调定义一次性页面路由的实用程序类。
+          PageRouteBuilder(
+            // 转换完成后路由是否会遮盖以前的路由。
+            opaque: false,
+            // 页面构建器（`pageBuilder`）属性，用于构建路径的主要内容。
+            pageBuilder: (BuildContext context, _, __) {
+              return AmoyPassword(
+                password: _name,
+              );
+            },
+          ),
+        )
+            .then((value) {
+          // 如果自定义的综合排序组件返回不为空时，更新
+          if (value != null) {
+          } else {}
+        });
+        // // 使用命名路由导航到第二个屏幕。
+        // Navigator.pushNamed(
+        //   context,
+        //   '/category/result',
+        //   arguments: {
+        //     'typeName': clipboardData.text,
+        //   },
+        // );
       }
     }
   }
