@@ -192,7 +192,7 @@ class _NavigationPageState extends State<NavigationPage>
         currentIndex: _selectedIndex,
         // 固定颜色（`fixedColor`）属性，当BottomNavigationBarType.fixed时所选项目的颜色。
         fixedColor: Color(0xffFE7C30),
-        // 在点击（`onTap`）属性，点击项目时调用的回调。
+        // 在���击（`onTap`）属性，点击项目时调用的回调。
         onTap: _onItemTapped,
         // 定义底部导航栏（`BottomNavigationBar`）组件的布局和行为。
         type: BottomNavigationBarType.fixed,

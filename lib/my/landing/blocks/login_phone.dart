@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:jedi/my/blocks/set_submit_button.dart';
+import 'package:jedi/internet/api_account.dart';
+import 'package:flutter/cupertino.dart';
 
 /// 自定义的手机登陆组件。
 class LoginPhone extends StatefulWidget {
@@ -47,6 +49,18 @@ class LoginPhone extends StatefulWidget {
 
 /// 与自定义的手机登陆组件关联的状态子类。
 class _LoginPhoneState extends State<LoginPhone> {
+  /// 手机号文本字段的控制器。
+  final _phoneController = TextEditingController();
+
+  /// 验证码文本字段的控制器。
+  final _codeController = TextEditingController();
+
+  /// 发送验证码按钮是否可用。
+  bool _codeAvailable = false;
+
+  /// 登陆按钮是否可用。
+  bool _loginAvailable = false;
+
   /// 倒计时的计时器。
   Timer _timer;
 
@@ -63,7 +77,7 @@ class _LoginPhoneState extends State<LoginPhone> {
   void initState() {
     super.initState();
     _seconds = widget.countdown;
-    inkWellStyle = widget._availableStyle;
+    inkWellStyle = widget._unavailableStyle;
   }
 
   /// 启动倒计时的计时器。
@@ -90,6 +104,36 @@ class _LoginPhoneState extends State<LoginPhone> {
   void _cancelTimer() {
     // 计时器（`Timer`）组件的取消（`cancel`）方法，取消计时器。
     _timer?.cancel();
+  }
+
+  /// 拿手机号码发送验证码。
+  void _getVerifcode() {
+    apiGetVerifcode().then((onValue) {
+      print(onValue);
+      showDialog<Null>(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            content: Text(
+              onValue.toString(),
+              style: TextStyle(
+                fontFamily: 'PingFangRegular',
+                fontSize: 15.0,
+              ),
+            ),
+            actions: [
+              CupertinoDialogAction(
+                child: Text('确定'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    });
   }
 
   @override
@@ -124,6 +168,7 @@ class _LoginPhoneState extends State<LoginPhone> {
                     right: 16.0,
                   ),
                   child: TextField(
+                    controller: _phoneController,
                     // 光标颜色属性，绘制光标时使用的颜色。
                     cursorColor: const Color(0xFFFE7C30),
                     // 光标宽度属性，光标的厚度，默认是2.0。
@@ -140,6 +185,19 @@ class _LoginPhoneState extends State<LoginPhone> {
                       // 提示文本属性，提示字段接受哪种输入的文本。
                       hintText: '请输入您的手机号',
                     ),
+                    // 在改变属性，当正在编辑的文本发生更改时调用。
+                    onChanged: (value) {
+                      if (RegExp(r'1(3|4|5|6|7|8|9)\d{9}')
+                              .hasMatch(value.trim()) &&
+                          value.trim().length == 11) {
+                        _codeAvailable = true;
+                        inkWellStyle = widget._availableStyle;
+                      } else {
+                        inkWellStyle = widget._unavailableStyle;
+                        _codeAvailable = false;
+                      }
+                      setState(() {});
+                    },
                   ),
                 ),
               ),
@@ -173,6 +231,7 @@ class _LoginPhoneState extends State<LoginPhone> {
                     right: 8.0,
                   ),
                   child: TextField(
+                    controller: _codeController,
                     // 光标颜色属性，绘制光标时使用的颜色。
                     cursorColor: const Color(0xFFFE7C30),
                     // 光标宽度属性，光标的厚度，默认是2.0。
@@ -186,20 +245,33 @@ class _LoginPhoneState extends State<LoginPhone> {
                       border: InputBorder.none,
                       // 提示样式属性，用于提示文本（`hintText`）的样式。
                       hintStyle: widget._hintStyle,
-                      // 提示文本属性，提示字段接受哪种输入的文本。
+                      // 提示文本属���，提示字段接受哪种输入的文本。
                       hintText: '请输入验证码',
                     ),
+                    // 在改变属性，当正在编辑的文本发生更改时调用。
+                    onChanged: (value) {
+                      if ((value.trim().length == 6) &&
+                          (RegExp(r'1(3|4|5|6|7|8|9)\d{9}')
+                                  .hasMatch(_phoneController.text.trim()) &&
+                              _phoneController.text.trim().length == 11)) {
+                        _loginAvailable = true;
+                      } else {
+                        _loginAvailable = false;
+                      }
+                      setState(() {});
+                    },
                   ),
                 ),
               ),
               GestureDetector(
-                onTap: (_seconds == widget.countdown)
+                onTap: (_seconds == widget.countdown) && _codeAvailable
                     ? () {
                         if (_timer == null) {
                           _startTimer();
                           inkWellStyle = widget._unavailableStyle;
                           _verifyStr = ' $_seconds' + '秒 ';
                           setState(() {});
+                          _getVerifcode();
                         } else {
                           if (_timer.isActive) {
                             return;
@@ -208,11 +280,14 @@ class _LoginPhoneState extends State<LoginPhone> {
                             inkWellStyle = widget._unavailableStyle;
                             _verifyStr = ' $_seconds' + '秒 ';
                             setState(() {});
+                            _getVerifcode();
                           }
                         }
                       }
                     : null,
                 child: Container(
+                  width: 98.0,
+                  alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(
                     horizontal: 13.0,
                     vertical: 10.0,
@@ -247,9 +322,39 @@ class _LoginPhoneState extends State<LoginPhone> {
             left: 21.0,
             right: 21.0,
           ),
-          callback: () {
-            print('登录');
-          },
+          callback: _loginAvailable
+              ? () {
+                  apiLogin(
+                    mobile: _phoneController.text.trim(),
+                    verifcode: _codeController.text.trim(),
+                  ).then((onValue) {
+                    print(onValue);
+                    showDialog<Null>(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (BuildContext context) {
+                        return CupertinoAlertDialog(
+                          content: Text(
+                            onValue.toString(),
+                            style: TextStyle(
+                              fontFamily: 'PingFangRegular',
+                              fontSize: 15.0,
+                            ),
+                          ),
+                          actions: [
+                            CupertinoDialogAction(
+                              child: Text('确定'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  });
+                }
+              : null,
         ),
       ],
     );

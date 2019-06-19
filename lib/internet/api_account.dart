@@ -1,30 +1,47 @@
 import 'package:dio/dio.dart';
 import 'package:jedi/internet/internet.dart';
 
-/// 上传淘宝授权信息。(弃用)
-/// POST /api/taobao_publisherinfo_save/
-Future apiTaobaoPublisherInfoSave({
-  String avatarurl,
-  String nick,
-  String openid,
-  String opensid,
-  String topaccesstoken,
-  String topauthcode,
+/// 获取验证码。
+/// POST /api/get_verifcode/
+/// {
+///   msg: ,
+///   code: 1,
+/// }
+Future apiGetVerifcode({
+  String mobile,
 }) async {
   try {
-    Response response = await dio.post('/taobao_publisherinfo_save/', data: {
-      'avatarurl': avatarurl,
-      'nick': nick,
-      'openid': openid,
-      'opensid': opensid,
-      'topaccesstoken': topaccesstoken,
-      'topauthcode': topauthcode,
+    Response response = await dio.post('/get_verifcode/', data: {
+      'mobile': mobile,
+      'veriftype': 52,
     });
-    print(nick);
-    print(response.data);
     return response.data;
   } catch (e) {
-    print('网络请求——上传淘宝授权信息：');
+    print('网络请求——获取验证码：');
+    print(e);
+  }
+}
+
+/// 登陆。
+/// POST /api/login/
+/// {
+///   "msg": "登录失败,用户不存在!",
+///   "code": -1
+/// }
+Future apiLogin({
+  String mobile,
+  String verifcode,
+}) async {
+  try {
+    Response response = await dio.post('/login/', data: {
+      'mobile': mobile,
+      'loginpwd': '123456',
+      'verifcode': verifcode,
+      'logintype': 49,
+    });
+    return response.data;
+  } catch (e) {
+    print('网络请求——登陆：');
     print(e);
   }
 }

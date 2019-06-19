@@ -52,6 +52,10 @@ dependencies:
   # https://pub.dev/packages/shared_preferences#-readme-tab-
   shared_preferences: ^0.5.3+1
 
+  # 用于访问加速度计和陀螺仪传感器。
+  # https://pub.dev/packages/sensors#-readme-tab-
+  sensors: ^0.4.0+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
