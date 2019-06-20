@@ -3,8 +3,6 @@ import 'package:jedi/my/blocks/common_operation.dart';
 import 'package:jedi/my/blocks/activity_banner.dart';
 import 'package:jedi/my/blocks/operation_list.dart';
 import 'package:jedi/my/blocks/my_information.dart';
-import 'package:sensors/sensors.dart';
-import 'package:flutter/cupertino.dart';
 
 /// 自定义的我的页面组件。
 class MyPage extends StatefulWidget {
@@ -24,37 +22,6 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
   /// 用于设置当前实例是否应保持活动状态（不因父组件的切换而重新绘制）。
   @override
   bool get wantKeepAlive => true;
-
-  @override
-  void initState() {
-    accelerometerEvents.listen((AccelerometerEvent event) {
-      print('摇一摇');
-      showDialog<Null>(
-        context: context,
-        barrierDismissible: true,
-        builder: (BuildContext context) {
-          return CupertinoAlertDialog(
-            content: Text(
-              event.toString(),
-              style: TextStyle(
-                fontFamily: 'PingFangRegular',
-                fontSize: 15.0,
-              ),
-            ),
-            actions: [
-              CupertinoDialogAction(
-                child: Text('确定'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    });
-    super.initState();
-  }
 
   @override
   void dispose() {

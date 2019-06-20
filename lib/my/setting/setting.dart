@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jedi/my/blocks/setting_options.dart';
+import 'package:jedi/my/setting/blocks/setting_options.dart';
 import 'package:jedi/my/blocks/set_submit_button.dart';
 import 'package:nautilus/nautilus.dart' as nautilus;
 

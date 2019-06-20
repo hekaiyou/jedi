@@ -9,7 +9,7 @@ Dio dio = Dio()
     'Content-Type': 'application/json',
   };
 
-/// 设置网络请求的服务器地址。
+/// 重新设置网络请求的服务器地址。
 void setDioUrl(String url) {
   dio.options.baseUrl = url;
 }

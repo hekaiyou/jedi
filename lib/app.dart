@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jedi/navigation.dart';
-import 'package:jedi/my/setting.dart';
+import 'package:jedi/my/setting/setting.dart';
 import 'package:jedi/my/change_username.dart';
 import 'package:jedi/my/modify_phone.dart';
 import 'package:jedi/my/change_password.dart';
@@ -9,6 +9,7 @@ import 'package:jedi/my/notification_settings.dart';
 import 'package:jedi/my/fans/fans.dart';
 import 'package:jedi/my/order/order.dart';
 import 'package:jedi/my/landing/landing.dart';
+import 'package:jedi/my/about/about.dart';
 import 'package:jedi/category/details/details.dart';
 import 'package:jedi/category/limited/limited.dart';
 import 'package:jedi/category/flash/flash.dart';
@@ -168,6 +169,12 @@ class _JediAppState extends State<JediApp> {
       return MaterialPageRoute(
         settings: settings,
         builder: (BuildContext context) => LandingPage(),
+      );
+      // 我的-关于页面路由。
+    } else if (name == '/my/about') {
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => AboutPage(),
       );
       // 分类-详情页面路由。
     } else if (name == '/category/details') {

@@ -3,16 +3,22 @@ import 'package:flutter/material.dart';
 /// 自定义的操作列表组件。
 class OperationList extends StatelessWidget {
   /// 构建具体的操作行组件。
-  Widget _buildOperationRow({String image, String title, Widget child}) {
+  Widget _buildOperationRow({
+    String image,
+    String title,
+    Widget child,
+    Function function,
+  }) {
     return GestureDetector(
       // 具体操作的细节，更新或跳转路由。
       onTap: () {
-        print(title);
+        function();
       },
       child: Container(
         alignment: Alignment.center,
         margin: EdgeInsets.symmetric(horizontal: 15.0),
         height: 49.0,
+        color: Color(0xffFFFFFF),
         // 双精度（`double`）类的无穷（`infinity`）常量，最大宽度。
         width: double.infinity,
         child: Row(
@@ -180,6 +186,10 @@ class OperationList extends StatelessWidget {
                 fontSize: 12.0,
               ),
             ),
+            function: () {
+              // 使用命名路由导航到第二个屏幕。
+              Navigator.pushNamed(context, '/my/about');
+            },
           ),
         ],
       ),
