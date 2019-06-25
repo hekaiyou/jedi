@@ -1,19 +1,55 @@
 # jedi（绝地武士）
 
-一个测试开发工程师用100天的业余时间开发的Flutter商业项目！
+1个测试开发工程师用100天的业余时间开发的Flutter商业项目！
 
-## Getting Started
+## 项目介绍
 
-This project is a starting point for a Flutter application.
+这个一个淘电商APP，同类型的APP有粉象生活、花生日记、好省、折800等等，基本上一个常规电商APP该有的，这个项目都有了。目前，该项目的完成度为80%，剩余的20%因为没有后台项目支持，所以无法完成。
 
-A few resources to get you started if this is your first Flutter project:
+为啥要做这个东西勒，因为作为Flutter的早期研究者，有不少人都问过我，Flutter现在可不可以做商业项目？现有的原生项目接入Flutter靠不靠谱？Flutter会不会有很多功能不能实现？……
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+当时我自己也没有正儿八经的做过商业项目，所以都不敢说可以做，基本都是含糊其辞都回答，甚至当作没看到信息，就没有回复了。所以我急切的想做一个商业项目，实际用Flutter开发商业项目，发现开发过程中的问题，用实际开发经历来回答类似的问题。
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+很巧的是，大约100天前，正好有网友想让我兼职开发一个淘电商APP，正好给了我这个机会，于是我便开始了开发，并记录下项目开始开发以来花费了多少时间。
+
+![P10](/image/P10.jpg)
+
+可以看到，到项目差不多完成时，一共是100天，而开发人员只有我1个人兼职开发，而且还是一个跨iOS、Android双平台的APP。现在，我想我应该可以回答上面提到的几个问题了：
+
+- Flutter现在可不可以做商业项目？
+    - 通过Google的近几年的发布会可以得知，得益于Google云服务的便利，Flutter已经成为国外开发者开发新项目时的首选
+    - 我现在这个淘电商项目应该也可以做一个例子吧
+
+- 现有的原生项目接入Flutter靠不靠谱？
+    - 咸鱼APP的部分页面，已经是使用Flutter实现的
+    - 爱奇艺直播助手APP的部分页面，也已经是用Flutter实现的了
+
+- Flutter会不会有很多功能不能实现？
+    - 目前，Flutter插件仓库里已经有4200多个插件了，其中包含国内常用的各种推送、社会分享、微信QQ支付宝登录、各种授权登陆、微信支付宝支付、淘系电商等对接原生SDK等第三方插件
+    - 因为通过插件可以在Flutter与原生代码之间搭建桥梁，所以基本上，原生可以实现的功能，Flutter都可以实现
+
+- 国内服务提供商对Flutter生态的支持如何？
+    - 极光推送已经为开发者准备好了极光推送的Flutter插件
+    - 阿里巴巴已经为Flutter贡献了一个视图UI与逻辑代码分离的第三方框架
+
+- 用Flutter开发应用可以上架App Store吗？
+    - 有这个担心其实是因为RN之前有前例，但是理性分析一下，有些RN为啥会被下架呢？不过是因为哪些APP本身违背了App Store的规则，热更新从理性上思考，难道不是一个安全风险吗？
+    - Flutter应用如果本身不违背App Store的规则，基本是不用担心这个问题的
+
+- Flutter作为跨平台开发的性能好不好？
+    - Flutter的性能与原生一模一样，帧频率达到到60帧/秒是基本操作
+
+后面是我对Flutter开发过程中的一些想法：
+
+1. 跨全平台开发很理想，但是现在不可能，在实际开发过程中，你难免会用到第三方的插件，而哪些插件又依赖Android或iOS的原生SDK，那你的项目还怎么在PC、Mac、Web跑呢？除非出现大量用Dart语言编写的插件（“SDK”）出现，不然跨全平台开发就是空中阁楼
+
+2. Flutter的热重载只对微调，比如调大小、移动上下左右几个单位、组件的内容文本图片什么的改一下方便，一旦代码动的多了，一热重载，大部分时候页面都会显示一片红，如何又是一顿代码调整。特别是接口联调，真的别指望热重载能多方便
+
+3. 没有原生开发经验的话，发布应用的时候会踩很多原生开发的坑，因为一旦你要打包Flutter程序，那就涉及到Android、iOS原生开发的知识点了，特别是原生Android打包发布的坑，经常让我一搞就是几个小时甚至更久，心疼原生Android开发的小伙伴一秒
+
+4. 对于之前没有学过原生开发的人来说，学过Flutter以后，估计不会再去学习原生开发了，毕竟原生开发只能开发单平台，毕竟如果你可以开发多平台的APP时，你还会满足单平台开发吗？
+
+5. 就目前来说，因为目前Flutter插件还没有完全覆盖国内的移动开发生态，你难免会需要自己去开发插件，以接入国内的某个服务SDK，这时候，除了找原生开发的小伙伴帮忙以外，就只剩下你自己开发的路可以走了。不过自己开发的难度也还好，因为各种原生SDK怎么使用在百度上一堆现成的代码，你只要会一些原生基础完全搞的定
 
 ## APP展示
 
